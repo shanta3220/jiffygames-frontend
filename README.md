@@ -10,19 +10,22 @@ Many players enjoy casual games but dislike installing multiple apps or managing
 
 ### User Profile
 
-Who will use it?
-Casual gamers who prefer no-download games.
-Users who want to quickly play and engage with games without additional app management.
+**Who will use it?**<br>
 
-How will they use it?
-Sign up and log in to access the platform and their personal gaming stats.
-Browse and launch games directly from the homepage.
-Track progress and compare scores on leaderboards.
-Share feedback and interact with the community via comments.
+- Casual gamers who prefer no-download games.<br>
+- Users who want to quickly play and engage with games without additional app management.<br>
 
-Special considerations
-Low-resource devices should still have a seamless experience.
-Ensure user privacy and secure authorization for personalized features like leaderboards and profiles.
+**How will they use it?**<br>
+
+- Sign up and log in to access the platform and their personal gaming stats.<br>
+- Browse and launch games directly from the homepage.<br>
+- Track progress and compare scores on leaderboards.<br>
+- Share feedback and interact with the community via comments.<br>
+
+**Special considerations**<br>
+
+- Low-resource devices should still have a seamless experience.
+- Ensure user privacy and secure authorization for personalized features like leaderboards and profiles.
 
 ### Features
 
@@ -48,7 +51,7 @@ Ensure user privacy and secure authorization for personalized features like lead
    Editable profile for the owner, including settings for updating personal details and avatar.
    Lists Playing games section
 
-6. Comments
+6. Comments:
    Comment section for every game page to share thoughts and connect with the community.
 
 ## Implementation
@@ -68,75 +71,113 @@ Custom APIs: Developed to manage leaderboards, games, and user profiles.
 
 ### Sitemap
 
-Homepage: Displays games with cards and featured slides.<br>
-Leaderboards Page: Lists all games' leaderboards.<br>
-Individual Leaderboard Page: Shows a detailed table of users and scores for a game.<br>
-User Profile Page: Displays personal details and editable settings for the profile owner.<br>
-Game Page: Includes the game itself, description, fullscreen mode, and comments.
+**Home Page**: Displays games with cards and featured slides.<br>
+**Leaderboards Page**: Lists all games' leaderboards.<br>
+**Individual Leaderboard Page**: Shows a detailed table of users and scores for a game.<br>
+**User Profile Page**: Displays personal details and editable settings for the profile owner.<br>
+**Game Page**: Includes the game itself, description, fullscreen mode, and comments.
 
 ### Data
 
 Data Relationships:
-Users: UserID, Username, Role, FullName, Avatar, AboutMe, Scores<br>
-Games: GameID, Title, Description, Instruction, Category, Thumbnail, HighScores, FeaturedVideo, CreatedAt, UpdatedAt<br>
-Leaderboards: LeaderboardID, GameID, UserID, Scores, Rank<br>
-Comments: CommentID, GameID, UserID, Content, Timestamp, CreatedAt, UpdatedAt<br>
+**Users**: UserID, Username, Role, FullName, Avatar, AboutMe, Scores<br>
+**Games**: GameID, Title, Description, Instruction, Category, Thumbnail, HighScores, FeaturedVideo, CreatedAt, UpdatedAt<br>
+**Leaderboards**: LeaderboardID, GameID, UserID, Scores, Rank<br>
+**Comments**: CommentID, GameID, UserID, Content, Timestamp, CreatedAt, UpdatedAt<br>
 
 ### Endpoints
 
-Game Management
-GET /api/games - Retrieve all games.<br>
-GET /api/games/:gameId - Retrieve a specific game.<br>
+**Game Management**
 
-Leaderboards
-GET /api/leaderboards - Retrieve all leaderboards.<br>
-GET /api/leaderboards/:leaderboardId - Retrieve leaderboard details for a game.<br>
-POST /api/leaderboards/:leaderboardId/comment - Post a comment to a game's leaderboard.<br>
+- `GET /api/games`  
+  Retrieve all games.
+- `GET /api/games/:gameId`  
+  Retrieve details for a specific game.
+- `POST /api/games/:gameId/comments`  
+  Post a comment to a game's page (`commentObject`).
+- `PUT /api/games/:gameId/comments/:commentId`  
+  Update a specific comment on a game (`commentObject`).
+- `DELETE /api/games/:gameId/comments/:commentId`  
+  Delete a specific comment on a game.
 
-User Management
-GET /api/users/:userId - Retrieve user profile data.<br>
-PUT /api/users/:userId - Update user profile data.<br>
+**Leaderboards**
 
-### Data
+- `GET /api/leaderboards`  
+  Retrieve all leaderboards.
+- `POST /api/leaderboards/`  
+  Create a new leaderboard (`leaderboardObject`).
+- `POST /api/leaderboards/:leaderboardId`  
+  Add a user's score to a leaderboard (`UserScoreObject`).
+- `GET /api/leaderboards/:leaderboardId`  
+  Retrieve leaderboard details for a specific game.
+- `GET /api/leaderboards/:leaderboardId/comments`  
+  Retrieve comments for a specific leaderboard.
+- `POST /api/leaderboards/:leaderboardId/comment`  
+  Post a comment to a game's leaderboard.
 
-Describe your data and the relationships between the data points. You can show this visually using diagrams, or write it out.
+**User Management**
 
-### Endpoints
+- `GET /api/users/:userId`  
+  Retrieve user profile data.
+- `GET /api/users/:userId/achievements`  
+  Retrieve a user's achievements.
+- `POST /api/users/`  
+  User signup (`UserObject`).
+- `PUT /api/users/:userId`  
+  Update user profile data (`UserObject`).
+- `GET /api/users/:userId/comments`  
+  Retrieve all comments made by a specific user.
+- `DELETE /api/users/:userId/comments/:commentId`  
+  Delete a specific comment made by a user.
 
-List endpoints that your server will implement, including HTTP methods, parameters, and example responses.
-Get: /api/games<br>
-Get: /api/games/:gameId<br>
-Get: /api/users/:userId<br>
-Get: /api/users/:userId/games
-Post: ("/api/users/, UserObject)
-Put ("/api/users/:userId", userOjbect) <br>
-Get: api/users/:userId/comments<br>
-POST: ("/api/games/:gameId/comments", commentObject)<br>
-PUT: ("/api/games/:gameId/comments/:commentId", commentObject)<br>
-Delete: /api/games/:gameId/comments/:commentId<br>
-Delete: /api/users/:userId/comments/:commentId<br>
-Get: /api/leaderboards<br>
-Post: ("/api/leaderboards", leaderboardObject)<br>
-POST: ("api/leaderboards/:leaderboardId", UserScoreObject)<br>
-Get: /api/leaderboards/:leaderboardId<br>
-Get: /api/leaderboards/:leaderboardId/comments<br>
+**Social Feature**
+
+- `POST /api/users/:userId/friends/:friendId`  
+  Add a friend to a user's friend list.
+- `GET /api/users/:userId/friends`  
+  Retrieve the list of a user's friends.
+- `GET /api/users/:userId/friends/:friendId`  
+  Retrieve the profile data of a specific friend.
 
 ## Roadmap
 
-Research & Tech Setup Day 1
-Frontend Skeleton (Homepage, Header, Game Cards) Day 2–3<br>
-Backend API Development (Games, Leaderboards, Users) Day 4–5<br>
-Game Integration (Embed Unity Games) Day 6–7<br>
-Leaderboards & User Profiles Day 8–9<br>
-Comments Section Integration Day 10<br>
-Testing & Debugging Day 11–12<br>
-Final Touches & Presentation Day 13–14<br>
+**Day 1: Research & Setup**
+
+- Set up project environment and repo.
+
+**Day 2–3: Frontend Skeleton**
+
+- Build Homepage, Header, and Game Cards.
+
+**Day 4–5: Backend API**
+
+- Implement API for Games, Leaderboards, and Users.
+
+**Day 6–7: Game Integration**
+
+- Embed Unity games on the frontend.
+
+**Day 8–9: Leaderboards & Profiles**
+
+- Implement Leaderboards and User Profiles.
+
+**Day 10: Comments Section**
+
+- Add comment functionality to game pages.
+
+**Day 11–12: Testing & Debugging**
+
+- Test and debug the app.
+
+**Day 13–14: Final Touches**
+
+- Polish UI/UX and prepare for presentation.
 
 ## Future Implementations
 
-Additional Games: Expand the library with more browser-based games.<br>
-Advanced Leaderboards: Add weekly and monthly leaderboards.<br>
-Achievements System: Include game-specific badges and progress tracking.<br>
-Game Gallery: Add a gallery section with featured images on game pages.<br>
-Game Publish: Allow specific user's role such as Admin and GameCreator to publish games in an additional page hidden by other roles.<br>
-Social Feature: Add a friend option in User Profile, allowing the owner user to see their list of friends and view their profiles when needed.
+- Additional Games: Expand the library with more browser-based games.<br>
+- Advanced Leaderboards: Add weekly and monthly leaderboards.<br>
+- Achievements System: Include game-specific badges and progress tracking.<br>
+- Game Gallery: Add a gallery section with featured images on game pages.<br>
+- Game Publish: Allow specific user's role such as Admin and GameCreator to publish games in an additional page hidden by other roles.<br>
+- Social Feature: Add a friend option in User Profile, allowing the owner user to see their list of friends and view their profiles when needed.
