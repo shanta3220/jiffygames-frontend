@@ -1,6 +1,4 @@
-# Project Title
-
-JiffyGames
+# JiffyGames
 
 ## Overview
 
