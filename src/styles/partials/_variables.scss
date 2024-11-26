@@ -2,20 +2,33 @@
 
 $font-family: "Fredoka";
 
-$primary-dark: #020301;
+// $primary-dark: #020301ec;
+// $primary-medium: #661211;
+// $primary-light: #ff5757;
+// $primary-bright: #ff914d;
+// $primary-invalid: #d22d2d;
+
+// $secondary-dark: #091e3b;
+// $secondary-medium: #f5a623;
+// $secondary-bright: #0ceeff;
+
+$primary-dark: #1c1c1c;
 $primary-medium: #661211;
-$primary-light: #ff5757;
+
+$primary-light: #ff5e42;
+
 $primary-bright: #ff914d;
 $primary-invalid: #d22d2d;
 
-$seconday-dark: #091e3b;
-$seconday-medium: #ff914d;
-$seconday-bright: #0ceeff;
+$secondary-dark: #0a1e2b;
+$secondary-medium: #f5a623;
+$secondary-bright: #0ceeff;
 
 $tablet-breakpoint: 768px;
 $desktop-breakpoint: 1280px;
 
 $padding-margin-top-bottom: 1.25rem;
+$padding-headlines-top-mobile: 1.25rem;
 $padding-headlines-bottom-mobile: 0.875rem;
 $padding-margin-between-components-mobile: 1rem;
 $padding-margin-between-mobile: 4.5vw;

@@ -1,6 +1,18 @@
-@use "./styles/global";
-
+@use "./styles/partials/global";
+@use "./styles/partials/variables" as *;
 * {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  width: 100%;
+  height: 100%;
+  font-family: $font-family;
+  background-color: $primary-medium;
+}
+
+a {
+  text-decoration: none;
 }

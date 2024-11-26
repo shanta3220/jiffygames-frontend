@@ -1,13 +1,10 @@
-@use "./variab
-les" as *;
-@use "./mixins" as *;
-
-.main-header {
-}
+@use "./variables" as *;
 
 @mixin reset-margin-padding {
-  margin: 0;
-  padding: 0;
+  & {
+    margin: 0;
+    padding: 0;
+  }
 }
 
 @mixin tablet {
@@ -27,9 +24,11 @@ les" as *;
 }
 
 @mixin text-style($text-size, $line-height, $text-width) {
-  font-size: $text-size;
-  line-height: $line-height;
-  font-weight: $text-width;
+  & {
+    font-size: $text-size;
+    line-height: $line-height;
+    font-weight: $text-width;
+  }
 }
 
 @mixin PaddingBetweenComponents(
@@ -40,12 +39,9 @@ les" as *;
   $isHalf: false
 ) {
   @include mobilePadding($top, $bottom, $left, $right, $isHalf);
-
   @include tabletPadding($top, $bottom, $left, $right, $isHalf);
-
   @include desktopPadding($left, $right, $isHalf);
 }
-
 @mixin mobilePadding(
   $top: false,
   $bottom: false,
@@ -54,34 +50,34 @@ les" as *;
   $isHalf: false
 ) {
   @if $top {
-    padding-top: $padding-margin-between-mobile;
-
-    @if ($isHalf) {
+    @if $isHalf {
       padding-top: $padding-margin-between-mobile-half;
+    } @else {
+      padding-top: $padding-margin-between-mobile;
     }
   }
 
   @if $bottom {
-    padding-bottom: $padding-margin-between-mobile;
-
-    @if ($isHalf) {
+    @if $isHalf {
       padding-bottom: $padding-margin-between-mobile-half;
+    } @else {
+      padding-bottom: $padding-margin-between-mobile;
     }
   }
 
   @if $left {
-    padding-left: $padding-margin-between-mobile;
-
-    @if ($isHalf) {
+    @if $isHalf {
       padding-left: $padding-margin-between-mobile-half;
+    } @else {
+      padding-left: $padding-margin-between-mobile;
     }
   }
 
   @if $right {
-    padding-right: $padding-margin-between-mobile;
-
-    @if ($isHalf) {
+    @if $isHalf {
       padding-right: $padding-margin-between-mobile-half;
+    } @else {
+      padding-right: $padding-margin-between-mobile;
     }
   }
 }
@@ -95,34 +91,34 @@ les" as *;
 ) {
   @include tablet {
     @if $top {
-      padding-top: $padding-margin-between-tablet;
-
-      @if ($isHalf) {
+      @if $isHalf {
         padding-top: $padding-margin-between-tablet-half;
+      } @else {
+        padding-top: $padding-margin-between-tablet;
       }
     }
 
     @if $bottom {
-      padding-bottom: $padding-margin-between-tablet;
-
-      @if ($isHalf) {
+      @if $isHalf {
         padding-bottom: $padding-margin-between-tablet-half;
+      } @else {
+        padding-bottom: $padding-margin-between-tablet;
       }
     }
 
     @if $left {
-      padding-left: $padding-margin-between-tablet;
-
-      @if ($isHalf) {
+      @if $isHalf {
         padding-left: $padding-margin-between-tablet-half;
+      } @else {
+        padding-left: $padding-margin-between-tablet;
       }
     }
 
     @if $right {
-      padding-right: $padding-margin-between-tablet;
-
-      @if ($isHalf) {
+      @if $isHalf {
         padding-right: $padding-margin-between-tablet-half;
+      } @else {
+        padding-right: $padding-margin-between-tablet;
       }
     }
   }
@@ -131,24 +127,24 @@ les" as *;
 @mixin desktopPadding($left: false, $right: false, $isHalf: false) {
   @include desktop {
     @if $left {
-      padding-left: $padding-margin-between-desktop;
-
-      @if ($isHalf) {
+      @if $isHalf {
         padding-left: $padding-margin-between-tablet;
+      } @else {
+        padding-left: $padding-margin-between-desktop;
       }
     }
 
     @if $right {
-      padding-right: $padding-margin-between-desktop;
-
-      @if ($isHalf) {
+      @if $isHalf {
         padding-right: $padding-margin-between-tablet;
+      } @else {
+        padding-right: $padding-margin-between-desktop;
       }
     }
   }
 }
 
-@mixin headlinesPaddingTopBottom() {
+@mixin headlinesPaddingTopBottom {
   padding-top: $padding-headlines-top-mobile;
   padding-bottom: $padding-headlines-bottom-mobile;
 
@@ -158,7 +154,7 @@ les" as *;
   }
 }
 
-@mixin headlinesPaddingBottom() {
+@mixin headlinesPaddingBottom {
   padding-bottom: $padding-headlines-bottom-mobile;
 
   @include tablet {
@@ -167,73 +163,42 @@ les" as *;
 }
 
 @mixin mainHeader {
-  @include text-style($text-size: 1.5rem, $line-height: 2rem, $text-width: 700);
+  @include text-style(1.5rem, 2rem, 700);
+
   @include tablet {
-    @include text-style(
-      $text-size: 2.0625rem,
-      $line-height: 2.75rem,
-      $text-width: 700
-    );
+    @include text-style(2.0625rem, 2.75rem, 700);
   }
 }
 
-.sub-header {
+@mixin subHeader {
   @include headlinesPaddingTopBottom();
-  @include text-style(
-    $text-size: 0.8125rem,
-    $line-height: 1.125rem,
-    $text-width: 700
-  );
+  @include text-style(1rem, 1.125rem, 700);
 
   @include tablet {
-    @include text-style(
-      $text-size: 0.875rem,
-      $line-height: 1.2rem,
-      $text-width: 700
-    );
+    @include text-style(1.1875rem, 1.4rem, 700);
   }
 }
 
 @mixin sectionHeader {
   @include headlinesPaddingTopBottom();
+  @include text-style(0.75rem, 1.25rem, 600);
 
-  @include text-style(
-    $text-size: 0.75rem,
-    $line-height: 1.25rem,
-    $text-width: 600
-  );
   @include tablet {
-    @include text-style(
-      $text-size: 0.8125rem,
-      $line-height: 1.125rem,
-      $text-width: 700
-    );
+    @include text-style(0.8125rem, 1.125rem, 700);
   }
 }
 
 @mixin bodyCopy {
   @include headlinesPaddingBottom();
-  @include text-style(
-    $text-size: 0.875rem,
-    $line-height: 1.375rem,
-    $text-width: 400
-  );
+  @include text-style(0.875rem, 1.375rem, 400);
 
   @include tablet {
-    @include text-style(
-      $text-size: 0.875rem,
-      $line-height: 1.375rem,
-      $text-width: 400
-    );
+    @include text-style(0.875rem, 1.375rem, 400);
   }
 }
 
 @mixin buttonLabel {
-  @include text-style(
-    $text-size: 0.75rem,
-    $line-height: 1.25rem,
-    $text-width: 600
-  );
+  @include text-style(0.75rem, 1.25rem, 600);
 }
 
 @mixin label {
@@ -284,7 +249,7 @@ les" as *;
   }
 
   @include tablet {
-    padding: 0, 2rem;
+    padding: 0 2rem;
     height: 2.5rem;
   }
 }
