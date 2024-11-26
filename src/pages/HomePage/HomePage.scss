@@ -1,0 +1,23 @@
+@use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/variables" as *;
+
+.hero {
+  height: 60vh;
+  width: 100%;
+  position: absolute;
+  text-align: center;
+
+  &__background {
+    width: 60%;
+    height: auto;
+    position: relative;
+    object-fit: contain;
+  }
+
+  &__leaderboard-container {
+    background-color: $secondary-dark;
+    position: absolute;
+    top: 2vh;
+    right: 1%;
+  }
+}

@@ -1,7 +1,7 @@
-import { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.scss";
 import Header from "./components/Header/Header";
+import HomePage from "./pages/HomePage/HomePage";
 
 function App() {
   return (
@@ -20,14 +20,6 @@ function App() {
 }
 
 export default App;
-
-function HomePage() {
-  return (
-    <div>
-      <p>This is HomePage</p>
-    </div>
-  );
-}
 
 function GamesPage() {
   return (
