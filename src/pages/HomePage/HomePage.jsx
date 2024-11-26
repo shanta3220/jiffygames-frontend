@@ -1,7 +1,7 @@
 import { useRef, useEffect } from "react";
 import "./HomePage.scss";
 import background from "../../assets/images/hero-background3.png";
-
+import leaderboardImage from "../../assets/images/leaderboard.png";
 function HomePage() {
   const backgroundRef = useRef(null);
   const leaderBoardRef = useRef(null);
@@ -38,11 +38,14 @@ function HomePage() {
   //     }
   //   };
   // }, []);
-
   return (
     <main className="hero">
-      <div className="hero__background" />
-      <div className="hero__leaderboard-container"></div>
+      <img src={background} alt="Background" className="hero__background" />
+      <img
+        src={leaderboardImage}
+        alt="Leaderboard"
+        className="hero__leaderboard-container"
+      />
     </main>
   );
 }
