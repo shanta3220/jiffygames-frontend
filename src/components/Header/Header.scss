@@ -1,0 +1,73 @@
+@use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/variables" as *;
+
+.header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  background-color: $primary-dark;
+  padding: 1rem $padding-margin-between-mobile;
+  flex-direction: column;
+
+  @include tablet {
+    padding: 1rem $padding-margin-between-tablet;
+    flex-direction: row;
+  }
+
+  @include desktop {
+    padding: 1rem $padding-margin-between-desktop;
+  }
+
+  &__item {
+    width: 30%;
+  }
+
+  &__logo {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+  }
+
+  &__logo-icon {
+    width: 26px;
+    height: 26px;
+  }
+
+  &__logo-title {
+    @include mainHeader;
+    & {
+      font-size: 28px;
+      font-weight: 700;
+      color: $primary-light;
+    }
+  }
+
+  &__logo-title--Games {
+    @extend .header__logo-title;
+    & {
+      color: $primary-bright;
+    }
+  }
+
+  &__links {
+    display: flex;
+    gap: 1rem;
+    height: 100%;
+    margin-top: -0.5rem;
+  }
+
+  &__link {
+    color: $primary-bright;
+    @include subHeader;
+
+    &.active {
+      color: $primary-light;
+    }
+
+    &:hover {
+      color: $secondary-medium;
+    }
+  }
+}

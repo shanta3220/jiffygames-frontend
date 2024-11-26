@@ -1,41 +1,47 @@
+@use "./variables" as *;
+@use "./mixins" as *;
+
 .button {
   @include buttonLabel;
-  height: 2.5rem;
-  background-color: $primary-medium;
-  border-radius: 0.25rem;
-  color: $primary-bright;
-  border: none;
-  width: 100%;
-  background-position: 0.625rem 0.5rem;
-  background-repeat: no-repeat;
-  text-transform: uppercase;
-  text-align: center;
+  & {
+    height: 2.5rem;
+    background-color: $primary-medium;
+    border-radius: 0.25rem;
+    color: $primary-bright;
+    border: none;
+    width: 100%;
+    background-position: 0.625rem 0.5rem;
+    background-repeat: no-repeat;
+    text-transform: uppercase;
+    text-align: center;
 
-  &:hover {
-    cursor: pointer;
-    background-color: $secondary-medium;
+    &:hover {
+      cursor: pointer;
+      background-color: #fff;
+      transition: background-color 0.2s ease; // Smooth transition
+    }
   }
 
   @include tablet {
-    padding: 0, 2rem;
+    padding: 0 2rem; // Fixed padding syntax
     max-width: 10rem;
   }
 }
 
-//user avatar used in comment section and in header
-
 .user-avatar {
-  min-width: 2.25rem;
-  min-height: 2.25rem;
-  width: 2.25rem;
-  height: 2.25rem;
-  padding: 0;
-  margin: 0;
-  background-image: url("../../assets/images/user-profile.png");
-  background-size: cover;
-  background-position-x: -0.3rem;
-  border-radius: 50%;
-  background-color: $secondary-light;
+  & {
+    min-width: 2.25rem;
+    min-height: 2.25rem;
+    width: 2.25rem;
+    height: 2.25rem;
+    padding: 0;
+    margin: 0;
+    background-image: url("../../assets/images/user-profile.png");
+    background-size: cover;
+    background-position-x: -0.3rem;
+    border-radius: 50%;
+    background-color: $primary-bright;
+  }
 
   @include tablet {
     min-width: 2.5rem;
@@ -55,7 +61,8 @@
   flex-direction: row;
   color: $primary-dark;
 
-  * {
+  > * {
+    // Targets only immediate children
     display: block;
     width: 100%;
   }
@@ -66,30 +73,32 @@
 }
 
 .form-input {
-  @extend .body-copy;
-  padding: 0.75rem;
-  background-color: $secondary-bright;
-  border-radius: 0.25rem;
-  height: 2.25rem;
-  width: 80%;
-  color: $primary-dark;
-  outline: 1px solid $secondary-light;
-  border: none;
+  @include bodyCopy;
+  & {
+    padding: 0.75rem;
+    background-color: $primary-medium;
+    border-radius: 0.25rem;
+    height: 2.25rem;
+    width: 80%;
+    color: $primary-bright;
+    outline: 1px solid $primary-medium;
+    border: none;
 
-  &:focus {
-    &:invalid {
-      outline: 1px solid $primary-invalid;
+    &:focus {
+      &:invalid {
+        outline: 1px solid $primary-invalid;
+      }
+
+      outline: 2px solid $primary-bright;
     }
 
-    outline: 2px solid $primary-medium;
-  }
-
-  &::placeholder {
-    color: $primary-dark;
+    &::placeholder {
+      color: $primary-bright;
+    }
   }
 
   @include tablet {
-    padding: 0, 2rem;
+    padding: 0 2rem; // Fixed padding syntax
     height: 2.5rem;
   }
 }
