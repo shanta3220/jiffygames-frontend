@@ -1,0 +1,31 @@
+@use "./typography";
+
+$font-family: "Fredoka";
+
+$primary-dark: #020301;
+$primary-medium: #661211;
+$primary-light: #ff5757;
+$primary-bright: #ff914d;
+$primary-invalid: #d22d2d;
+
+$seconday-dark: #091e3b;
+$seconday-medium: #ff914d;
+$seconday-bright: #0ceeff;
+
+$tablet-breakpoint: 768px;
+$desktop-breakpoint: 1280px;
+
+$padding-margin-top-bottom: 1.25rem;
+$padding-headlines-bottom-mobile: 0.875rem;
+$padding-margin-between-components-mobile: 1rem;
+$padding-margin-between-mobile: 4.5vw;
+$padding-margin-between-mobile-half: 0.5rem;
+
+$padding-headlines-top-tablet: 2.25rem;
+$padding-headlines-bottom-tablet: 1.5rem;
+$padding-margin-between-tablet: 4.5vw;
+$padding-margin-between-tablet-half: 1.125rem;
+$padding-margin-between-desktop: 10vw;
+
+$gap: 1rem;
+$border-radius: 4px;
