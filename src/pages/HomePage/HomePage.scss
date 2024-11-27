@@ -1,10 +1,15 @@
 @use "../../styles/partials/mixins" as *;
 @use "../../styles/partials/variables" as *;
 
+.home-main {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
 .hero {
   position: relative;
   width: 96%;
-  height: 60vh;
   margin: auto;
 
   @include tablet {
@@ -17,11 +22,10 @@
 
   &__images {
     width: 100%;
-    height: 100%;
+
     display: flex;
     justify-content: center;
     align-items: start;
-    max-width: 1920px; // Limit scaling of child elements
   }
 
   &__background {
@@ -29,17 +33,23 @@
     height: auto;
     object-fit: contain;
     object-position: right center;
-    border-top-left-radius: 5%;
-    border-bottom-left-radius: 5%;
+
+    @include desktop {
+      border-top-left-radius: 5%;
+      border-bottom-left-radius: 5%;
+    }
   }
 
   &__leaderboard-container {
-    border-top-right-radius: 5%;
-    border-bottom-right-radius: 5%;
     width: 24.1%;
     height: auto;
     object-fit: contain;
     object-position: left center;
+
+    @include desktop {
+      border-top-right-radius: 5%;
+      border-bottom-right-radius: 5%;
+    }
   }
 
   &__contents {
@@ -52,7 +62,7 @@
     padding-left: 0;
     gap: 6%;
     @include desktop {
-      padding-left: 2%;
+      padding-left: 1%;
     }
   }
 
@@ -69,14 +79,42 @@
     width: 100%;
     height: 100%;
     border-radius: 8%;
-    border: 3px solid #b51d4d8e;
     object-fit: fill;
     object-position: 0 -6px;
+    border: 3px solid #b51d368e;
+
+    @include tablet {
+      border: 4px solid #b51d368e;
+    }
+
+    @include desktop {
+      border: 5px solid #b51d368e;
+    }
   }
 
   &__leaderboard-list {
     margin-top: 2.7%;
     background-color: rgba(0, 255, 255, 0.199);
     border-radius: 2%;
+  }
+}
+
+.featured-games {
+  height: 100%;
+  width: 100%;
+  background-color: black;
+
+  &__list {
+    display: flex;
+  }
+  &__item {
+  }
+  &__link {
+  }
+  &__item-contents {
+  }
+  &__item-image {
+  }
+  &__item-title {
   }
 }
