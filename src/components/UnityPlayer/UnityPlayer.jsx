@@ -1,10 +1,10 @@
-import { useEffect, Fragment, useState, useCallback } from "react";
+import { useEffect, Fragment, useState, useCallback, useRef } from "react";
 import { Unity, useUnityContext } from "react-unity-webgl";
 import { useNavigate } from "react-router-dom";
 
 export default function UnityPlayer({ gameProjectName }) {
   const navigate = useNavigate();
-
+  const canvasRef = useRef();
   const [isGameOver, setIsGameOver] = useState(false);
   const [isQuit, setIsQuit] = useState(false);
   const [userName, setUserName] = useState();
@@ -65,24 +65,6 @@ export default function UnityPlayer({ gameProjectName }) {
     setScore(score);
   }, []);
 
-  useEffect(() => {
-    addEventListener("GameOver", handleGameOver);
-    addEventListener("SetScore", handleSetScore);
-    addEventListener("Quit", handleQuit);
-
-    return () => {
-      removeEventListener("GameOver", handleGameOver);
-      removeEventListener("SetScore", handleSetScore);
-      removeEventListener("Quit", handleQuit);
-    };
-  }, [
-    addEventListener,
-    removeEventListener,
-    handleGameOver,
-    handleSetScore,
-    handleQuit,
-  ]);
-
   function handleScore() {
     sendMessage("GameController", "SetScore", 100);
   }
@@ -91,6 +73,73 @@ export default function UnityPlayer({ gameProjectName }) {
     requestFullscreen(true);
   }
 
+  async function handleClickBack() {
+    try {
+      if (unload) await unload();
+    } finally {
+      navigate("/");
+    }
+  }
+
+  // functions to unload, register/unregister events
+  useEffect(() => {
+    // Function to mark touchstart, wheel, and touchmove listeners as passive
+    const makeEventsPassive = () => {
+      const unityCanvas = document.querySelector("canvas");
+      if (unityCanvas) {
+        // Mark 'touchstart', 'wheel', and 'touchmove' events as passive
+        unityCanvas.addEventListener("touchstart", (e) => e.preventDefault(), {
+          passive: true,
+        });
+        unityCanvas.addEventListener("wheel", (e) => e.preventDefault(), {
+          passive: true,
+        });
+        unityCanvas.addEventListener("touchmove", (e) => e.preventDefault(), {
+          passive: true,
+        });
+      }
+    };
+
+    // Run after Unity is loaded to modify event listeners
+    if (isLoaded) {
+      makeEventsPassive();
+    }
+
+    addEventListener("GameOver", handleGameOver);
+    addEventListener("SetScore", handleSetScore);
+    addEventListener("Quit", handleQuit);
+
+    return () => {
+      const removeAllListeners = async () => {
+        try {
+          const unityCanvas = document.querySelector("canvas");
+          if (unityCanvas) {
+            unityCanvas.removeEventListener("touchstart", (e) =>
+              e.preventDefault()
+            );
+            unityCanvas.removeEventListener("wheel", (e) => e.preventDefault());
+            unityCanvas.removeEventListener("touchmove", (e) =>
+              e.preventDefault()
+            );
+          }
+          if (isLoaded && unload) await unload();
+        } finally {
+          removeEventListener("GameOver", handleGameOver);
+          removeEventListener("SetScore", handleSetScore);
+          removeEventListener("Quit", handleQuit);
+        }
+      };
+      removeAllListeners();
+    };
+  }, [
+    isLoaded,
+    unload,
+    addEventListener,
+    removeEventListener,
+    handleGameOver,
+    handleSetScore,
+    handleQuit,
+  ]);
   useEffect(
     function () {
       const updateDevicePixelRatio = function () {
@@ -108,11 +157,6 @@ export default function UnityPlayer({ gameProjectName }) {
   );
   const loadingPercentage = Math.round(loadingProgression * 100);
 
-  async function handleClickBack() {
-    await unload();
-    navigate("/");
-  }
-
   return (
     <div className="game">
       {isLoaded === false && (
@@ -125,6 +169,8 @@ export default function UnityPlayer({ gameProjectName }) {
           className="game__unity-player"
           style={{ visibility: isLoaded ? "visible" : "hidden" }}
           unityProvider={unityProvider}
+          disabledCanvasEvents={["dragstart", "scroll"]}
+          ref={canvasRef}
         />
         {userName && score && (
           <p>{`Set Score ${userName}! You've scored ${score} points.`}</p>
