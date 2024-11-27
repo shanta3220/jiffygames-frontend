@@ -18,6 +18,7 @@
 
   @include desktop {
     width: 64%;
+    margin-top: 1.5rem;
   }
 
   &__images {
@@ -100,21 +101,56 @@
 }
 
 .featured-games {
+  padding: $padding-headlines-top-mobile;
+
   height: 100%;
   width: 100%;
-  background-color: black;
+  background-color: $secondary-medium;
 
   &__list {
+    padding-top: $padding-headlines-top-mobile;
     display: flex;
   }
+
   &__item {
+    border-radius: 10px;
+    background-color: $primary-medium;
+    width: 16%;
+
+    padding: 1rem;
+
+    &:hover {
+      background-color: $primary-medium;
+      .featured-games__item-image {
+        border: 0.25rem solid $secondary-light;
+      }
+      .featured-games__item-title {
+        color: $secondary-light;
+      }
+    }
   }
+
   &__link {
   }
   &__item-contents {
+    border-radius: 20px;
   }
   &__item-image {
+    border: 0.25rem solid $primary-bright;
+    width: 100%;
+    border-radius: 20px;
   }
+
   &__item-title {
+    @include subHeader;
+    & {
+      text-decoration: none;
+      text-align: center;
+      padding-top: 16px !important;
+      padding-bottom: 8px !important;
+      text-transform: uppercase;
+      margin: 0;
+      color: $primary-bright;
+    }
   }
 }

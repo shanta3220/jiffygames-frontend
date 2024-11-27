@@ -197,12 +197,40 @@
   }
 }
 
-@mixin buttonLabel {
-  @include text-style(0.75rem, 1.25rem, 600);
+@mixin button {
+  @include text-style(0.875rem, 1.25rem, 600);
+  @include tablet {
+    @include text-style(16px, 1.125rem, 700);
+  }
+  & {
+    height: 2.5rem;
+    background-color: $primary-medium;
+    border-radius: 1.25rem;
+    color: $primary-bright;
+    border: none;
+    width: 100%;
+    text-transform: uppercase;
+    text-align: center;
+
+    &:hover {
+      cursor: pointer;
+      background-color: $primary-bright;
+      color: $primary-medium;
+      transition: background-color 0.2s ease; // Smooth transition
+    }
+  }
+
+  @include tablet {
+    padding: 0 2rem; // Fixed padding syntax
+    max-width: 11rem;
+  }
 }
 
 @mixin label {
-  @include buttonLabel;
+  @include text-style(0.875rem, 1.25rem, 600);
+  @include tablet {
+    @include text-style(16px, 1.125rem, 700);
+  }
   font-weight: 400;
   width: 12.5rem;
   text-transform: uppercase;

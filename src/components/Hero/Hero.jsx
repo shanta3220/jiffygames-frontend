@@ -13,9 +13,9 @@ function Hero({ videoPath }) {
   useEffect(() => {
     if (videoRef.current) {
       videoRef.current.muted = true;
-      videoRef.current.play().catch((err) => {
-        console.error("Autoplay failed:", err);
-      });
+      //   videoRef.current.play().catch((err) => {
+      //     console.error("Autoplay failed:", err);
+      //   });
     }
   }, []);
 

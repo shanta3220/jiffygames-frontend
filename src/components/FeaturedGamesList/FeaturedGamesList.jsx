@@ -3,22 +3,27 @@ import { Link } from "react-router-dom";
 function FeaturedGamesList({ games }) {
   games = [
     {
-      gameName: "RikoTheAventurer",
+      gameName: "Riko: The Aventurer",
+      projectName: "RikoTheAventurer",
     },
   ];
 
-  console.log(games[0].gameName);
   return (
     <section className="featured-games">
+      <button className="button">VIEW ALL</button>
       <ul className="featured-games__list">
         {games.map((game) => (
           <li key={game.gameName} className="featured-games__item">
             <Link
-              to={`/games/${game.gameName}`}
+              to={`/games/${game.projectName}`}
               className="featured-games__link"
             >
               <div className="featured-games__item-contents">
-                <img src={`/images/${game.gameName}.png`} alt="" />
+                <img
+                  src={`/images/${game.projectName}.png`}
+                  alt=""
+                  className="featured-games__item-image"
+                />
                 <p className="featured-games__item-title">{game.gameName}</p>
               </div>
             </Link>
