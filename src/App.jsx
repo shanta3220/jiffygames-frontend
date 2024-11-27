@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.scss";
 import Header from "./components/Header/Header";
 import HomePage from "./pages/HomePage/HomePage";
+import GamePage from "./pages/GamePage/GamePage";
 
 function App() {
   return (
@@ -9,7 +10,7 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/games/:gameName" element={<GamesPage />} />
+        <Route path="/games/:gameProjectName" element={<GamePage />} />
 
         <Route path="/leaderboards" element={<LeaderboardsPage />} />
         <Route path="/register" element={<RegisterPage />} />
@@ -21,14 +22,6 @@ function App() {
 }
 
 export default App;
-
-function GamesPage() {
-  return (
-    <div>
-      <p>This is GamesPage</p>
-    </div>
-  );
-}
 
 function LeaderboardsPage() {
   return (

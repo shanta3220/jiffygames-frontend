@@ -1,6 +1,9 @@
-import "./App.scss";
-import UnityPlayer from "./Component/UnityPlayer";
+import UnityPlayer from "../../components/UnityPlayer/UnityPlayer";
+import { useParams } from "react-router-dom";
 
-export default function GamePage({ gameProjectName }) {
+import "./GamePage.scss";
+
+export default function GamePage() {
+  const { gameProjectName } = useParams();
   return <UnityPlayer gameProjectName={gameProjectName} />;
 }

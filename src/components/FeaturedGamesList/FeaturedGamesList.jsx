@@ -16,15 +16,15 @@ function FeaturedGamesList({ setVideoPath, games }) {
       projectName: "EndlessRunner2.5D",
     },
     {
-      gameName: "Riko: The Adventurer",
+      gameName: "Riko: The Adventurer2",
       projectName: "RikoTheAdventurer",
     },
     {
-      gameName: "LSD: Last Survival Days",
+      gameName: "LSD: Last Survival Days2",
       projectName: "LSDLastSurvivalDays",
     },
     {
-      gameName: "Endless Runner 2.5D",
+      gameName: "Endless Runner 2.5D2",
       projectName: "EndlessRunner2.5D",
     },
   ];

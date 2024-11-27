@@ -114,7 +114,7 @@ export default function UnityPlayer({ gameProjectName }) {
   }
 
   return (
-    <div className="container">
+    <div className="game">
       {isLoaded === false && (
         <div className="loading-overlay">
           <p>Loading... ({loadingPercentage}%)</p>
@@ -122,7 +122,7 @@ export default function UnityPlayer({ gameProjectName }) {
       )}
       <Fragment>
         <Unity
-          className="unity"
+          className="game__unity-player"
           style={{ visibility: isLoaded ? "visible" : "hidden" }}
           unityProvider={unityProvider}
         />
