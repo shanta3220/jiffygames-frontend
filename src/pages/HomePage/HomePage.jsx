@@ -5,47 +5,81 @@ import leaderboardImage from "../../assets/images/leaderboard.png";
 function HomePage() {
   const backgroundRef = useRef(null);
   const leaderBoardRef = useRef(null);
+  const videoPlayerRef = useRef(null);
+  const leaderBoardListRef = useRef(null);
+  useEffect(() => {
+    const updateLeaderboardSize = () => {
+      if (leaderBoardRef.current && leaderBoardListRef.current) {
+        const { width, height } =
+          leaderBoardRef.current.getBoundingClientRect();
 
-  // useEffect(() => {
-  //   const updateLeaderboardSize = () => {
-  //     if (backgroundRef.current && leaderBoardRef.current) {
-  //       const { width, height } = backgroundRef.current.getBoundingClientRect();
+        // Set width and height for leaderboard dynamically
+        leaderBoardListRef.current.style.setProperty("width", `${width}px`);
+        leaderBoardListRef.current.style.setProperty("height", `${height}px`);
+      }
+    };
 
-  //       // Set width and height for leaderboard dynamically
-  //       leaderBoardRef.current.style.setProperty("width", `${width * 0.2}px`);
-  //       leaderBoardRef.current.style.setProperty("height", `${height * 0.8}px`);
+    // Create a ResizeObserver to watch for changes to the leaderboard size
+    const observer = new ResizeObserver(updateLeaderboardSize);
+    if (leaderBoardRef.current) {
+      observer.observe(leaderBoardRef.current); // Correct method usage
+    }
 
-  //       // Position the leaderboard relative to the background
-  //       const topOffset = height * 0.1; // 10% from the top
-  //       const rightOffset = 5; // Align to the right of the background
+    // Cleanup observer on component unmount
+    return () => {
+      if (leaderBoardRef.current) {
+        observer.unobserve(leaderBoardRef.current); // Correct cleanup
+      }
+    };
+  }, []);
+  useEffect(() => {
+    const updateBackgroundSize = () => {
+      if (backgroundRef.current && videoPlayerRef.current) {
+        const { width, height } = backgroundRef.current.getBoundingClientRect();
 
-  //       // Update position based on the background size
-  //       leaderBoardRef.current.style.setProperty("top", `${topOffset}px`);
-  //       leaderBoardRef.current.style.setProperty("right", `${rightOffset}%`); // Keep aligned to the right side of the background
-  //     }
-  //   };
+        // Set width and height for leaderboard dynamically
+        videoPlayerRef.current.style.setProperty("width", `${width * 0.897}px`);
+        videoPlayerRef.current.style.setProperty(
+          "height",
+          `${height * 0.86}px`
+        );
+      }
+    };
 
-  //   // Create a ResizeObserver to watch for changes to the background size
-  //   const observer = new ResizeObserver(updateLeaderboardSize);
-  //   if (backgroundRef.current) {
-  //     observer.observe(backgroundRef.current);
-  //   }
+    // Create a ResizeObserver to watch for changes to the leaderboard size
+    const observer = new ResizeObserver(updateBackgroundSize);
+    if (backgroundRef.current) {
+      observer.observe(backgroundRef.current); // Correct method usage
+    }
 
-  //   // Cleanup observer on component unmount
-  //   return () => {
-  //     if (backgroundRef.current) {
-  //       observer.unobserve(backgroundRef.current);
-  //     }
-  //   };
-  // }, []);
+    // Cleanup observer on component unmount
+    return () => {
+      if (backgroundRef.current) {
+        observer.unobserve(backgroundRef.current); // Correct cleanup
+      }
+    };
+  }, []);
+
   return (
     <main className="hero">
-      <img src={background} alt="Background" className="hero__background" />
-      <img
-        src={leaderboardImage}
-        alt="Leaderboard"
-        className="hero__leaderboard-container"
-      />
+      <div className="hero__images">
+        <img
+          src={background}
+          alt="Background"
+          className="hero__background"
+          ref={backgroundRef}
+        />
+        <img
+          src={leaderboardImage}
+          alt="Leaderboard"
+          className="hero__leaderboard-container"
+          ref={leaderBoardRef}
+        />
+      </div>
+      <div className="hero__contents">
+        <div className="hero__video-player" ref={videoPlayerRef}></div>
+        <div className="hero__leaderboard-list" ref={leaderBoardListRef}></div>
+      </div>
     </main>
   );
 }

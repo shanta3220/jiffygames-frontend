@@ -5,10 +5,6 @@
   position: relative;
   width: 70%;
   height: 60vh;
-
-  display: flex;
-  justify-content: center;
-  align-items: start;
   margin: auto;
 
   @include tablet {
@@ -18,6 +14,14 @@
   @include desktop {
     max-width: 60vw;
     width: 64%;
+  }
+
+  &__images {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: start;
   }
 
   &__background {
@@ -32,5 +36,22 @@
     height: auto;
     object-fit: contain;
     object-position: left center;
+  }
+
+  &__contents {
+    position: absolute;
+    width: 100%;
+    top: 0;
+    display: flex;
+  }
+  &__video-player {
+    background-color: $primary-dark;
+    margin-top: 3.3%;
+    margin-left: 1.3%;
+    border-radius: 10%;
+  }
+  &__leaderboard-list {
+    margin-left: 2%;
+    background-color: aqua;
   }
 }
