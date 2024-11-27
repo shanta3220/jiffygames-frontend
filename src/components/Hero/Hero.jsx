@@ -17,7 +17,7 @@ function Hero({ videoPath }) {
         console.error("Autoplay failed:", err);
       });
     }
-  }, []);
+  }, [videoPath]);
 
   useEffect(() => {
     const updateLeaderboardSize = () => {

@@ -95,7 +95,7 @@
 
   &__leaderboard-list {
     margin-top: 2.7%;
-    background-color: rgba(0, 255, 255, 0.199);
+    //background-color: rgba(0, 255, 255, 0.199);
     border-radius: 2%;
   }
 }
@@ -110,21 +110,33 @@
   &__list {
     padding-top: $padding-headlines-top-mobile;
     display: flex;
+    flex-direction: column;
+    gap: $padding-headlines-top-mobile;
+
+    @include tablet {
+      flex-direction: row;
+      gap: 1.5rem;
+    }
   }
 
   &__item {
     border-radius: 10px;
     background-color: $primary-medium;
-    width: 16%;
-
+    width: 100%;
     padding: 1rem;
+
+    @include tablet {
+      width: 30%;
+    }
+    @include desktop {
+      width: 16%;
+    }
   }
 
-  &__link {
-  }
   &__item-contents {
     border-radius: 20px;
   }
+
   &__item-image {
     border: 0.25rem solid $primary-bright;
     width: 100%;
@@ -158,5 +170,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: $padding-margin-between-components-mobile;
   }
 }
