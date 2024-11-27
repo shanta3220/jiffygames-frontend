@@ -3,16 +3,16 @@
 
 .hero {
   position: relative;
-  width: 70%;
+  width: 96%;
   height: 60vh;
   margin: auto;
 
   @include tablet {
-    width: 97%;
+    width: 96%;
   }
 
   @include desktop {
-    max-width: 60vw;
+    max-width: 1920px; // Ensure the layout doesn't scale infinitely
     width: 64%;
   }
 
@@ -22,6 +22,7 @@
     display: flex;
     justify-content: center;
     align-items: start;
+    max-width: 1920px; // Limit scaling of child elements
   }
 
   &__background {
@@ -29,13 +30,15 @@
     height: auto;
     object-fit: contain;
     object-position: right center;
+    max-width: 1920px; // Cap background scaling
   }
+
   &__leaderboard-container {
     width: 24.1%;
-
     height: auto;
     object-fit: contain;
     object-position: left center;
+    max-width: 1920px; // Cap leaderboard scaling
   }
 
   &__contents {
@@ -43,26 +46,30 @@
     width: 100%;
     top: 0;
     display: flex;
+    gap: 5%;
   }
 
   &__video-player {
     background-color: $primary-dark;
-    margin-top: 3.3%;
-    margin-left: 1.3%;
+    margin: auto;
+    margin-top: 1.5%;
     border-radius: 10%;
     display: flex;
     justify-content: center;
   }
 
   &__video {
-    width: 100%;
+    width: 101%;
     height: 100%;
-    border-radius: 10%;
+    border-radius: 8%;
+    border: 4px solid #b51d4dc5;
     object-fit: fill;
+    object-position: 0 -4px;
   }
 
   &__leaderboard-list {
-    margin-left: 2%;
-    background-color: aqua;
+    margin-top: 2.7%;
+    background-color: rgba(0, 255, 255, 0.199);
+    border-radius: 2%;
   }
 }

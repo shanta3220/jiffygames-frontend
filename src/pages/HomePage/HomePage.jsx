@@ -26,8 +26,14 @@ function HomePage() {
           leaderBoardRef.current.getBoundingClientRect();
 
         // Set width and height for leaderboard dynamically
-        leaderBoardListRef.current.style.setProperty("width", `${width}px`);
-        leaderBoardListRef.current.style.setProperty("height", `${height}px`);
+        leaderBoardListRef.current.style.setProperty(
+          "width",
+          `${width * 0.87}px`
+        );
+        leaderBoardListRef.current.style.setProperty(
+          "height",
+          `${height * 0.77}px`
+        );
       }
     };
 
@@ -50,10 +56,10 @@ function HomePage() {
         const { width, height } = backgroundRef.current.getBoundingClientRect();
 
         // Set width and height for leaderboard dynamically
-        videoPlayerRef.current.style.setProperty("width", `${width * 0.897}px`);
+        videoPlayerRef.current.style.setProperty("width", `${width}px`);
         videoPlayerRef.current.style.setProperty(
           "height",
-          `${height * 0.86}px`
+          `${height * 0.93}px`
         );
       }
     };
