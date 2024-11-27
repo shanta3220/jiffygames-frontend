@@ -118,16 +118,6 @@
     width: 16%;
 
     padding: 1rem;
-
-    &:hover {
-      background-color: $primary-medium;
-      .featured-games__item-image {
-        border: 0.25rem solid $secondary-light;
-      }
-      .featured-games__item-title {
-        color: $secondary-light;
-      }
-    }
   }
 
   &__link {
@@ -138,7 +128,15 @@
   &__item-image {
     border: 0.25rem solid $primary-bright;
     width: 100%;
-    border-radius: 20px;
+    border-radius: 1.25rem;
+
+    &:hover {
+      cursor: pointer;
+      background-color: $primary-medium;
+      & {
+        border: 0.25rem solid $secondary-light;
+      }
+    }
   }
 
   &__item-title {
@@ -147,10 +145,18 @@
       text-decoration: none;
       text-align: center;
       padding-top: 16px !important;
-      padding-bottom: 8px !important;
+      padding-bottom: 16px !important;
       text-transform: uppercase;
       margin: 0;
       color: $primary-bright;
     }
+  }
+
+  &__preview-button-container {
+    background-color: $secondary-medium;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }
