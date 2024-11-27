@@ -105,7 +105,7 @@
   height: 100%;
   width: 100%;
   background-color: $secondary-medium;
-
+  background: linear-gradient($secondary-medium, $primary-dark);
   &__list {
     padding-top: $padding-headlines-top-mobile;
     display: flex;
@@ -137,7 +137,7 @@
   }
 
   &__item-image {
-    border: 0.25rem solid $primary-bright;
+    border: 0.25rem solid $secondary-medium;
     width: 100%;
     border-radius: 1.25rem;
 
