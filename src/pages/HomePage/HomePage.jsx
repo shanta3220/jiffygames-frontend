@@ -7,6 +7,18 @@ function HomePage() {
   const leaderBoardRef = useRef(null);
   const videoPlayerRef = useRef(null);
   const leaderBoardListRef = useRef(null);
+
+  const videoRef = useRef(null);
+
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.muted = true;
+      videoRef.current.play().catch((err) => {
+        console.error("Autoplay failed:", err);
+      });
+    }
+  }, []);
+
   useEffect(() => {
     const updateLeaderboardSize = () => {
       if (leaderBoardRef.current && leaderBoardListRef.current) {
@@ -77,7 +89,14 @@ function HomePage() {
         />
       </div>
       <div className="hero__contents">
-        <div className="hero__video-player" ref={videoPlayerRef}></div>
+        <div className="hero__video-player" ref={videoPlayerRef}>
+          <video
+            className="hero__video"
+            ref={videoRef}
+            crossOrigin="anonymous"
+            src="/trailers/RikoTheAdventurerTrailer.mp4"
+          />
+        </div>
         <div className="hero__leaderboard-list" ref={leaderBoardListRef}></div>
       </div>
     </main>
