@@ -1,11 +1,11 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-function FeaturedGamesList({ games }) {
+function FeaturedGamesList({ setVideoPath, games }) {
   const navigate = useNavigate("");
   games = [
     {
-      gameName: "Riko: The Aventurer",
-      projectName: "RikoTheAventurer",
+      gameName: "Riko: The Adventurer",
+      projectName: "RikoTheAdventurer",
     },
   ];
 
@@ -18,8 +18,11 @@ function FeaturedGamesList({ games }) {
             <div className="featured-games__item-contents">
               <img
                 src={`/images/${game.projectName}.png`}
-                alt=""
+                alt={`${game.gameName} image`}
                 className="featured-games__item-image"
+                onClick={() => {
+                  setVideoPath(`/trailers/${game.projectName}.mp4`);
+                }}
               />
               <p className="featured-games__item-title">{game.gameName}</p>
 
