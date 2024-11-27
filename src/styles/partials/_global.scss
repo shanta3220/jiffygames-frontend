@@ -2,30 +2,7 @@
 @use "./mixins" as *;
 
 .button {
-  @include buttonLabel;
-  & {
-    height: 2.5rem;
-    background-color: $primary-medium;
-    border-radius: 0.25rem;
-    color: $primary-bright;
-    border: none;
-    width: 100%;
-    background-position: 0.625rem 0.5rem;
-    background-repeat: no-repeat;
-    text-transform: uppercase;
-    text-align: center;
-
-    &:hover {
-      cursor: pointer;
-      background-color: #fff;
-      transition: background-color 0.2s ease; // Smooth transition
-    }
-  }
-
-  @include tablet {
-    padding: 0 2rem; // Fixed padding syntax
-    max-width: 10rem;
-  }
+  @include button;
 }
 
 .user-avatar {
