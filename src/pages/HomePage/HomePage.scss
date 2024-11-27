@@ -12,7 +12,6 @@
   }
 
   @include desktop {
-    max-width: 1920px; // Ensure the layout doesn't scale infinitely
     width: 64%;
   }
 
@@ -30,23 +29,31 @@
     height: auto;
     object-fit: contain;
     object-position: right center;
-    max-width: 1920px; // Cap background scaling
+    border-top-left-radius: 5%;
+    border-bottom-left-radius: 5%;
   }
 
   &__leaderboard-container {
+    border-top-right-radius: 5%;
+    border-bottom-right-radius: 5%;
     width: 24.1%;
     height: auto;
     object-fit: contain;
     object-position: left center;
-    max-width: 1920px; // Cap leaderboard scaling
   }
 
   &__contents {
     position: absolute;
+    left: 0;
     width: 100%;
     top: 0;
     display: flex;
-    gap: 5%;
+    justify-content: left;
+    padding-left: 0;
+    gap: 6%;
+    @include desktop {
+      padding-left: 2%;
+    }
   }
 
   &__video-player {
@@ -59,12 +66,12 @@
   }
 
   &__video {
-    width: 101%;
+    width: 100%;
     height: 100%;
     border-radius: 8%;
-    border: 4px solid #b51d4dc5;
+    border: 3px solid #b51d4d8e;
     object-fit: fill;
-    object-position: 0 -4px;
+    object-position: 0 -6px;
   }
 
   &__leaderboard-list {

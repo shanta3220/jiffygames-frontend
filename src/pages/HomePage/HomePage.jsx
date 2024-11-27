@@ -59,7 +59,7 @@ function HomePage() {
         videoPlayerRef.current.style.setProperty("width", `${width}px`);
         videoPlayerRef.current.style.setProperty(
           "height",
-          `${height * 0.93}px`
+          `${height * 0.92}px`
         );
       }
     };
