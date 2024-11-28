@@ -6,17 +6,20 @@ import { getGameList } from "../../scripts/GameApi";
 
 function HomePage() {
   const [videoPath, setVideoPath] = useState("/trailers/RikoTheAdventurer.mp4");
-  const [games, setGames] = useState("");
+  const [games, setGames] = useState(null);
+
   useEffect(() => {
-    try {
-      const games = getGameList();
+    const fetchGameList = async () => {
+      try {
+        const games = await getGameList();
 
-      setGames(games);
-    } catch (error) {
-      console.error(error);
-    }
+        setGames(games);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchGameList();
   }, []);
-
   return (
     <main className="home-main">
       <Hero videoPath={videoPath} />

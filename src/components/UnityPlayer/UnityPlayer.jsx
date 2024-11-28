@@ -1,8 +1,13 @@
 import { useEffect, Fragment, useState, useCallback, useRef } from "react";
 import { Unity, useUnityContext } from "react-unity-webgl";
 import { useNavigate } from "react-router-dom";
+import fullScreenIcon from "../../assets/icons/icon_fullscreen.png";
+import likeIcon from "../../assets/icons/icon_like.png";
+import shareIcon from "../../assets/icons/icon_share1.png";
 
-export default function UnityPlayer({ gameProjectName }) {
+export default function UnityPlayer({ gameInfo }) {
+  const gameProjectName = gameInfo.projectName;
+
   const navigate = useNavigate();
   const canvasRef = useRef(null);
   const [isGameOver, setIsGameOver] = useState(false);
@@ -158,7 +163,7 @@ export default function UnityPlayer({ gameProjectName }) {
             <p>Loading... ({loadingPercentage}%)</p>
           </div>
         )}
-        <Fragment>
+        {/* <Fragment>
           <Unity
             className="game__unity-player"
             style={{ visibility: isLoaded ? "visible" : "hidden" }}
@@ -166,21 +171,41 @@ export default function UnityPlayer({ gameProjectName }) {
             disabledCanvasEvents={["dragstart", "scroll"]}
             ref={canvasRef}
           />
+        </Fragment> */}
+
+        <div className="game__title-and-interaction">
+          <div>
+            <img src={likeIcon} alt="" className="game-interact__icon" />
+            <h1 className="game__title-text">{gameInfo.gameName}</h1>
+          </div>
+
+          <div className="game-interact">
+            <div className="game-interact__social">
+              <img
+                src={shareIcon}
+                alt=""
+                className="game-interact__icon"
+                onClick={handleClickBack}
+              />
+              <div className="game-interact__like">
+                <img src={likeIcon} alt="" className="game-interact__icon" />
+                <p className="game-interact__like-text">{gameInfo.like}</p>
+              </div>
+            </div>
+            <div>
+              <img
+                src={fullScreenIcon}
+                alt=""
+                className="game-interact__icon--fullscreen"
+                onClick={handleClickEnterFullscreen}
+              />
+            </div>
+          </div>
+
           {userName && score && (
             <p>{`Set Score ${userName}! You've scored ${score} points.`}</p>
           )}
-          <div>
-            <button onClick={handleClickEnterFullscreen} className="button">
-              Enter Fullscreen
-            </button>
-          </div>
-          {isGameOver === true && (
-            <p>{`Game Over ${userName}! You've scored ${score} points.`}</p>
-          )}
-          <button onClick={handleClickBack} className="button">
-            Back
-          </button>
-        </Fragment>
+        </div>
       </div>
     </div>
   );

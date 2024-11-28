@@ -4,6 +4,7 @@
 .main-game {
   width: 100%;
   height: 100%;
+  color: $primary-bright;
 
   @include tablet {
     padding: 1rem $padding-margin-between-tablet;
@@ -47,12 +48,32 @@
     margin-top: 20px;
     min-width: 300px !important;
   }
+
+  &__title-text {
+    @include mainHeader;
+  }
+
+  &__title-and-interaction {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: $primary-medium;
+    padding: $padding-margin-between-components-mobile;
+
+    @include tablet {
+      padding: $padding-margin-between-components-tablet;
+    }
+  }
 }
 
 .game-interact {
   width: 100%;
-  height: 30px;
-  background-color: $primary-medium;
+  display: flex;
+  justify-content: end;
+  flex: 1;
+  gap: 3rem;
+  align-items: center;
 
   &__social {
     border-radius: 2rem;
@@ -64,13 +85,29 @@
     gap: 1rem;
   }
 
-  &__share-image {
-    padding: 4px 0;
-    height: 100%;
+  &__icon {
+    height: 28px;
   }
-  &__like-image {
-    padding: 4px 0;
-    height: 100%;
-    width: auto;
+
+  &__icon--fullscreen {
+    @extend .game-interact__icon;
+
+    height: 32px;
+  }
+
+  &__like {
+    display: flex;
+    align-items: center;
+    height: 36px;
+    gap: 6px;
+  }
+  &__like-text {
+    @include bodyCopy;
+
+    & {
+      height: 36px;
+      line-height: 2rem;
+      vertical-align: middle;
+    }
   }
 }

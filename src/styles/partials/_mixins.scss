@@ -181,10 +181,10 @@
 
 @mixin sectionHeader {
   @include headlinesPaddingTopBottom();
-  @include text-style(0.75rem, 1.25rem, 600);
+  @include text-style(0.875rem, 1.375rem, 600);
 
   @include tablet {
-    @include text-style(0.8125rem, 1.125rem, 700);
+    @include text-style(1.125rem, 1.125rem, 600);
   }
 }
 
@@ -193,14 +193,14 @@
   @include text-style(0.875rem, 1.375rem, 400);
 
   @include tablet {
-    @include text-style(0.875rem, 1.375rem, 400);
+    @include text-style(1.125rem, 1.5rem, 400);
   }
 }
 
 @mixin button {
   @include text-style(0.875rem, 1.25rem, 600);
   @include tablet {
-    @include text-style(16px, 1.125rem, 700);
+    @include text-style(16px, 1.125rem, 600);
   }
   & {
     height: 2.5rem;
