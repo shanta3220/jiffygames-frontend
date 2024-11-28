@@ -5,5 +5,11 @@ import "./GamePage.scss";
 
 export default function GamePage() {
   const { gameProjectName } = useParams();
-  return <UnityPlayer gameProjectName={gameProjectName} />;
+  return (
+    <main className="main-game">
+      <section className="game-holder">
+        <UnityPlayer gameProjectName={gameProjectName} />
+      </section>
+    </main>
+  );
 }

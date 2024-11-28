@@ -1,25 +1,35 @@
 @use "../../styles/partials/mixins" as *;
 @use "../../styles/partials/variables" as *;
 
+.main-game {
+  width: 100%;
+  height: 100%;
+
+  @include tablet {
+    padding: 1rem $padding-margin-between-tablet;
+  }
+
+  @include desktop {
+    padding: 1rem $padding-margin-between-desktop;
+  }
+
+  .game-holder {
+    width: 50%;
+    height: 50%;
+    background-color: $secondary-medium;
+    border-radius: 2rem;
+  }
+}
+
 .game {
-  width: 100vw;
-  height: 80vh;
+  width: 100%;
+  height: 100%;
 
   .game-container {
     padding: $padding-headlines-top-mobile
       $padding-margin-between-components-mobile;
-    width: 100vw;
-    height: 60vw;
-
-    @include tablet {
-      width: 60vw;
-      height: 37vw;
-    }
-
-    @include desktop {
-      width: 50vw;
-      height: 30vw;
-    }
+    width: 100%;
+    height: 100%;
   }
 
   &__unity-player {

@@ -104,11 +104,18 @@
 
 .featured-games {
   padding: $padding-headlines-top-mobile;
-
   height: 100%;
   width: 100%;
   background-color: $secondary-medium;
   background: linear-gradient($secondary-medium, $primary-dark);
+
+  @include tablet {
+    padding: 1rem $padding-margin-between-tablet;
+  }
+
+  @include desktop {
+    padding: 1rem $padding-margin-between-desktop;
+  }
 
   &__list {
     padding-top: $padding-headlines-top-mobile;
@@ -117,62 +124,56 @@
     gap: $padding-headlines-top-mobile;
 
     @include tablet {
+      padding-top: $padding-headlines-top-tablet;
+
       flex-direction: row;
       justify-content: space-between;
       flex-wrap: wrap;
       gap: 1.5rem;
-      & > .featured-games__item {
-        width: 31%;
-      }
     }
 
     @include tablet {
       flex-direction: row;
       justify-content: space-between;
       flex-wrap: wrap;
-
-      & > .featured-games__item {
-        width: 31%;
-      }
     }
+
     @include desktop {
+      padding-top: $padding-headlines-top-tablet;
+
       flex-direction: row;
       justify-content: space-between;
       align-items: start;
       justify-items: start;
       flex-wrap: wrap;
-      gap: 1.5rem;
-
-      & > .featured-games__item {
-        width: 280px;
-        height: 305px;
-      }
+      gap: 2rem;
     }
   }
 
   &__item {
-    border-radius: 10px;
+    border-radius: 0.625rem;
     background-color: $primary-medium;
     width: 100%;
     padding: 1rem;
 
     @include tablet {
-      width: 27%;
+      width: 45%;
     }
+
     @include desktop {
-      width: 32%;
-      height: 80%;
+      width: 30%;
     }
   }
 
   &__item-contents {
-    border-radius: 20px;
+    border-radius: 1.25rem;
   }
 
   &__item-image {
     border: 0.25rem solid $secondary-medium;
     width: 100%;
     border-radius: 1.25rem;
+    margin-bottom: 0.75rem;
 
     &:hover {
       cursor: pointer;
@@ -184,12 +185,16 @@
   }
 
   &__item-title {
+    background-color: $secondary-medium;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+
     @include subHeader;
     & {
       text-decoration: none;
       text-align: center;
-      padding-top: 16px !important;
-      padding-bottom: 16px !important;
+      padding-top: $padding-margin-between-components-mobile !important;
+      padding-bottom: 0 !important;
       text-transform: uppercase;
       margin: 0;
       color: $primary-bright;
@@ -198,10 +203,13 @@
 
   &__preview-button-container {
     background-color: $secondary-medium;
-    height: 70px;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
     display: flex;
     align-items: center;
     justify-content: center;
+
     padding: $padding-margin-between-components-mobile;
+    padding-bottom: 1.125rem;
   }
 }
