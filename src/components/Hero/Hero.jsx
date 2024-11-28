@@ -1,5 +1,5 @@
 import { useRef, useEffect } from "react";
-import background from "../../assets/images/hero-background3.png";
+import background from "../../assets/images/hero-background.png";
 import leaderboardImage from "../../assets/images/leaderboard.png";
 
 function Hero({ videoPath }) {

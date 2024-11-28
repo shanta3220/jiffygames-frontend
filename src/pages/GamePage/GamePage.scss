@@ -1,14 +1,34 @@
-.game {
-  width: 50%;
-  height: 20%;
+@use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/variables" as *;
 
-  .loading-overlay {
-    width: 100%;
-    height: 100%;
+.game {
+  width: 100vw;
+  height: 80vh;
+
+  .game-container {
+    padding: $padding-headlines-top-mobile
+      $padding-margin-between-components-mobile;
+    width: 100vw;
+    height: 60vw;
+
+    @include tablet {
+      width: 60vw;
+      height: 37vw;
+    }
+
+    @include desktop {
+      width: 50vw;
+      height: 30vw;
+    }
   }
 
   &__unity-player {
     width: 100%;
     height: 100%;
+  }
+
+  .button {
+    margin-top: 20px;
+    min-width: 300px !important;
   }
 }

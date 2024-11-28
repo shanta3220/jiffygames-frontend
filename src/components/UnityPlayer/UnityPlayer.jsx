@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 export default function UnityPlayer({ gameProjectName }) {
   const navigate = useNavigate();
-  const canvasRef = useRef();
+  const canvasRef = useRef(null);
   const [isGameOver, setIsGameOver] = useState(false);
   const [isQuit, setIsQuit] = useState(false);
   const [userName, setUserName] = useState();
@@ -75,7 +75,7 @@ export default function UnityPlayer({ gameProjectName }) {
 
   async function handleClickBack() {
     try {
-      if (unload) await unload();
+      if (unload) await unload(); // Ensure Unity is unloaded before navigating away
     } finally {
       navigate("/");
     }
@@ -83,21 +83,16 @@ export default function UnityPlayer({ gameProjectName }) {
 
   // functions to unload, register/unregister events
   useEffect(() => {
-    // Function to mark touchstart, wheel, and touchmove listeners as passive
     const makeEventsPassive = () => {
-      const unityCanvas = document.querySelector("canvas");
-      if (unityCanvas) {
-        // Mark 'touchstart', 'wheel', and 'touchmove' events as passive
-        unityCanvas.addEventListener("touchstart", (e) => e.preventDefault(), {
-          passive: true,
-        });
-        unityCanvas.addEventListener("wheel", (e) => e.preventDefault(), {
-          passive: true,
-        });
-        unityCanvas.addEventListener("touchmove", (e) => e.preventDefault(), {
-          passive: true,
-        });
-      }
+      const unityCanvas = canvasRef.current;
+      // if (unityCanvas) {
+      //   unityCanvas.addEventListener("touchstart", (e) => e.preventDefault(), {
+      //     passive: false,
+      //   });
+      //   unityCanvas.addEventListener("touchmove", (e) => e.preventDefault(), {
+      //     passive: false,
+      //   });
+      // }
     };
 
     // Run after Unity is loaded to modify event listeners
@@ -111,25 +106,24 @@ export default function UnityPlayer({ gameProjectName }) {
 
     return () => {
       const removeAllListeners = async () => {
-        try {
-          const unityCanvas = document.querySelector("canvas");
-          if (unityCanvas) {
-            unityCanvas.removeEventListener("touchstart", (e) =>
-              e.preventDefault()
-            );
-            unityCanvas.removeEventListener("wheel", (e) => e.preventDefault());
-            unityCanvas.removeEventListener("touchmove", (e) =>
-              e.preventDefault()
-            );
-          }
-          if (isLoaded && unload) await unload();
-        } finally {
-          removeEventListener("GameOver", handleGameOver);
-          removeEventListener("SetScore", handleSetScore);
-          removeEventListener("Quit", handleQuit);
+        if (isLoaded && unload) {
+          const unityCanvas = canvasRef.current;
+          // if (unityCanvas) {
+          //   unityCanvas.removeEventListener("touchstart", (e) =>
+          //     e.preventDefault()
+          //   );
+          //   unityCanvas.removeEventListener("touchmove", (e) =>
+          //     e.preventDefault()
+          //   );
+          // }
+          await unload(); // Ensure unloading happens in the cleanup
         }
       };
       removeAllListeners();
+      // Removing Unity event listeners as well
+      removeEventListener("GameOver", handleGameOver);
+      removeEventListener("SetScore", handleSetScore);
+      removeEventListener("Quit", handleQuit);
     };
   }, [
     isLoaded,
@@ -140,49 +134,54 @@ export default function UnityPlayer({ gameProjectName }) {
     handleSetScore,
     handleQuit,
   ]);
-  useEffect(
-    function () {
-      const updateDevicePixelRatio = function () {
-        setDevicePixelRatio(window.devicePixelRatio);
-      };
-      const mediaMatcher = window.matchMedia(
-        `screen and (resolution: ${devicePixelRatio}dppx)`
-      );
-      mediaMatcher.addEventListener("change", updateDevicePixelRatio);
-      return function () {
-        mediaMatcher.removeEventListener("change", updateDevicePixelRatio);
-      };
-    },
-    [devicePixelRatio]
-  );
+
+  useEffect(() => {
+    const updateDevicePixelRatio = function () {
+      setDevicePixelRatio(window.devicePixelRatio);
+    };
+    const mediaMatcher = window.matchMedia(
+      `screen and (resolution: ${devicePixelRatio}dppx)`
+    );
+    mediaMatcher.addEventListener("change", updateDevicePixelRatio);
+    return function () {
+      mediaMatcher.removeEventListener("change", updateDevicePixelRatio);
+    };
+  }, [devicePixelRatio]);
+
   const loadingPercentage = Math.round(loadingProgression * 100);
 
   return (
     <div className="game">
-      {isLoaded === false && (
-        <div className="loading-overlay">
-          <p>Loading... ({loadingPercentage}%)</p>
-        </div>
-      )}
-      <Fragment>
-        <Unity
-          className="game__unity-player"
-          style={{ visibility: isLoaded ? "visible" : "hidden" }}
-          unityProvider={unityProvider}
-          disabledCanvasEvents={["dragstart", "scroll"]}
-          ref={canvasRef}
-        />
-        {userName && score && (
-          <p>{`Set Score ${userName}! You've scored ${score} points.`}</p>
+      <div className="game-container">
+        {isLoaded === false && (
+          <div className="loading-overlay">
+            <p>Loading... ({loadingPercentage}%)</p>
+          </div>
         )}
-        <div>
-          <button onClick={handleClickEnterFullscreen}>Enter Fullscreen</button>
-        </div>
-        {isGameOver === true && (
-          <p>{`Game Over ${userName}! You've scored ${score} points.`}</p>
-        )}
-        <button onClick={handleClickBack}>Back</button>
-      </Fragment>
+        <Fragment>
+          <Unity
+            className="game__unity-player"
+            style={{ visibility: isLoaded ? "visible" : "hidden" }}
+            unityProvider={unityProvider}
+            disabledCanvasEvents={["dragstart", "scroll"]}
+            ref={canvasRef}
+          />
+          {userName && score && (
+            <p>{`Set Score ${userName}! You've scored ${score} points.`}</p>
+          )}
+          <div>
+            <button onClick={handleClickEnterFullscreen} className="button">
+              Enter Fullscreen
+            </button>
+          </div>
+          {isGameOver === true && (
+            <p>{`Game Over ${userName}! You've scored ${score} points.`}</p>
+          )}
+          <button onClick={handleClickBack} className="button">
+            Back
+          </button>
+        </Fragment>
+      </div>
     </div>
   );
 }
