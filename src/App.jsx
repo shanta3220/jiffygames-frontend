@@ -10,7 +10,7 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/games/:gameProjectName" element={<GamePage />} />
+        <Route path="/games/:gameId" element={<GamePage />} />
 
         <Route path="/leaderboards" element={<LeaderboardsPage />} />
         <Route path="/register" element={<RegisterPage />} />

@@ -154,9 +154,10 @@
     border-radius: 0.625rem;
     background-color: $primary-medium;
     width: 100%;
-    padding: 1rem;
+    padding: $padding-margin-between-components-mobile;
 
     @include tablet {
+      padding: $padding-margin-between-components-tablet;
       width: 45%;
     }
 

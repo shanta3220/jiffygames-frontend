@@ -1,33 +1,9 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+
 function FeaturedGamesList({ setVideoPath, games }) {
   const navigate = useNavigate("");
-  games = [
-    {
-      gameName: "Riko: The Adventurer",
-      projectName: "RikoTheAdventurer",
-    },
-    {
-      gameName: "LSD: Last Survival Days",
-      projectName: "LSDLastSurvivalDays",
-    },
-    {
-      gameName: "Endless Runner 2.5D",
-      projectName: "EndlessRunner2.5D",
-    },
-    {
-      gameName: "Riko: The Adventurer2",
-      projectName: "RikoTheAdventurer",
-    },
-    {
-      gameName: "LSD: Last Survival Days2",
-      projectName: "LSDLastSurvivalDays",
-    },
-    {
-      gameName: "Endless Runner 2.5D2",
-      projectName: "EndlessRunner2.5D",
-    },
-  ];
+
   return (
     <section className="featured-games">
       <button className="button">VIEW ALL</button>
