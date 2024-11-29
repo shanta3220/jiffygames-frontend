@@ -1,6 +1,7 @@
 import { useEffect, Fragment, useState, useCallback, useRef } from "react";
 import { Unity, useUnityContext } from "react-unity-webgl";
 import { useNavigate } from "react-router-dom";
+import "./UnityPlayer.scss";
 import fullScreenIcon from "../../assets/icons/icon_fullscreen.png";
 import likeIcon from "../../assets/icons/icon_like.png";
 import shareIcon from "../../assets/icons/icon_share.png";

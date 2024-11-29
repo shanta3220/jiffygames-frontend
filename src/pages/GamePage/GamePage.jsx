@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { getGameInfo } from "../../scripts/GameApi";
 import "./GamePage.scss";
 import { useEffect, useState } from "react";
+import GameDetails from "../../components/GameDetails/GameDetails";
 
 export default function GamePage() {
   const { gameId } = useParams();
@@ -39,6 +40,9 @@ export default function GamePage() {
     <main className="main-game">
       <section className="game-holder">
         {<UnityPlayer gameInfo={gameInfo} />}
+      </section>
+      <section className="main-game__details">
+        {<GameDetails gameInfo={gameInfo} />}
       </section>
     </main>
   );
