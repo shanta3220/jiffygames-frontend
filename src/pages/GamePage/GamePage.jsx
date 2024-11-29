@@ -8,7 +8,6 @@ import GameDetails from "../../components/GameDetails/GameDetails";
 export default function GamePage() {
   const { gameId } = useParams();
   const [gameInfo, setGameInfo] = useState(null);
-  const [fullscreenFunction, setFullscreenFunction] = useState(null);
 
   useEffect(() => {
     const fetchGameInfo = async () => {
@@ -31,11 +30,6 @@ export default function GamePage() {
     );
   }
 
-  const handleFullscreenClick = () => {
-    if (fullscreenFunction) {
-      fullscreenFunction();
-    }
-  };
   return (
     <main className="main-game">
       <section className="game-holder">

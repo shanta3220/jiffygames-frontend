@@ -25,7 +25,7 @@ function FeaturedGamesList({ setVideoPath, games }) {
                 <button
                   className="button"
                   onClick={() => {
-                    navigate(`/games/${game.projectName}`);
+                    navigate(`/games/${game.id}`);
                   }}
                 >
                   Play
