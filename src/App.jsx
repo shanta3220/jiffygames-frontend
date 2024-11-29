@@ -4,6 +4,7 @@ import Header from "./components/Header/Header";
 import HomePage from "./pages/HomePage/HomePage";
 import GamePage from "./pages/GamePage/GamePage";
 import GamesPage from "./pages/GamesPage/GamesPage";
+import LeaderboardPage from "./components/LeaderboardPage/LeaderboardPage";
 
 function App() {
   return (
@@ -17,11 +18,12 @@ function App() {
         <Route path="/leaderboards" element={<LeaderboardsPage />} />
         <Route
           path="/leaderboards/:leaderboardId"
-          element={<LeaderboardsPage />}
+          element={<LeaderboardPage />}
         />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/user-profile" element={<UserProfilePage />} />
+        <Route path="/users/" element={<UserProfilePage />} />
+        <Route path="/users/:userId" element={<UserProfilePage />} />
       </Routes>
     </BrowserRouter>
   );

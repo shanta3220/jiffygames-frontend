@@ -8,17 +8,17 @@ function FeaturedGamesList({ setVideoPath, games }) {
       <button className="button">VIEW ALL</button>
       <ul className="featured-games__list">
         {games.map((game) => (
-          <li key={game.gameName} className="featured-games__item">
+          <li key={game.id} className="featured-games__item">
             <div className="featured-games__item-contents">
               <img
-                src={`/images/${game.projectName}.png`}
-                alt={`${game.gameName} image`}
+                src={`/images/${game.project_name}.png`}
+                alt={`${game.game_name} image`}
                 className="featured-games__item-image"
                 onClick={() => {
-                  setVideoPath(`/trailers/${game.projectName}.mp4`);
+                  setVideoPath(`/trailers/${game.project_name}.mp4`);
                 }}
               />
-              <p className="featured-games__item-title">{game.gameName}</p>
+              <p className="featured-games__item-title">{game.game_name}</p>
 
               <div className="featured-games__preview-button-container">
                 <button

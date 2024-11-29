@@ -9,7 +9,7 @@ function GameList({ games }) {
       <ul className="all-game__list">
         {games.map((game) => (
           <li
-            key={game.gameName}
+            key={game.id}
             className="all-game__item"
             onClick={() => {
               navigate(`/games/${game.id}`);
@@ -17,11 +17,11 @@ function GameList({ games }) {
           >
             <div className="all-game__item-contents">
               <img
-                src={`/images/${game.projectName}.png`}
-                alt={`${game.gameName} image`}
+                src={`/images/${game.project_name}.png`}
+                alt={`${game.game_name} image`}
                 className="all-game__item-image"
               />
-              <p className="all-game__item-title">{game.gameName}</p>
+              <p className="all-game__item-title">{game.game_name}</p>
             </div>
           </li>
         ))}

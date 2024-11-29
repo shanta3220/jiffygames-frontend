@@ -9,7 +9,7 @@ import returnIcon from "../../assets/icons/icon_return.png";
 import loadingGif from "../../assets/images/loading.gif";
 
 export default function UnityPlayer({ gameInfo }) {
-  const gameProjectName = gameInfo.projectName;
+  const gameProjectName = gameInfo.project_name;
 
   const navigate = useNavigate();
   const canvasRef = useRef(null);
@@ -191,7 +191,7 @@ export default function UnityPlayer({ gameInfo }) {
               className="game-interact__icon"
               onClick={handleClickReturn}
             />
-            <p className="game__title-text">{gameInfo.gameName}</p>
+            <p className="game__title-text">{gameInfo.game_name}</p>
           </div>
           <div className="game-interact">
             <p>{`Score: ${score ? score : 0}`}</p>
