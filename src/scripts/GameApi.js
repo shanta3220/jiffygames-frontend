@@ -59,81 +59,90 @@ export async function getGameList() {
 export async function getComments(gameId) {
   let comments = [
     {
-      comment_id: 1,
+      id: 1,
       game_id: 1,
       user_id: 1,
-      content:
+      comment:
         "This game is absolutely amazing! I love the graphics and gameplay.",
       timestamp: 1691558262000,
     },
     {
-      comment_id: 2,
+      id: 2,
       game_id: 1,
       user_id: 2,
-      content: "Challenging levels but super rewarding when you finish them.",
+      comment: "Challenging levels but super rewarding when you finish them.",
       timestamp: 1691559365000,
     },
     {
-      comment_id: 3,
+      id: 3,
       game_id: 2,
       user_id: 3,
-      content: "A bit buggy at times, but overall a fun experience.",
+      comment: "A bit buggy at times, but overall a fun experience.",
       timestamp: 1691560468000,
     },
     {
-      comment_id: 4,
+      id: 4,
       game_id: 2,
       user_id: 4,
-      content: "The storyline really pulls you in. Can't wait for the sequel!",
+      comment: "The storyline really pulls you in. Can't wait for the sequel!",
       timestamp: 1691561571000,
     },
     {
-      comment_id: 5,
+      id: 5,
       game_id: 3,
       user_id: 5,
-      content: "This game reminds me of my childhood! Nostalgic vibes.",
+      comment: "This game reminds me of my childhood! Nostalgic vibes.",
       timestamp: 1691562674000,
     },
     {
-      comment_id: 6,
+      id: 6,
       game_id: 3,
       user_id: 6,
-      content: "Too many ads interrupting the flow of the game.",
+      comment: "Too many ads interrupting the flow of the game.",
       timestamp: 1691563777000,
     },
     {
-      comment_id: 7,
+      id: 7,
       game_id: 4,
       user_id: 7,
-      content:
+      comment:
         "Multiplayer mode is so much fun! Highly recommend playing with friends.",
       timestamp: 1691564880000,
     },
     {
-      comment_id: 8,
+      id: 8,
       game_id: 4,
       user_id: 8,
-      content: "Not a fan of the new update. It feels less intuitive now.",
+      comment: "Not a fan of the new update. It feels less intuitive now.",
       timestamp: 1691565983000,
     },
     {
-      comment_id: 9,
+      id: 9,
       game_id: 5,
       user_id: 9,
-      content: "The boss battles are epic! Loving every minute of it.",
+      comment: "The boss battles are epic! Loving every minute of it.",
       timestamp: 1691567086000,
     },
     {
-      comment_id: 10,
+      id: 10,
       game_id: 5,
       user_id: 10,
-      content: "Pretty average game, but it's a good way to kill time.",
+      comment: "Pretty average game, but it's a good way to kill time.",
       timestamp: 1691568189000,
     },
   ];
 
+  const users = await getUsers();
+
   if (gameId) {
-    comments = comments.filter((comment) => comment.game_id == gameId);
+    comments = comments.filter((comment) => {
+      if (comment.game_id == gameId) {
+        const user = users.filter((user) => user.id == comment.user_id)[0];
+        comment.userName = user.userName;
+        comment.avatar = user.avatar;
+        return comment;
+      }
+    });
   }
   return comments;
 }
@@ -285,10 +294,13 @@ export async function getUsers() {
       password: "12345678",
     },
   ];
-
   return users;
 }
 
+export async function getUser(userId) {
+  const users = await getUsers();
+  return users.filter((user) => user.id == userId)[0];
+}
 export async function getGameInfo(gameId) {
   const games = await getGameList();
   const game = games.filter((game) => game.id == gameId)[0];

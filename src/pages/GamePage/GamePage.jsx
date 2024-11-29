@@ -4,6 +4,8 @@ import { getGameInfo } from "../../scripts/GameApi";
 import "./GamePage.scss";
 import { useEffect, useState } from "react";
 import GameDetails from "../../components/GameDetails/GameDetails";
+import VideoComments from "../../components/Comments/Comments";
+import Comments from "../../components/Comments/Comments";
 
 export default function GamePage() {
   const { gameId } = useParams();
@@ -33,10 +35,21 @@ export default function GamePage() {
   return (
     <main className="main-game">
       <section className="game-holder">
-        {<UnityPlayer gameInfo={gameInfo} />}
+        <UnityPlayer gameInfo={gameInfo} />
       </section>
       <section className="main-game__details">
-        {<GameDetails gameInfo={gameInfo} />}
+        <GameDetails gameInfo={gameInfo} />
+      </section>
+      <section className="main-game__comments">
+        <Comments
+          comments={gameInfo.comments}
+          handlePostNewComment={() => {
+            console.log("clicked post new comment");
+          }}
+          handleDeleteComment={() => {
+            console.log("clicked delete comment");
+          }}
+        />
       </section>
     </main>
   );
