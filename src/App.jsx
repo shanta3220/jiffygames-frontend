@@ -3,6 +3,7 @@ import "./App.scss";
 import Header from "./components/Header/Header";
 import HomePage from "./pages/HomePage/HomePage";
 import GamePage from "./pages/GamePage/GamePage";
+import GamesPage from "./pages/GamesPage/GamesPage";
 
 function App() {
   return (
@@ -27,14 +28,6 @@ function App() {
 }
 
 export default App;
-
-function GamesPage() {
-  return (
-    <div>
-      <p>This is GamesPage</p>
-    </div>
-  );
-}
 
 function LeaderboardsPage() {
   return (
