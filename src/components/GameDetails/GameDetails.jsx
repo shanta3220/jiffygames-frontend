@@ -6,7 +6,7 @@ function GameDetails({ gameInfo }) {
   const navigate = useNavigate();
 
   function handleViewLeaderboardClick() {
-    navigate(`/leaderboards/${gameInfo.leaderboardId}`);
+    navigate(`/leaderboards/${gameInfo.leaderboard_id}`);
   }
   return (
     <div className="game-details">

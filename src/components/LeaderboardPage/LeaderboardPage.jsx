@@ -10,7 +10,6 @@ function LeaderboardPage() {
     const fetchLeaderboard = async () => {
       try {
         const leaderboard = await getLeaderboard(leaderboardId);
-
         setLeaderboard(leaderboard);
       } catch (error) {
         console.error(error);
@@ -18,34 +17,31 @@ function LeaderboardPage() {
     };
     fetchLeaderboard();
   }, [leaderboardId]);
-  let i = 0;
-  if (leaderboard == null) {
+
+  if (!leaderboard) {
     return <p>loading...</p>;
   }
+
   return (
-    <div className="leaderboard">
+    <main className="main-leaderboard">
+      <h1>{leaderboard.gameInfo.game_name}</h1>
       <ul className="leaderboard-list">
-        {leaderboard.map((entry) => {
-          i++;
-          console.log(entry.userInfo.id);
-          return (
-            <>
-              <Link to={`/users/${entry.userInfo.id}`}>
-                <li className="leaderboard-list__item" key={entry.userInfo.id}>
-                  <div>
-                    <p className="leaderboard-list__item-text">{i}</p>
-                    <p className="leaderboard-list__item-text">
-                      {entry.userInfo.user_name}
-                    </p>
-                    <p className="leaderboard-list__item-text">{entry.score}</p>
-                  </div>
-                </li>
-              </Link>
-            </>
-          );
-        })}
+        {leaderboard.userEntries.map((entry, i) => (
+          <Link to={`/users/${entry.userInfo.id}`} key={entry.userInfo.id}>
+            <li className="leaderboard-list__item">
+              <p className="leaderboard-list__item-text--rank">{i + 1}</p>
+              <div className="user-avatar">
+                {/* <img src={userInfo.avatar} alt="" /> */}
+              </div>
+              <p className="leaderboard-list__item-text">
+                {entry.userInfo.user_name}
+              </p>
+              <p className="leaderboard-list__item-text">{entry.score}</p>
+            </li>
+          </Link>
+        ))}
       </ul>
-    </div>
+    </main>
   );
 }
 

@@ -1,2 +1,67 @@
 @use "../../styles/partials/mixins" as *;
 @use "../../styles/partials/variables" as *;
+
+.main-leaderboard {
+  width: 100%;
+  height: 100%;
+  gap: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  @include tablet {
+    padding: 1rem $padding-margin-between-tablet;
+  }
+
+  @include desktop {
+    padding: 1rem $padding-margin-between-desktop;
+  }
+}
+
+.leaderboard-list {
+  background-color: $secondary-medium;
+  border-radius: $border-radius;
+
+  h1 {
+    @include mainHeader;
+    & {
+      padding-top: $padding-headlines-top-mobile;
+      padding-bottom: $padding-headlines-bottom-mobile;
+      padding-left: $padding-margin-between-components-mobile;
+    }
+  }
+
+  width: 70%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: $gap;
+
+  padding: 1rem $padding-margin-between-components-mobile;
+  @include tablet {
+    padding: 1rem $padding-margin-between-components-tablet;
+  }
+
+  @include desktop {
+  }
+  &__item {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    color: $primary-bright;
+    background-color: $primary-medium;
+  }
+
+  &__item-text {
+    width: 20%;
+    text-align: center;
+    &--rank {
+      @extend .leaderboard-list__item-text;
+      max-width: 40px;
+    }
+  }
+  &__item-text:nth-child(3) {
+    width: 50%;
+  }
+}
