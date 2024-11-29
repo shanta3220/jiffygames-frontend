@@ -191,9 +191,10 @@ export default function UnityPlayer({ gameInfo }) {
               className="game-interact__icon"
               onClick={handleClickReturn}
             />
-            <h1 className="game__title-text">{gameInfo.gameName}</h1>
+            <p className="game__title-text">{gameInfo.gameName}</p>
           </div>
           <div className="game-interact">
+            <p>{`Score: ${score ? score : 0}`}</p>
             <div className="game-interact__social">
               <img
                 src={shareIcon}
@@ -219,9 +220,6 @@ export default function UnityPlayer({ gameInfo }) {
               />
             </div>
           </div>
-          {userName && score && (
-            <p>{`Set Score ${userName}! You've scored ${score} points.`}</p>
-          )}
         </div>
       </div>
     </div>
