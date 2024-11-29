@@ -214,13 +214,15 @@
       cursor: pointer;
       background-color: $primary-bright;
       color: $primary-medium;
-      transition: background-color 0.2s ease; // Smooth transition
+      transition: background-color 0.2s ease;
     }
   }
 
   @include tablet {
-    padding: 0 2rem; // Fixed padding syntax
-    max-width: 11rem;
+    padding: 0 2rem;
+    width: auto;
+    min-width: 10rem;
+    max-width: auto;
   }
 }
 

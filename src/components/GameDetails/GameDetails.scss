@@ -20,7 +20,14 @@
     @include tablet {
       padding: $padding-margin-between-components-tablet;
     }
+
+    &--button-container {
+      @extend .game-details__info;
+      justify-content: center;
+      align-items: center;
+    }
   }
+
   &__info-group {
     &--category {
       @extend .game-details__info-group;
@@ -34,7 +41,8 @@
   &__title {
     @include sectionHeader;
   }
-  p {
+
+  &__text {
     @include bodyCopy;
     & {
       padding: 0;

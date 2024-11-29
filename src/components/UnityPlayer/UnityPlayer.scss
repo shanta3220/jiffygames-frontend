@@ -9,25 +9,27 @@
     width: 100%;
     height: 100%;
     position: relative;
+  }
 
-    .loading-overlay {
-      &__text {
-        @include bodyCopy;
-      }
-      & {
-        position: absolute;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 1.25rem;
-      }
-      img {
-        height: 40%;
-        margin-bottom: 1.25rem;
-      }
+  &__loading-overlay {
+    &__text {
+      @include bodyCopy;
+    }
+    & {
+      position: absolute;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 1.25rem;
+      text-align: center;
+      flex-direction: column;
+    }
+    img {
+      height: 35%;
+      margin-bottom: 1.25rem;
     }
   }
 

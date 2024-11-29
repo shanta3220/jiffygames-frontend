@@ -14,7 +14,7 @@ export default function GamePage() {
     const fetchGameInfo = async () => {
       try {
         const gameInfo = await getGameInfo(gameId);
-        console.log(gameInfo);
+
         setGameInfo(gameInfo);
       } catch (error) {
         console.error(error);

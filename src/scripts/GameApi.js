@@ -10,6 +10,7 @@ export async function getGameList() {
         "Move with 'WASD' keys and right mouseclick to shoot, if there is more than 1 weapon use mousescroll to switch weapons.",
       category: "Action, Adventure, Fantasy",
       like: 12,
+      leaderboardId: "ggddfgsdgh",
     },
     {
       gameName: "LSD: Last Survival Days",
@@ -20,6 +21,7 @@ export async function getGameList() {
         "Move with 'WASD' keys and right mouse click to shoot, use mouse scroll to switch characters",
       category: "Action",
       like: 7,
+      leaderboardId: "gggggfgdfdgddfgsdgh",
     },
     {
       gameName: "Endless Runner 2.5D",
@@ -30,6 +32,7 @@ export async function getGameList() {
         "Use space to jump, watch over the fuel, if its runs out you can't jump.",
       category: "Fantasy",
       like: 2,
+      leaderboardId: "gggggfgdfdgddsdsddfgsdgh",
     },
     {
       gameName: "Riko: The Adventurer2",

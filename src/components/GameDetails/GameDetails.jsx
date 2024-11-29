@@ -1,6 +1,13 @@
 import React from "react";
 import "./GameDetails.scss";
+import { Navigate, useNavigate } from "react-router-dom";
+
 function GameDetails({ gameInfo }) {
+  const navigate = useNavigate();
+
+  function handleViewLeaderboardClick() {
+    navigate(`/leaderboards/${gameInfo.leaderboardId}`);
+  }
   return (
     <div className="game-details">
       <div className="game-details__info">
@@ -18,6 +25,11 @@ function GameDetails({ gameInfo }) {
           <h2 className="game-details__title">CATEGORY:</h2>
           <p className="game-details__text">{gameInfo.category}</p>
         </div>
+      </div>
+      <div className="game-details__info--button-container">
+        <button className="button" onClick={handleViewLeaderboardClick}>
+          View Leaderboard
+        </button>
       </div>
     </div>
   );

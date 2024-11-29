@@ -162,7 +162,7 @@ export default function UnityPlayer({ gameInfo }) {
     <div className="game">
       <div className="game__container">
         {isLoaded === false && (
-          <div className="loading-overlay">
+          <div className="game__loading-overlay">
             <img src={loadingGif} alt="" />
             <p className="loading-overlay__text">
               Loading... ({loadingPercentage}%)

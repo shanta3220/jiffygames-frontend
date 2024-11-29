@@ -10,9 +10,14 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/games/" element={<GamesPage />} />
         <Route path="/games/:gameId" element={<GamePage />} />
 
         <Route path="/leaderboards" element={<LeaderboardsPage />} />
+        <Route
+          path="/leaderboards/:leaderboardId"
+          element={<LeaderboardsPage />}
+        />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/user-profile" element={<UserProfilePage />} />
@@ -22,6 +27,14 @@ function App() {
 }
 
 export default App;
+
+function GamesPage() {
+  return (
+    <div>
+      <p>This is GamesPage</p>
+    </div>
+  );
+}
 
 function LeaderboardsPage() {
   return (
