@@ -15,9 +15,7 @@
     margin: 0;
     background-image: url("../../assets/images/user-profile.png");
     background-size: cover;
-    background-position-x: -0.3rem;
     border-radius: 50%;
-    background-color: $primary-bright;
   }
 
   @include tablet {

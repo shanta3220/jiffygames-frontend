@@ -73,7 +73,10 @@
   }
 
   &__link {
-    color: $primary-bright;
+    & {
+      color: $primary-bright;
+      @include headlinesPaddingTopBottom();
+    }
     @include subHeader;
 
     &.active {

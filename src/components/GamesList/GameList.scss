@@ -1,0 +1,84 @@
+@use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/variables" as *;
+
+.all-game {
+  height: 100%;
+  width: 100%;
+
+  padding: $padding-margin-between-components-mobile;
+
+  @include tablet {
+    padding: $padding-margin-between-components-tablet;
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: $padding-headlines-top-mobile;
+
+    @include tablet {
+      flex-direction: row;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+
+    @include tablet {
+      flex-direction: row;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    @include desktop {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: start;
+      justify-items: start;
+      flex-wrap: wrap;
+      gap: 2rem;
+    }
+  }
+
+  &__item {
+    border-radius: 0.625rem;
+    // background-color: $primary-medium;
+    width: 100%;
+
+    @include tablet {
+      width: 45%;
+    }
+
+    @include desktop {
+      width: 45%;
+    }
+  }
+
+  &__item-contents {
+    border-radius: 1.25rem;
+  }
+
+  &__item-image {
+    border: 2px solid transparent;
+    width: 100%;
+    border-radius: 1.25rem;
+
+    &:hover {
+      cursor: pointer;
+      background-color: $primary-medium;
+      & {
+        border: 2px solid $primary-bright;
+      }
+    }
+  }
+
+  &__item-title {
+    @include bodyCopy;
+    & {
+      text-decoration: none;
+      text-align: center;
+      padding: 0 !important;
+      margin: 0;
+      color: $primary-bright;
+    }
+  }
+}

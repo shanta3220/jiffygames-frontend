@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.scss";
 import Header from "./components/Header/Header";
 import HomePage from "./pages/HomePage/HomePage";
+import GamePage from "./pages/GamePage/GamePage";
 
 function App() {
   return (
@@ -9,9 +10,14 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/games/:gameName" element={<GamesPage />} />
+        <Route path="/games/" element={<GamesPage />} />
+        <Route path="/games/:gameId" element={<GamePage />} />
 
         <Route path="/leaderboards" element={<LeaderboardsPage />} />
+        <Route
+          path="/leaderboards/:leaderboardId"
+          element={<LeaderboardsPage />}
+        />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/user-profile" element={<UserProfilePage />} />
