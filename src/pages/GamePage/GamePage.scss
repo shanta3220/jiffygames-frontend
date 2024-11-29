@@ -20,7 +20,7 @@
     width: 56%;
     height: 50%;
     background-color: $secondary-medium;
-    border-radius: 1rem;
+    border-radius: $border-radius;
     display: flex;
     flex-direction: column;
     gap: 1rem;
@@ -41,7 +41,7 @@
   &__comments {
     width: 56%;
     background-color: $secondary-medium;
-    border-radius: 1rem;
+    border-radius: $border-radius;
 
     padding: $padding-margin-between-components-mobile;
 
@@ -54,7 +54,7 @@
 .main-games {
   width: 40%;
   background-color: $secondary-medium;
-  border-radius: 1rem;
+  border-radius: $border-radius;
   padding: $padding-margin-between-components-mobile;
 
   @include tablet {
