@@ -27,6 +27,18 @@ export async function getGameList() {
     },
     {
       id: 3,
+      gameName: "Lana's Adventure",
+      projectName: "LanasAdventure",
+      description:
+        "Lana's Adventure is a platformer shooting game, where the player shoots enemies, and fight the boss to rescue his friend.",
+      instruction:
+        "Move left-right with 'A & D' keys,  jump with 'W' key and use 'space' for shooting, collect fruits to collect points. Make sure you collect keys to unlock hidden platform / shooting skills",
+      category: "Action, Adventure, Fantasy",
+      like: 12,
+      leaderboardId: "LanasAdventureLB",
+    },
+    {
+      id: 4,
       gameName: "Endless Runner 2.5D",
       projectName: "EndlessRunner2.5D",
       description:
@@ -36,11 +48,6 @@ export async function getGameList() {
       category: "Fantasy",
       like: 2,
       leaderboardId: "EndlessRunner2.5DLB",
-    },
-    {
-      id: 4,
-      gameName: "Riko: The Adventurer2",
-      projectName: "RikoTheAdventurer",
     },
     {
       id: 5,
