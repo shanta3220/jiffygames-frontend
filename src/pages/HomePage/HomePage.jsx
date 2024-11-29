@@ -1,7 +1,7 @@
 import { useRef, useEffect, useState } from "react";
 import "./HomePage.scss";
 import Hero from "../../components/Hero/Hero";
-import FeaturedGamesList from "../../components/FeaturedGamesList/FeaturedGamesList";
+import FeaturedGameList from "../../components/FeaturedGameList/FeaturedGameList";
 import { getGameList } from "../../scripts/GameApi";
 
 function HomePage() {
@@ -23,7 +23,7 @@ function HomePage() {
   return (
     <main className="home-main">
       <Hero videoPath={videoPath} />
-      {games && <FeaturedGamesList setVideoPath={setVideoPath} games={games} />}
+      {games && <FeaturedGameList setVideoPath={setVideoPath} games={games} />}
     </main>
   );
 }

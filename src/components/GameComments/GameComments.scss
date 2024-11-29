@@ -3,12 +3,6 @@
 @use "../../styles/partials/global" as *;
 
 .comments {
-  padding: $padding-margin-between-components-mobile;
-
-  @include tablet {
-    padding: $padding-margin-between-components-tablet;
-  }
-
   &__header {
     @include sectionHeader;
   }

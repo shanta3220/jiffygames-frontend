@@ -1,15 +1,30 @@
 import UnityPlayer from "../../components/UnityPlayer/UnityPlayer";
 import { useParams } from "react-router-dom";
-import { getGameInfo } from "../../scripts/GameApi";
+import { getGameInfo, getGameList } from "../../scripts/GameApi";
 import "./GamePage.scss";
 import { useEffect, useState } from "react";
 import GameDetails from "../../components/GameDetails/GameDetails";
-import VideoComments from "../../components/Comments/Comments";
-import Comments from "../../components/Comments/Comments";
+import VideoComments from "../../components/GameComments/GameComments";
+import Comments from "../../components/GameComments/GameComments";
+import GameList from "../../components/GamesList/GameList";
 
 export default function GamePage() {
   const { gameId } = useParams();
   const [gameInfo, setGameInfo] = useState(null);
+  const [games, setGames] = useState(null);
+
+  useEffect(() => {
+    const fetchGames = async () => {
+      try {
+        const games = await getGameList();
+
+        setGames(games);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchGames();
+  }, []);
 
   useEffect(() => {
     const fetchGameInfo = async () => {
@@ -51,6 +66,11 @@ export default function GamePage() {
           }}
         />
       </section>
+      {games && (
+        <section className="main-games">
+          <GameList games={games} />
+        </section>
+      )}
     </main>
   );
 }

@@ -1,5 +1,5 @@
-import Comment from "../Comment/Comment";
-import "./Comments.scss";
+import Comment from "../Comment/GameComment";
+import "./GameComments.scss";
 import { useRef, useState, useEffect } from "react";
 
 function Comments({ comments, handlePostNewComment, handleDeleteComment }) {
