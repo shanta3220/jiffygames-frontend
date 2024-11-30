@@ -62,7 +62,7 @@ function Form({
           />
           <Input
             inputType="email"
-            label="Enter your email"
+            label="Enter your confirm email"
             name={fieldNames.confirmEmail}
             handleInputChange={handleInputChange}
             value={formData[fieldNames.confirmEmail]}

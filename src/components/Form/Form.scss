@@ -41,7 +41,7 @@
 
   padding: 1rem $padding-margin-between-components-mobile;
   @include tablet {
-    padding: 1rem $padding-margin-between-components-tablet;
+    padding: 2rem $padding-margin-between-components-tablet;
     width: 37.5rem;
   }
 
@@ -84,7 +84,7 @@
       color: $primary-invalid;
     }
     img {
-      height: 22px;
+      height: 1.375rem;
     }
   }
   &__button-and-link {
