@@ -7,7 +7,7 @@ function Comment({ comment, handleDeleteComment }) {
       <div className="user-avatar"></div>
       <div className="comment__texts">
         <div className="comment__pair-info">
-          <p className="comment__username">{comment.userName}</p>
+          <p className="comment__username">{comment.user_name}</p>
           <p className="comment__date">{getTimeInterval(comment.timestamp)}</p>
         </div>
         <p className="body-copy">{comment.comment}</p>

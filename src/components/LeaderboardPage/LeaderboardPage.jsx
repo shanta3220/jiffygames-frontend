@@ -26,10 +26,17 @@ function LeaderboardPage() {
     <main className="main-leaderboard">
       <h1>{leaderboard.gameInfo.game_name}</h1>
       <ul className="leaderboard-list">
+        <div className="leaderboard-list__item">
+          <p className="leaderboard-list__item-label--rank">RANK</p>
+          <p className="leaderboard-list__item-label--avatar">AVATAR</p>
+          <p className="leaderboard-list__item-label--user">USER</p>
+          <p className="leaderboard-list__item-label--score">SCORE</p>
+        </div>
+
         {leaderboard.userEntries.map((entry, i) => (
           <Link to={`/users/${entry.userInfo.id}`} key={entry.userInfo.id}>
-            <li className="leaderboard-list__item">
-              <p className="leaderboard-list__item-text--rank">{i + 1}</p>
+            <li className="leaderboard-list__item leaderboard-list__item--hover">
+              <p className="leaderboard-list__item-text">{i + 1}</p>
               <div className="user-avatar">
                 {/* <img src={userInfo.avatar} alt="" /> */}
               </div>

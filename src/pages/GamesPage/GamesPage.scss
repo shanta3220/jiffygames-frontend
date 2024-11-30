@@ -11,6 +11,7 @@
   @include desktop {
     padding: 1rem $padding-margin-between-desktop;
   }
+
   section {
     background-color: $secondary-medium;
     border-radius: $border-radius;
@@ -26,6 +27,13 @@
   }
 
   .all-game__item {
+    background-color: $primary-medium;
+
+    padding: $padding-margin-between-components-mobile;
+    @include tablet {
+      padding: $padding-margin-between-components-tablet;
+    }
+
     & {
       border-radius: 0.625rem;
       width: 100%;
