@@ -28,6 +28,7 @@
   & {
     width: 100%;
     text-align: center;
+    margin-bottom: 0.5rem;
   }
 }
 
@@ -72,13 +73,14 @@
       width: 100%;
       display: flex;
       padding-left: 1rem;
+      padding-right: 1rem;
     }
   }
 
   &__input--textarea {
     @extend .form__input;
     font-family: $font-family;
-    height: 3.75rem;
+    height: 5rem;
     resize: none;
   }
 

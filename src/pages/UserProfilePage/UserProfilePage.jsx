@@ -3,6 +3,7 @@ import { useState, useRef, useEffect } from "react";
 import { getUser, updateUser } from "../../scripts/GameApi";
 import defaultImage from "../../assets/images/user-profile.png";
 import UserProfileInput from "../../components/UserProfileInput/UserProfileInput";
+import "./UserProfilePage.scss";
 
 function UserProfile() {
   const isLoggedIn = true;
@@ -68,9 +69,6 @@ function UserProfile() {
   const handleSubmit = (e) => {
     e.preventDefault();
     let hasAnyErrors = "";
-
-    const isLogin = window.location.pathname.includes("/login");
-
     for (let key of Object.keys(formData)) {
       hasAnyErrors = checkErrors(key, formData[key]);
       if (hasAnyErrors) {
@@ -183,13 +181,11 @@ function UserProfile() {
     <main className="main-user-profile">
       <h1 className="main-user-profile__title">User Profile</h1>
       <form onSubmit={handleSubmit} className="form">
-        <div className="user-profile__label--avatar">
-          <div className="upload-form__image-container">
-            <img src={avatarPreviewImage} alt="User Avatar." />
-            <button className="button" type="button" onClick={handleImageClick}>
-              Change Icon
-            </button>
-          </div>
+        <section className="form__section-left">
+          <img src={avatarPreviewImage} alt="User Avatar." />
+          <button className="button" type="button" onClick={handleImageClick}>
+            Change Icon
+          </button>
           <input
             ref={imageInputRef}
             type="file"
@@ -199,53 +195,56 @@ function UserProfile() {
             onChange={handleImageChange}
             style={{ display: "none" }}
           />
-        </div>{" "}
-        <UserProfileInput
-          inputType="textarea"
-          label="About me"
-          name={fieldNames.aboutMe}
-          handleInputChange={handleInputChange}
-          value={formData[fieldNames.aboutMe]}
-          errorMessage={errorMessages[fieldNames.aboutMe]}
-        />
-        <UserProfileInput
-          inputType="text"
-          label="Enter your username"
-          name={fieldNames.name}
-          handleInputChange={handleInputChange}
-          value={formData[fieldNames.name]}
-          errorMessage={errorMessages[fieldNames.name]}
-        />
-        <UserProfileInput
-          inputType="email"
-          label="Email"
-          name={fieldNames.email}
-          handleInputChange={handleInputChange}
-          value={formData[fieldNames.email]}
-          errorMessage={errorMessages[fieldNames.email]}
-        />
-        <UserProfileInput
-          inputType="password"
-          label="Password"
-          name={fieldNames.password}
-          handleInputChange={handleInputChange}
-          value={formData[fieldNames.password]}
-          errorMessage={errorMessages[fieldNames.password]}
-        />
-        {formData[fieldNames.password] !==
-          formData[fieldNames.confirmPassword] && (
+        </section>
+        <section className="form__section-right">
+          {" "}
+          <UserProfileInput
+            inputType="textarea"
+            label="About me"
+            name={fieldNames.aboutMe}
+            handleInputChange={handleInputChange}
+            value={formData[fieldNames.aboutMe]}
+            errorMessage={errorMessages[fieldNames.aboutMe]}
+          />
+          <UserProfileInput
+            inputType="text"
+            label="Enter your username"
+            name={fieldNames.name}
+            handleInputChange={handleInputChange}
+            value={formData[fieldNames.name]}
+            errorMessage={errorMessages[fieldNames.name]}
+          />
+          <UserProfileInput
+            inputType="email"
+            label="Email"
+            name={fieldNames.email}
+            handleInputChange={handleInputChange}
+            value={formData[fieldNames.email]}
+            errorMessage={errorMessages[fieldNames.email]}
+          />
           <UserProfileInput
             inputType="password"
-            label="Confirm password"
-            name={fieldNames.confirmPassword}
+            label="Password"
+            name={fieldNames.password}
             handleInputChange={handleInputChange}
-            value={formData[fieldNames.confirmPassword]}
-            errorMessage={errorMessages[fieldNames.confirmPassword]}
+            value={formData[fieldNames.password]}
+            errorMessage={errorMessages[fieldNames.password]}
           />
-        )}
-        <button type="submit" className="button">
-          Submit
-        </button>
+          {formData[fieldNames.password] !==
+            formData[fieldNames.confirmPassword] && (
+            <UserProfileInput
+              inputType="password"
+              label="Confirm password"
+              name={fieldNames.confirmPassword}
+              handleInputChange={handleInputChange}
+              value={formData[fieldNames.confirmPassword]}
+              errorMessage={errorMessages[fieldNames.confirmPassword]}
+            />
+          )}
+          <button type="submit" className="button">
+            Submit
+          </button>
+        </section>
       </form>
     </main>
   );

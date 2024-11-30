@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import errorIcon from "../../assets/icons/error-24px.svg";
+import errorIcon from "../../assets/icons/icon_error.svg";
 import editIcon from "../../assets/icons/icon_edit.png";
 
 function UserProfileInput({
