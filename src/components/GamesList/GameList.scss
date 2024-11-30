@@ -45,7 +45,7 @@
 
   &__item {
     border-radius: 0.625rem;
-    // background-color: $primary-medium;
+    border: 2px solid transparent;
     width: 100%;
 
     @include tablet {
@@ -55,6 +55,11 @@
     @include desktop {
       width: 45%;
     }
+
+    &:hover {
+      cursor: pointer;
+      border: 2px solid $primary-bright;
+    }
   }
 
   &__item-contents {
@@ -62,17 +67,9 @@
   }
 
   &__item-image {
-    border: 2px solid transparent;
+    border: 2px solid $primary-dark;
     width: 100%;
     border-radius: 1.25rem;
-
-    &:hover {
-      cursor: pointer;
-      background-color: $primary-medium;
-      & {
-        border: 2px solid $primary-bright;
-      }
-    }
   }
 
   &__item-title {

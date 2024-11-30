@@ -59,4 +59,14 @@
   @include tablet {
     padding: $padding-margin-between-components-tablet;
   }
+
+  .all-game__item-image {
+    border-radius: 10px;
+    border: none;
+    width: 100%;
+  }
+  .all-game__item-title {
+    margin-top: -5px;
+    margin-bottom: 5px;
+  }
 }
