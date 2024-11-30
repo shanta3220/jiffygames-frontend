@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import errorIcon from "../../assets/icons/error-24px.svg";
-import editIcon from "../../assets/icons/edit-24px.svg";
+import editIcon from "../../assets/icons/icon_edit.png";
 
 function UserProfileInput({
   value,
@@ -13,12 +13,12 @@ function UserProfileInput({
   const [isFocused, setIsFocused] = useState(false);
   const ref = useRef();
 
-  const handleEdit2 = () => {
+  const handleEdit = () => {
     setIsFocused(true);
     ref.current.focus();
   };
 
-  const handleBlur2 = () => {
+  const handleBlur = () => {
     setIsFocused(false);
   };
 
@@ -27,28 +27,42 @@ function UserProfileInput({
       <label className="form__input-label">
         {label}
         <div className="form__input-holder">
-          <input
-            type={inputType}
-            name={name}
-            id={name}
-            onChange={handleInputChange}
-            value={value}
-            placeholder={`${label}...`}
-            required
-            className="form__input"
-            onBlur={handleBlur2}
-            ref={ref}
-            disabled={!isFocused}
-          />
+          {inputType !== "textarea" ? (
+            <input
+              type={inputType}
+              name={name}
+              id={name}
+              onChange={handleInputChange}
+              value={value}
+              placeholder={`${label}...`}
+              required
+              className="form__input"
+              onBlur={handleBlur}
+              ref={ref}
+              disabled={!isFocused}
+            />
+          ) : (
+            <textarea
+              name={name}
+              id={name}
+              onChange={handleInputChange}
+              value={value}
+              placeholder={`${label}...`}
+              className="form__input--textarea"
+              onBlur={handleBlur}
+              ref={ref}
+              disabled={!isFocused}
+            />
+          )}
           {!isFocused && (
-            <img src={editIcon} alt="edit icon" onClick={handleEdit2} />
+            <img src={editIcon} alt="edit icon" onClick={handleEdit} />
           )}
         </div>
         {errorMessage && (
           <div className="form__input-error-message">
-            <img src={errorIcon} /> <p>{errorMessage}</p>
+            <img src={errorIcon} alt="error icon" /> <p>{errorMessage}</p>
           </div>
-        )}{" "}
+        )}
       </label>
     </div>
   );

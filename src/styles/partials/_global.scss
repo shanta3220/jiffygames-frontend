@@ -75,6 +75,13 @@
     }
   }
 
+  &__input--textarea {
+    @extend .form__input;
+    font-family: $font-family;
+    height: 3.75rem;
+    resize: none;
+  }
+
   &__input-error-message {
     & {
       display: flex;
@@ -128,6 +135,8 @@
   img {
     position: absolute;
     right: 10px;
-    top: 10px;
+    top: 14px;
+    width: 26px;
+    height: 26px;
   }
 }

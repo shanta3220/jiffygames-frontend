@@ -203,7 +203,7 @@ function UserProfile() {
         <UserProfileInput
           inputType="textarea"
           label="About me"
-          name={fieldNames.confirmPassword}
+          name={fieldNames.aboutMe}
           handleInputChange={handleInputChange}
           value={formData[fieldNames.aboutMe]}
           errorMessage={errorMessages[fieldNames.aboutMe]}
