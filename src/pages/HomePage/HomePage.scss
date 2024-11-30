@@ -110,11 +110,11 @@
   background: linear-gradient($secondary-medium, $primary-dark);
 
   @include tablet {
-    padding: 1rem $padding-margin-between-tablet;
+    padding: 2rem $padding-margin-between-tablet;
   }
 
   @include desktop {
-    padding: 1rem $padding-margin-between-desktop;
+    padding: 2rem $padding-margin-between-desktop;
   }
 
   &__list {
@@ -209,7 +209,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-
     padding: $padding-margin-between-components-mobile;
     padding-bottom: 1.125rem;
   }
