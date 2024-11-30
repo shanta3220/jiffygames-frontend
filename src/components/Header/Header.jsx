@@ -30,7 +30,16 @@ function Header() {
       </div>
       <div className="header__links">
         {!isLoggedIn && (
-          <NavLink to={"/register"} className="header__link">
+          <NavLink
+            to={"/register"}
+            className={({ isActive }) =>
+              `header__link ${
+                window.location.pathname.includes("/login") || isActive
+                  ? "active"
+                  : ""
+              }`
+            }
+          >
             LOGIN/SIGN UP
           </NavLink>
         )}
