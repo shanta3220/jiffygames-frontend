@@ -1,10 +1,12 @@
 @use "../../styles/partials/mixins" as *;
 @use "../../styles/partials/variables" as *;
-@use "../../styles/partials/global" as *;
 
 .comments {
   &__header {
     @include sectionHeader;
+  }
+  & {
+    padding: 0;
   }
 
   &__and-form {
@@ -20,32 +22,34 @@
 }
 
 .comment-form {
-  @extend .form;
-  flex-direction: column;
-  gap: $gap;
+  @include form;
+  & {
+    flex-direction: column;
+    gap: $gap;
 
-  @include tablet {
-    align-items: flex-end;
-    padding-bottom: 0;
+    @include tablet {
+      align-items: flex-end;
+      padding-bottom: 0;
+    }
   }
 
   &__comment {
-    width: 100%;
-    height: 6.25rem;
-    @extend .form-input;
-    padding-top: $padding-margin-between-mobile-half;
-    padding-left: $padding-margin-between-components-mobile;
-
-    font-family: $font-family;
-    resize: none;
-
-    @include tablet {
-      height: 3.75rem;
+    @include formInput;
+    & {
+      width: 100%;
+      height: 6.25rem;
+      padding-top: $padding-margin-between-mobile-half;
+      padding-left: $padding-margin-between-components-mobile;
+      font-family: $font-family;
+      resize: none;
+      @include tablet {
+        height: 3.75rem;
+      }
     }
   }
 
   &__button {
-    @extend .button;
+    @include button;
     @include tablet {
       max-width: 12.5rem;
     }

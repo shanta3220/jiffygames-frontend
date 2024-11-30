@@ -1,5 +1,6 @@
 import React from "react";
 import Input from "../Input/Input";
+import "./Form.scss";
 
 function Form({ formData, handleSubmit, handleInputChange, fieldNames }) {
   const isLogin = window.location.pathname.includes("/login");
