@@ -155,10 +155,12 @@
 }
 
 @mixin headlinesPaddingBottom {
-  padding-bottom: $padding-headlines-bottom-mobile;
+  & {
+    padding-bottom: $padding-headlines-bottom-mobile;
 
-  @include tablet {
-    padding-bottom: $padding-headlines-bottom-tablet;
+    @include tablet {
+      padding-bottom: $padding-headlines-bottom-tablet;
+    }
   }
 }
 
@@ -188,6 +190,7 @@
 
 @mixin bodyCopy {
   @include headlinesPaddingBottom();
+
   @include text-style(0.875rem, 1.375rem, 400);
 
   @include tablet {

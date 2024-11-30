@@ -3,7 +3,13 @@ import { Link } from "react-router-dom";
 import Input from "../Input/Input";
 import "./Form.scss";
 
-function Form({ formData, handleSubmit, handleInputChange, fieldNames }) {
+function Form({
+  fieldNames,
+  formData,
+  handleSubmit,
+  handleInputChange,
+  errorMessages,
+}) {
   const isLogin = window.location.pathname.includes("/login");
   if (isLogin) {
     return (
@@ -15,14 +21,16 @@ function Form({ formData, handleSubmit, handleInputChange, fieldNames }) {
             label="Enter your username"
             name={fieldNames.name}
             handleInputChange={handleInputChange}
-            formData={formData}
+            value={formData[fieldNames.name]}
+            errorMessage={errorMessages[fieldNames.name]}
           />
           <Input
             inputType="password"
             label="Enter your password"
             name={fieldNames.password}
             handleInputChange={handleInputChange}
-            formData={formData}
+            value={formData[fieldNames.password]}
+            errorMessage={errorMessages[fieldNames.password]}
           />
           <button type="submit" className="button">
             LOGIN
@@ -40,7 +48,8 @@ function Form({ formData, handleSubmit, handleInputChange, fieldNames }) {
             label="Enter your username"
             name={fieldNames.name}
             handleInputChange={handleInputChange}
-            formData={formData}
+            value={formData[fieldNames.name]}
+            errorMessage={errorMessages[fieldNames.name]}
           />
 
           <Input
@@ -48,28 +57,32 @@ function Form({ formData, handleSubmit, handleInputChange, fieldNames }) {
             label="Enter your email"
             name={fieldNames.email}
             handleInputChange={handleInputChange}
-            formData={formData}
+            value={formData[fieldNames.email]}
+            errorMessage={errorMessages[fieldNames.email]}
           />
           <Input
             inputType="email"
             label="Enter your email"
             name={fieldNames.confirmEmail}
             handleInputChange={handleInputChange}
-            formData={formData}
+            value={formData[fieldNames.confirmEmail]}
+            errorMessage={errorMessages[fieldNames.confirmEmail]}
           />
           <Input
             inputType="password"
             label="Enter your password"
             name={fieldNames.password}
             handleInputChange={handleInputChange}
-            formData={formData}
+            value={formData[fieldNames.password]}
+            errorMessage={errorMessages[fieldNames.password]}
           />
           <Input
             inputType="password"
             label="Enter your confirm password"
             name={fieldNames.confirmPassword}
             handleInputChange={handleInputChange}
-            formData={formData}
+            value={formData[fieldNames.confirmPassword]}
+            errorMessage={errorMessages[fieldNames.confirmPassword]}
           />
           <div className="form__button-and-link">
             <Link className="form__account-link" to={"/login"}>

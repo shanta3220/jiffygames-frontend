@@ -40,7 +40,6 @@
   border-radius: $border-radius;
 
   padding: 1rem $padding-margin-between-components-mobile;
-
   @include tablet {
     padding: 1rem $padding-margin-between-components-tablet;
     width: 37.5rem;
@@ -55,18 +54,39 @@
     width: 100%;
   }
 
+  &__input-label {
+    display: flex;
+    flex-direction: column;
+  }
   &__input {
-    @include formInput;
     @include bodyCopy;
+    @include formInput;
     & {
       padding: 0;
       margin-top: 0.5rem;
+      margin-bottom: 0.75rem;
       width: 100%;
       display: flex;
       padding-left: 1rem;
     }
   }
 
+  &__input-error-message {
+    & {
+      display: flex;
+      margin-top: -0.5rem;
+      margin-bottom: -0.85rem;
+      align-items: center;
+      gap: 4px;
+    }
+    p {
+      font-size: 14px;
+      color: $primary-invalid;
+    }
+    img {
+      height: 22px;
+    }
+  }
   &__button-and-link {
     display: flex;
     align-items: center;
