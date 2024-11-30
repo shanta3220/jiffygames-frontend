@@ -50,16 +50,16 @@ export default function GamePage() {
   return (
     <main className="main-game">
       <section className="game-holder">
-        <UnityPlayer gameInfo={gameInfo} />
+        <UnityPlayer gameInfo={gameInfo} tabIndex={1} />
       </section>
       <section className="main-game__details">
         <GameDetails gameInfo={gameInfo} />
       </section>
-      <section className="main-game__comments">
+      <section className="main-game__comments" tabIndex={2}>
         <Comments
           comments={gameInfo.comments}
-          handlePostNewComment={() => {
-            console.log("clicked post new comment");
+          handlePostNewComment={(comment) => {
+            alert("clicked post new comment");
           }}
           handleDeleteComment={() => {
             console.log("clicked delete comment");
