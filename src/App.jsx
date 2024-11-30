@@ -5,6 +5,7 @@ import HomePage from "./pages/HomePage/HomePage";
 import GamePage from "./pages/GamePage/GamePage";
 import GamesPage from "./pages/GamesPage/GamesPage";
 import LeaderboardPage from "./components/LeaderboardPage/LeaderboardPage";
+import LoginRegisterPage from "./pages/LoginRegisterPage/LoginRegisterPage";
 
 function App() {
   return (
@@ -20,8 +21,8 @@ function App() {
           path="/leaderboards/:leaderboardId"
           element={<LeaderboardPage />}
         />
-        <Route path="/register" element={<RegisterPage />} />
-        <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<LoginRegisterPage />} />
+        <Route path="/login" element={<LoginRegisterPage />} />
         <Route path="/users/" element={<UserProfilePage />} />
         <Route path="/users/:userId" element={<UserProfilePage />} />
       </Routes>
@@ -35,21 +36,6 @@ function LeaderboardsPage() {
   return (
     <div>
       <p>This is LeaderboardsPage</p>
-    </div>
-  );
-}
-
-function RegisterPage() {
-  return (
-    <div>
-      <p>This is RegisterPage</p>
-    </div>
-  );
-}
-function LoginPage() {
-  return (
-    <div>
-      <p>This is HomePage</p>
     </div>
   );
 }
