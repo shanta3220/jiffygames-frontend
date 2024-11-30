@@ -1,11 +1,13 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState, useRef, useEffect } from "react";
-import { updateUser } from "../../scripts/GameApi";
-import { defaultImage } from "../../assets/images/user-profile.png";
+import { getUser, updateUser } from "../../scripts/GameApi";
+import defaultImage from "../../assets/images/user-profile.png";
+import UserProfileInput from "../../components/UserProfileInput/UserProfileInput";
 
 function UserProfile() {
   const isLoggedIn = true;
   const navigate = useNavigate("");
+  const userId = 1;
 
   useEffect(() => {
     if (!isLoggedIn) {
@@ -14,14 +16,8 @@ function UserProfile() {
   }, [isLoggedIn]);
 
   const imageInputRef = useRef(null);
-  const usernameInputRef = useRef(null);
-  const emailInputRef = useRef(null);
-  const passwordInputRef = useRef(null);
-  const confirmPasswordInputRef = useRef(null);
-  const aboutMeInputRef = useRef(null);
-
   const [imageFile, setImageFile] = useState(null);
-  const [videoPreviewImage, setVideoPreviewImage] = useState(defaultImage);
+  const [avatarPreviewImage, setAvatarPreviewImage] = useState(defaultImage);
 
   const fieldNames = {
     avatar: "avatar",
@@ -49,6 +45,26 @@ function UserProfile() {
     [fieldNames.aboutMe]: "",
   });
 
+  useEffect(() => {
+    const fetchUserInfo = async () => {
+      try {
+        const data = await getUser(userId);
+        if (data) {
+          setFormData({
+            [fieldNames.name]: data.user_name ?? "",
+            [fieldNames.email]: data.email ?? "",
+            [fieldNames.password]: data.password,
+            [fieldNames.confirmPassword]: data.password,
+            [fieldNames.avatar]: data.avatar ?? "",
+            [fieldNames.aboutMe]: data.about_me ?? "",
+          });
+        }
+      } catch (e) {
+        console.error(e);
+      }
+    };
+    fetchUserInfo();
+  }, [userId]);
   const handleSubmit = (e) => {
     e.preventDefault();
     let hasAnyErrors = "";
@@ -133,6 +149,17 @@ function UserProfile() {
     return errorText;
   };
 
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [name]: value,
+    }));
+
+    checkErrors(name, value);
+  };
+
   const handleImageChange = (e) => {
     const imageFile = e.target.files[0];
 
@@ -141,7 +168,7 @@ function UserProfile() {
 
       const reader = new FileReader();
       reader.onloadend = () => {
-        setVideoPreviewImage(reader.result); // Set the preview image
+        setAvatarPreviewImage(reader.result); // Set the preview image
       };
       reader.readAsDataURL(imageFile);
     }
@@ -152,43 +179,16 @@ function UserProfile() {
     imageInputRef.current.click();
   };
 
-  const handleUsernameClick = (e) => {
-    e.stopPropagation();
-    usernameInputRef.current.click();
-  };
-
-  const handleAboutmeClick = (e) => {
-    e.stopPropagation();
-    aboutMeInputRef.current.click();
-  };
-
-  const handleEmailClick = (e) => {
-    e.stopPropagation();
-    emailInputRef.current.click();
-  };
-
-  const handlePasswordClick = (e) => {
-    e.stopPropagation();
-    passwordInputRef.current.click();
-  };
-
-  const handleConfirmPasswordClick = (e) => {
-    e.stopPropagation();
-    confirmPasswordInputRef.current.click();
-  };
-
   return (
-    <main className="upload-content">
-      <h1 className="upload-content__title">Upload Video</h1>
-      <form onSubmit={handleSubmit} className="upload-form">
-        <label className="upload-form__label--video-thumnail">
-          Video Thumbnail
+    <main className="main-user-profile">
+      <h1 className="main-user-profile__title">User Profile</h1>
+      <form onSubmit={handleSubmit} className="form">
+        <div className="user-profile__label--avatar">
           <div className="upload-form__image-container">
-            <img
-              src={videoPreviewImage}
-              alt="Thumbnail image showcasing your video's visual style."
-              onClick={() => handleImageClick}
-            />
+            <img src={avatarPreviewImage} alt="User Avatar." />
+            <button className="button" type="button" onClick={handleImageClick}>
+              Change Icon
+            </button>
           </div>
           <input
             ref={imageInputRef}
@@ -197,8 +197,55 @@ function UserProfile() {
             name="imageUpload"
             accept="image/png, image/jpeg"
             onChange={handleImageChange}
+            style={{ display: "none" }}
           />
-        </label>
+        </div>{" "}
+        <UserProfileInput
+          inputType="textarea"
+          label="About me"
+          name={fieldNames.confirmPassword}
+          handleInputChange={handleInputChange}
+          value={formData[fieldNames.aboutMe]}
+          errorMessage={errorMessages[fieldNames.aboutMe]}
+        />
+        <UserProfileInput
+          inputType="text"
+          label="Enter your username"
+          name={fieldNames.name}
+          handleInputChange={handleInputChange}
+          value={formData[fieldNames.name]}
+          errorMessage={errorMessages[fieldNames.name]}
+        />
+        <UserProfileInput
+          inputType="email"
+          label="Email"
+          name={fieldNames.email}
+          handleInputChange={handleInputChange}
+          value={formData[fieldNames.email]}
+          errorMessage={errorMessages[fieldNames.email]}
+        />
+        <UserProfileInput
+          inputType="password"
+          label="Password"
+          name={fieldNames.password}
+          handleInputChange={handleInputChange}
+          value={formData[fieldNames.password]}
+          errorMessage={errorMessages[fieldNames.password]}
+        />
+        {formData[fieldNames.password] !==
+          formData[fieldNames.confirmPassword] && (
+          <UserProfileInput
+            inputType="password"
+            label="Confirm password"
+            name={fieldNames.confirmPassword}
+            handleInputChange={handleInputChange}
+            value={formData[fieldNames.confirmPassword]}
+            errorMessage={errorMessages[fieldNames.confirmPassword]}
+          />
+        )}
+        <button type="submit" className="button">
+          Submit
+        </button>
       </form>
     </main>
   );
