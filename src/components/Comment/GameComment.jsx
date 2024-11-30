@@ -1,10 +1,11 @@
 import { getTimeInterval } from "../../scripts/global";
 import deleteIcon from "../../assets/icons/icon_delete.png";
+import UserAvatar from "../UserAvatar/UserAvatar";
 
 function Comment({ comment, handleDeleteComment }) {
   return (
     <div className="comment">
-      <div className="user-avatar"></div>
+      <UserAvatar linkPath={`/users/${comment.user_id}`} />
       <div className="comment__texts">
         <div className="comment__pair-info">
           <p className="comment__username">{comment.user_name}</p>

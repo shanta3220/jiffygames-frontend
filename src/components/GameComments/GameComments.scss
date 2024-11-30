@@ -19,6 +19,10 @@
       border-bottom: 1px solid $secondary-light;
     }
   }
+  .user-avatar__image-container {
+    max-width: 48px;
+    max-height: 48px;
+  }
 }
 
 .comment-form {
@@ -74,9 +78,7 @@
   width: 100%;
   gap: $gap;
   padding: 0;
-
   padding-top: $gap;
-
   border-bottom: 1px solid $primary-bright;
 
   @include tablet {

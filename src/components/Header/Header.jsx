@@ -48,10 +48,8 @@ function Header() {
           <>
             <Link to={"/"} className="header__link">
               LOGOUT
-            </Link>{" "}
-            <Link to={"/user-profile"} className="header__user-profile">
-              <UserAvatar />
             </Link>
+            <UserAvatar />
           </>
         )}
       </div>

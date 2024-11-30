@@ -87,8 +87,9 @@
       color: $secondary-light;
     }
   }
-}
 
-.header__user-profile {
-  margin: auto;
+  .user-avatar {
+    margin: auto;
+    margin-bottom: 1.5625rem;
+  }
 }

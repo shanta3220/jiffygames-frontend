@@ -1,4 +1,5 @@
 import Comment from "../Comment/GameComment";
+import UserAvatar from "../UserAvatar/UserAvatar";
 import "./GameComments.scss";
 import { useRef, useState, useEffect } from "react";
 
@@ -49,7 +50,7 @@ function Comments({ comments, handlePostNewComment, handleDeleteComment }) {
 
       <section className="comments__and-form">
         <div className="comment-form-container">
-          <div className="user-avatar"></div>
+          <UserAvatar />
           <form className="comment-form" onSubmit={handleSubmit}>
             <label className="comment-form__label">
               <textarea
