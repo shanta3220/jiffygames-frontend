@@ -129,6 +129,15 @@
       min-width: 12.5rem;
     }
   }
+  label {
+    @include label;
+    & {
+      padding: 0;
+      margin: 0;
+      width: 100%;
+      text-transform: none;
+    }
+  }
 }
 
 .form__input-holder {

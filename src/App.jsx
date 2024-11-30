@@ -6,6 +6,7 @@ import GamePage from "./pages/GamePage/GamePage";
 import GamesPage from "./pages/GamesPage/GamesPage";
 import LeaderboardPage from "./components/LeaderboardPage/LeaderboardPage";
 import LoginRegisterPage from "./pages/LoginRegisterPage/LoginRegisterPage";
+import EditUserPage from "./pages/EditUserPage/EditUserPage";
 import UserProfilePage from "./pages/UserProfilePage/UserProfilePage";
 
 function App() {
@@ -25,8 +26,8 @@ function App() {
         <Route path="/register" element={<LoginRegisterPage />} />
         <Route path="/login" element={<LoginRegisterPage />} />
         <Route path="/users/" element={<UserProfilePages />} />
-        <Route path="/users/:userId" element={<UserProfilePages />} />
-        <Route path="/user-profile" element={<UserProfilePage />} />
+        <Route path="/users/:userId" element={<UserProfilePage />} />
+        <Route path="/user-profile" element={<EditUserPage />} />
       </Routes>
     </BrowserRouter>
   );

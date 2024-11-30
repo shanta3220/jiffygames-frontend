@@ -2,6 +2,7 @@ import { useParams, Link } from "react-router-dom";
 import "./LeaderboardPage.scss";
 import { useEffect, useState } from "react";
 import { getLeaderboard } from "../../scripts/GameApi";
+import UserAvatar from "../../components/UserAvatar/UserAvatar";
 
 function LeaderboardPage() {
   const [leaderboard, setLeaderboard] = useState(null);
@@ -37,9 +38,10 @@ function LeaderboardPage() {
           <Link to={`/users/${entry.userInfo.id}`} key={entry.userInfo.id}>
             <li className="leaderboard-list__item leaderboard-list__item--hover">
               <p className="leaderboard-list__item-text">{i + 1}</p>
-              <div className="user-avatar">
-                {/* <img src={userInfo.avatar} alt="" /> */}
-              </div>
+              <UserAvatar
+                avatar={entry.userInfo.avatar}
+                linkPath={`/users/${entry.userInfo.id}`}
+              />
               <p className="leaderboard-list__item-text">
                 {entry.userInfo.user_name}
               </p>

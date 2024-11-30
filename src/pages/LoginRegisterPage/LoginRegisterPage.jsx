@@ -2,7 +2,7 @@ import { useState } from "react";
 import Form from "../../components/Form/Form";
 import { useNavigate } from "react-router-dom";
 
-function RegisterPage() {
+function LoginRegisterPage() {
   const fieldNames = {
     name: "username",
     email: "email",
@@ -156,4 +156,4 @@ function RegisterPage() {
   );
 }
 
-export default RegisterPage;
+export default LoginRegisterPage;

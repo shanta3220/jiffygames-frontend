@@ -77,8 +77,11 @@
 
   .user-avatar {
     margin-right: 20px;
-    margin-top: 20px;
+    margin-top: 22px;
+    height: 38px;
+    width: 38px;
   }
+
   .leaderboard-list__item-label--avatar {
     @extend .leaderboard-list__item-label;
     width: 4.375rem;
