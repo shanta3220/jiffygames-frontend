@@ -5,6 +5,7 @@ import HomePage from "./pages/HomePage/HomePage";
 import GamePage from "./pages/GamePage/GamePage";
 import GamesPage from "./pages/GamesPage/GamesPage";
 import LeaderboardPage from "./components/LeaderboardPage/LeaderboardPage";
+import RegisterPage from "./pages/RegisterPage/RegisterPage";
 
 function App() {
   return (
@@ -39,13 +40,6 @@ function LeaderboardsPage() {
   );
 }
 
-function RegisterPage() {
-  return (
-    <div>
-      <p>This is RegisterPage</p>
-    </div>
-  );
-}
 function LoginPage() {
   return (
     <div>
