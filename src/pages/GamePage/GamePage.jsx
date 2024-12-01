@@ -50,7 +50,7 @@ export default function GamePage() {
   return (
     <main className="main-game">
       <section className="game-holder">
-        <UnityPlayer gameInfo={gameInfo} tabIndex={1} />
+        <UnityPlayer gameInfo={gameInfo} tabIndex={1} key={gameId} />
       </section>
       <section className="main-game__details">
         <GameDetails gameInfo={gameInfo} />
