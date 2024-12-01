@@ -78,6 +78,7 @@ function Comments({ comments, handlePostNewComment, handleDeleteComment }) {
             <Comment
               comment={comment}
               key={comment.id}
+              id={comment.id}
               handleDeleteComment={handleDeleteComment}
             />
           ))}

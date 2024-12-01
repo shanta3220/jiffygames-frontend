@@ -47,6 +47,14 @@ export default function GamePage() {
     );
   }
 
+  const handlePostNewComment = (comment) => {
+    alert("clicked post new comment");
+  };
+
+  const handleDeleteComment = (comment) => {
+    alert("clicked post new comment");
+  };
+
   return (
     <main className="main-game">
       <section className="game-holder">
@@ -58,12 +66,8 @@ export default function GamePage() {
       <section className="main-game__comments" tabIndex={2}>
         <Comments
           comments={gameInfo.comments}
-          handlePostNewComment={(comment) => {
-            alert("clicked post new comment");
-          }}
-          handleDeleteComment={() => {
-            console.log("clicked delete comment");
-          }}
+          handlePostNewComment={handlePostNewComment}
+          handleDeleteComment={handleDeleteComment}
         />
       </section>
       {games && (

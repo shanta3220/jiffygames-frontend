@@ -9,9 +9,9 @@ function Comment({ comment, handleDeleteComment }) {
       <div className="comment__texts">
         <div className="comment__pair-info">
           <p className="comment__username">{comment.user_name}</p>
-          <p className="comment__date">{getTimeInterval(comment.timestamp)}</p>
+          <p className="comment__date">{getTimeInterval(comment.created_at)}</p>
         </div>
-        <p className="body-copy">{comment.comment}</p>
+        <p className="body-copy">{comment.message}</p>
         <div className="comment__delete-container">
           <div
             className="comment__delete"
