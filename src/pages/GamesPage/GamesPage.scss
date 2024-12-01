@@ -4,12 +4,14 @@
 .main-game-list {
   display: flex;
   flex-direction: column;
+  padding: 0;
+
   @include tablet {
-    padding: 1rem $padding-margin-between-tablet;
+    padding: 0 $padding-margin-between-tablet;
   }
 
   @include desktop {
-    padding: 1rem $padding-margin-between-desktop;
+    padding: 0 $padding-margin-between-desktop;
   }
 
   section {
@@ -18,11 +20,10 @@
   }
 
   h1 {
-    @include mainHeader;
+    @include headlinesPaddingTopBottom();
     & {
-      padding-top: $padding-headlines-top-mobile;
-      padding-bottom: $padding-headlines-bottom-mobile;
-      padding-left: $padding-margin-between-components-mobile;
+      margin-top: -0.5rem;
+      @include mainHeader;
     }
   }
 

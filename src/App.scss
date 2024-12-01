@@ -26,28 +26,3 @@ a {
 li {
   list-style-type: none;
 }
-
-.user-avatar {
-  & {
-    min-width: 2.25rem;
-    min-height: 2.25rem;
-    width: 2.25rem;
-    height: 2.25rem;
-    padding: 0;
-    margin: 0;
-    background-image: url("./assets/images/user-profile.png");
-    background-size: cover;
-    border-radius: 50%;
-  }
-
-  @include tablet {
-    min-width: 2.5rem;
-    min-height: 2.5rem;
-    width: 2.5rem;
-    height: 2.5rem;
-  }
-
-  &--empty {
-    background-image: none;
-  }
-}

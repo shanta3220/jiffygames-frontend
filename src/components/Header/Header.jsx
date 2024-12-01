@@ -1,9 +1,10 @@
 import "./Header.scss";
 import { Link, NavLink } from "react-router-dom";
 import logoIcon from "/logo.png";
+import UserAvatar from "../UserAvatar/UserAvatar";
 
 function Header() {
-  const isLoggedIn = false;
+  const isLoggedIn = true;
 
   return (
     <div className="header">
@@ -47,14 +48,8 @@ function Header() {
           <>
             <Link to={"/"} className="header__link">
               LOGOUT
-            </Link>{" "}
-            <Link to={"/user-profile"} className="header__user-profile">
-              <img
-                src={"../../assets/images/user-profile.png"}
-                alt="User Avatar"
-                className="user-avatar"
-              />
             </Link>
+            <UserAvatar />
           </>
         )}
       </div>

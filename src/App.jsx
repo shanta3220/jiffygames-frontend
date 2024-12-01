@@ -6,6 +6,8 @@ import GamePage from "./pages/GamePage/GamePage";
 import GamesPage from "./pages/GamesPage/GamesPage";
 import LeaderboardPage from "./components/LeaderboardPage/LeaderboardPage";
 import LoginRegisterPage from "./pages/LoginRegisterPage/LoginRegisterPage";
+import EditUserPage from "./pages/EditUserPage/EditUserPage";
+import UserProfilePage from "./pages/UserProfilePage/UserProfilePage";
 
 function App() {
   return (
@@ -23,8 +25,9 @@ function App() {
         />
         <Route path="/register" element={<LoginRegisterPage />} />
         <Route path="/login" element={<LoginRegisterPage />} />
-        <Route path="/users/" element={<UserProfilePage />} />
+        <Route path="/users/" element={<UserProfilePages />} />
         <Route path="/users/:userId" element={<UserProfilePage />} />
+        <Route path="/user-profile" element={<EditUserPage />} />
       </Routes>
     </BrowserRouter>
   );
@@ -39,7 +42,7 @@ function LeaderboardsPage() {
     </div>
   );
 }
-function UserProfilePage() {
+function UserProfilePages() {
   return (
     <div>
       <p>This is UserProfilePage</p>

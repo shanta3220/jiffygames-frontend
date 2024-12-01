@@ -1,0 +1,60 @@
+@use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/variables" as *;
+
+.main-edit-user {
+  &__title {
+    & {
+      width: 100%;
+      text-align: center;
+      margin-top: 1rem;
+    }
+
+    @include mainHeader;
+    @include headlinesPaddingBottom();
+  }
+  .form {
+    display: flex;
+    flex-direction: row;
+    align-items: start;
+    width: 80%;
+    max-width: 700px;
+
+    &__section-left {
+      display: flex;
+      flex-direction: column;
+      width: 30%;
+      img {
+        margin: auto;
+        height: 100px;
+        width: 100px;
+      }
+
+      button {
+        margin: auto;
+        min-width: 10rem;
+        padding: 0;
+      }
+    }
+    &__section-right {
+      width: 70%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      textarea {
+        padding-right: 2rem;
+        padding-top: 0.35rem;
+      }
+      .form__input {
+        margin-bottom: 1.75rem;
+        padding-right: 3rem;
+      }
+
+      .form__input-error-message {
+        margin-top: -1.65rem;
+        margin-bottom: 0.25rem;
+      }
+    }
+  }
+}

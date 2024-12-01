@@ -494,3 +494,5 @@ export async function getGameInfo(gameId) {
   game.comments = await getComments(gameId);
   return game;
 }
+
+export async function updateUser(userObject) {}
