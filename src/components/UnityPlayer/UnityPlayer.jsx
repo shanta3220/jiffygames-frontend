@@ -1,6 +1,6 @@
 import { useEffect, Fragment, useState, useCallback, useRef } from "react";
 import { Unity, useUnityContext } from "react-unity-webgl";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import "./UnityPlayer.scss";
 import fullScreenIcon from "../../assets/icons/icon_fullscreen.png";
 import likeIcon from "../../assets/icons/icon_like.png";
@@ -10,6 +10,7 @@ import loadingGif from "../../assets/images/loading.gif";
 
 export default function UnityPlayer({ gameInfo }) {
   const gameProjectName = gameInfo.project_name;
+  const { gameId } = useParams();
 
   const navigate = useNavigate();
   const canvasRef = useRef(null);
@@ -44,6 +45,7 @@ export default function UnityPlayer({ gameInfo }) {
     addEventListener,
     removeEventListener,
     unload,
+    sendMessage,
   } = useUnityContext({
     loaderUrl: `${absoluteFilePath}.loader.js`,
     dataUrl: `${absoluteFilePath}.data.gz`,
@@ -53,6 +55,15 @@ export default function UnityPlayer({ gameInfo }) {
     productVersion: "1.0.0",
     companyName: "Developer",
   });
+  const [unityKey, setUnityKey] = useState(gameId);
+
+  useEffect(() => {
+    setUnityKey(gameId);
+  }, [gameId]);
+
+  useEffect(() => {
+    setUnityKey(gameId);
+  }, [unityKey]);
 
   const handleGameOver = useCallback((userName, score) => {
     setIsGameOver(true);
@@ -75,6 +86,18 @@ export default function UnityPlayer({ gameInfo }) {
 
   function handleScore() {
     sendMessage("GameController", "SetScore", 100);
+  }
+
+  function HandleUnityPlayerClick() {
+    SetUnityKeyboardInput(true);
+  }
+
+  function HandleUnityPlayerBlur() {
+    SetUnityKeyboardInput(false);
+  }
+
+  function SetUnityKeyboardInput(value) {
+    sendMessage("WebglInputController", "CaptureKeyboardInputs", value);
   }
 
   function handleClickEnterFullscreen() {
@@ -177,6 +200,7 @@ export default function UnityPlayer({ gameInfo }) {
               unityProvider={unityProvider}
               disabledCanvasEvents={["dragstart", "scroll"]}
               ref={canvasRef}
+              onClick={HandleUnityPlayerClick}
             />
           </Fragment>
         }

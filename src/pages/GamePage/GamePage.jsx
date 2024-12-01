@@ -4,7 +4,6 @@ import { getGameInfo, getGameList } from "../../scripts/GameApi";
 import "./GamePage.scss";
 import { useEffect, useState } from "react";
 import GameDetails from "../../components/GameDetails/GameDetails";
-import VideoComments from "../../components/GameComments/GameComments";
 import Comments from "../../components/GameComments/GameComments";
 import GameList from "../../components/GamesList/GameList";
 
