@@ -27,8 +27,8 @@ function UserProfilePage() {
 
         if (data) {
           setFormData({
-            [fieldNames.name]: data.user_name ?? "",
-            [fieldNames.avatar]: data.avatar ?? "",
+            [fieldNames.name]: data.username ?? "",
+            [fieldNames.avatar]: data.avatar_path ?? "",
             [fieldNames.aboutMe]: data.about_me ?? "",
           });
         }
@@ -45,7 +45,7 @@ function UserProfilePage() {
       <form className="form">
         <section className="form__section-left">
           <UserAvatar
-            avatar={fieldNames.avatar}
+            avatar={formData[fieldNames.avatar]}
             linkPath={`/users/${userId}`}
           />
         </section>

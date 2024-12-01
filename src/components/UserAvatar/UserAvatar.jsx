@@ -8,7 +8,7 @@ function UserAvatar({ linkPath, avatar }) {
   return (
     <Link to={linkPath ?? "/user-profile"} className="user-avatar">
       <div className="user-avatar__image-container">
-        <img src={profileIcon ?? defaultIcon} alt="userProfileIcon" />
+        <img src={avatar ?? defaultIcon} alt="userProfileIcon" />
       </div>
     </Link>
   );

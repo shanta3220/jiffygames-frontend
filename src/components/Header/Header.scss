@@ -12,9 +12,7 @@
   padding: 1.5rem $padding-margin-between-mobile;
   position: relative;
   z-index: 1;
-
   flex-direction: column;
-
   @include tablet {
     padding: 1rem $padding-margin-between-tablet;
     flex-direction: row;
@@ -90,5 +88,6 @@
 
   .user-avatar {
     margin: auto;
+    height: 2.75rem;
   }
 }

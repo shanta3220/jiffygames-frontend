@@ -64,6 +64,7 @@
 
   &__item--hover {
     &:hover {
+      cursor: pointer;
       color: $primary-medium;
       background-color: $primary-bright;
     }
@@ -76,10 +77,10 @@
   }
 
   .user-avatar {
-    margin-right: 20px;
-    margin-top: 22px;
-    height: 38px;
-    width: 38px;
+    margin-right: 1.25rem;
+    margin-top: 1.45rem;
+    height: 2.25rem;
+    width: 2.25rem;
   }
 
   .leaderboard-list__item-label--avatar {

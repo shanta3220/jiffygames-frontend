@@ -4,6 +4,7 @@ import { getUser, updateUser } from "../../scripts/GameApi";
 import defaultImage from "../../assets/images/user-profile.png";
 import EditUserInput from "../../components/EditUserInput/EditUserInput";
 import "./EditUserPage.scss";
+import UserAvatar from "../../components/UserAvatar/UserAvatar";
 
 function EditUserPage() {
   const isLoggedIn = true;
@@ -52,10 +53,10 @@ function EditUserPage() {
         const data = await getUser(userId);
         if (data) {
           setFormData({
-            [fieldNames.name]: data.user_name ?? "",
+            [fieldNames.name]: data.username ?? "",
             [fieldNames.email]: data.email ?? "",
-            [fieldNames.password]: data.password,
-            [fieldNames.confirmPassword]: data.password,
+            [fieldNames.password]: data.password ?? "",
+            [fieldNames.confirmPassword]: data.password ?? "",
             [fieldNames.avatar]: data.avatar ?? "",
             [fieldNames.aboutMe]: data.about_me ?? "",
           });
@@ -83,7 +84,7 @@ function EditUserPage() {
     const updateUser = async () => {
       try {
         const userObject = {
-          user_name: formData.name,
+          username: formData.name,
           email: formData.email,
           password: formData.password,
           avatar: imageFile,
@@ -182,7 +183,10 @@ function EditUserPage() {
       <h1 className="main-edit-user__title">User Profile</h1>
       <form onSubmit={handleSubmit} className="form">
         <section className="form__section-left">
-          <img src={avatarPreviewImage} alt="User Avatar." />
+          <div>
+            <UserAvatar avatar={avatarPreviewImage} />
+          </div>
+          {/* <img src={avatarPreviewImage} alt="User Avatar." /> */}
           <button className="button" type="button" onClick={handleImageClick}>
             Change Icon
           </button>
@@ -229,7 +233,7 @@ function EditUserPage() {
             value={formData[fieldNames.password]}
             errorMessage={errorMessages[fieldNames.password]}
           />
-          {formData[fieldNames.password] !==
+          {/*   {formData[fieldNames.password] !==
             formData[fieldNames.confirmPassword] && (
             <EditUserInput
               inputType="password"
@@ -239,7 +243,7 @@ function EditUserPage() {
               value={formData[fieldNames.confirmPassword]}
               errorMessage={errorMessages[fieldNames.confirmPassword]}
             />
-          )}
+          )} */}
           <button type="submit" className="button">
             Submit
           </button>
