@@ -26,10 +26,8 @@ export default function GamePage() {
 
   const handleUnityFocus = () => {
     if (sendMessage) {
-      console.log("called here");
       sendMessage("Datacontroller", "CaptureKeyboardInputs", 1);
     }
-    console.log("called here 1");
   };
 
   useEffect(() => {

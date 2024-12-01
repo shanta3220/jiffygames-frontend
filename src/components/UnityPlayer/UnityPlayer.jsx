@@ -101,15 +101,6 @@ export default function UnityPlayer({
     sendMessage("GameManager", "SetScore", 100);
   }
 
-  function HandleUnityPlayerClick() {
-    handleScore();
-    SetUnityKeyboardInput(1);
-  }
-
-  function SetUnityKeyboardInput(value) {
-    sendMessage("Datacontroller", "CaptureKeyboardInputs", value);
-  }
-
   function handleClickEnterFullscreen() {
     requestFullscreen(true);
   }
@@ -220,7 +211,6 @@ export default function UnityPlayer({
           style={{ visibility: isLoaded ? "visible" : "none" }}
         >
           <div className="game__title-and-return">
-            <button onClick={HandleUnityPlayerClick}>Testing</button>
             <img
               src={returnIcon}
               alt="Return icon"
