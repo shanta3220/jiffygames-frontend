@@ -27,19 +27,19 @@ export default function UnityPlayer({
   );
   const absoluteFilePath = `${gameInfo?.build_path}/Build/${gameProjectName}`;
 
-  // Prevent unity memory logs spam message
-  // useEffect(() => {
-  //   const originalConsoleLog = console.log;
-  //   const originalConsoleWarn = console.warn;
+  //Prevent unity memory logs spam message
+  useEffect(() => {
+    const originalConsoleLog = console.log;
+    const originalConsoleWarn = console.warn;
 
-  //   const suppressAllLogs = () => {};
-  //   console.log = suppressAllLogs;
-  //   console.warn = suppressAllLogs;
-  //   return () => {
-  //     console.log = originalConsoleLog;
-  //     console.warn = originalConsoleWarn;
-  //   };
-  // }, []);
+    const suppressAllLogs = () => {};
+    console.log = suppressAllLogs;
+    console.warn = suppressAllLogs;
+    return () => {
+      console.log = originalConsoleLog;
+      console.warn = originalConsoleWarn;
+    };
+  }, []);
 
   const {
     unityProvider,
