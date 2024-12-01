@@ -8,7 +8,6 @@ const getFullPath = (path) => {
 export async function getGameList() {
   try {
     const { data } = await axios.get(getFullPath("games"));
-    console.log(data);
     return data;
   } catch (error) {
     console.error(error);
@@ -18,7 +17,7 @@ export async function getGameList() {
 export async function getGameInfo(gameId) {
   try {
     const { data } = await axios.get(getFullPath(`games/${gameId}`));
-    console.log(data);
+
     return data;
   } catch (error) {
     console.error(error);

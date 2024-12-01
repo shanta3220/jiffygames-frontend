@@ -21,7 +21,7 @@ export default function UnityPlayer({ gameInfo }) {
   const [devicePixelRatio, setDevicePixelRatio] = useState(
     window.devicePixelRatio
   );
-  const absoluteFilePath = `/build/${gameProjectName}/Build/${gameProjectName}`;
+  const absoluteFilePath = `${gameInfo?.build_path}/Build/${gameProjectName}`;
 
   // Prevent unity memory logs spam message
   useEffect(() => {
@@ -39,18 +39,18 @@ export default function UnityPlayer({ gameInfo }) {
 
   const {
     unityProvider,
+    sendMessage,
     isLoaded,
     loadingProgression,
     requestFullscreen,
     addEventListener,
     removeEventListener,
     unload,
-    sendMessage,
   } = useUnityContext({
     loaderUrl: `${absoluteFilePath}.loader.js`,
-    dataUrl: `${absoluteFilePath}.data.gz`,
-    frameworkUrl: `${absoluteFilePath}.framework.js.gz`,
-    codeUrl: `${absoluteFilePath}.wasm.gz`,
+    dataUrl: `${absoluteFilePath}.data.unityweb`,
+    frameworkUrl: `${absoluteFilePath}.framework.js.unityweb`,
+    codeUrl: `${absoluteFilePath}.wasm.unityweb`,
     productName: "My Game",
     productVersion: "1.0.0",
     companyName: "Developer",
@@ -85,19 +85,16 @@ export default function UnityPlayer({ gameInfo }) {
   }, []);
 
   function handleScore() {
-    sendMessage("GameController", "SetScore", 100);
+    sendMessage("GameManager", "SetScore", 100);
   }
 
   function HandleUnityPlayerClick() {
-    SetUnityKeyboardInput(true);
-  }
-
-  function HandleUnityPlayerBlur() {
-    SetUnityKeyboardInput(false);
+    handleScore();
+    SetUnityKeyboardInput(1);
   }
 
   function SetUnityKeyboardInput(value) {
-    sendMessage("WebglInputController", "CaptureKeyboardInputs", value);
+    sendMessage("Datacontroller", "CaptureKeyboardInputs", value);
   }
 
   function handleClickEnterFullscreen() {
@@ -200,7 +197,6 @@ export default function UnityPlayer({ gameInfo }) {
               unityProvider={unityProvider}
               disabledCanvasEvents={["dragstart", "scroll"]}
               ref={canvasRef}
-              onClick={HandleUnityPlayerClick}
             />
           </Fragment>
         }
@@ -209,6 +205,7 @@ export default function UnityPlayer({ gameInfo }) {
           style={{ visibility: isLoaded ? "visible" : "none" }}
         >
           <div className="game__title-and-return">
+            <button onClick={HandleUnityPlayerClick}>Testing</button>
             <img
               src={returnIcon}
               alt="Return icon"
