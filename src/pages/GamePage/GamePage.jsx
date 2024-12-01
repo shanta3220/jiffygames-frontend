@@ -1,6 +1,6 @@
 import UnityPlayer from "../../components/UnityPlayer/UnityPlayer";
-import { useParams } from "react-router-dom";
-import { getGameInfo, getGameList } from "../../scripts/GameApi";
+import { useParams, useNavigate } from "react-router-dom";
+import { getGameInfo, getGameList, getMyUserId } from "../../scripts/GameApi";
 import "./GamePage.scss";
 import { useEffect, useState } from "react";
 import GameDetails from "../../components/GameDetails/GameDetails";
@@ -9,9 +9,29 @@ import GameList from "../../components/GamesList/GameList";
 
 export default function GamePage() {
   const { gameId } = useParams();
+  const [userId, setUserId] = useState(null);
   const [gameInfo, setGameInfo] = useState(null);
   const [games, setGames] = useState(null);
   const [sendMessage, setSendMessage] = useState(null);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchLoggedUser = async () => {
+      try {
+        const userId = getMyUserId();
+
+        if (!userId) {
+          navigate("/register");
+          alert("You need to login with an account");
+        } else {
+          setUserId(userId);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchLoggedUser();
+  }, [navigate]);
 
   const handleUnityReady = (sendMessageFunction) => {
     // Store the sendMessage function from UnityPlayer
@@ -92,6 +112,7 @@ export default function GamePage() {
           handlePostNewComment={handlePostNewComment}
           handleDeleteComment={handleDeleteComment}
           handleCommentFocus={handleUnityBlur}
+          userId={userId}
         />
       </section>
       {games && (

@@ -8,6 +8,7 @@ function Comments({
   handlePostNewComment,
   handleDeleteComment,
   handleCommentFocus,
+  userId,
 }) {
   const [comment, setComment] = useState("");
   const [commentError, setCommentError] = useState("");
@@ -86,6 +87,7 @@ function Comments({
               key={comment.id}
               id={comment.id}
               handleDeleteComment={handleDeleteComment}
+              userId={userId}
             />
           ))}
         </div>

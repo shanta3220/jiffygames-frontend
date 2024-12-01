@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState, useRef, useEffect } from "react";
-import { getUser, updateUser } from "../../scripts/GameApi";
+import { getMyUserId, getUser, updateUser } from "../../scripts/GameApi";
 import defaultImage from "../../assets/images/user-profile.png";
 import EditUserInput from "../../components/EditUserInput/EditUserInput";
 import "./EditUserPage.scss";
@@ -9,7 +9,7 @@ import UserAvatar from "../../components/UserAvatar/UserAvatar";
 function EditUserPage() {
   const isLoggedIn = true;
   const navigate = useNavigate("");
-  const userId = 1;
+  const userId = getMyUserId();
 
   useEffect(() => {
     if (!isLoggedIn) {

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Form from "../../components/Form/Form";
 import { useNavigate } from "react-router-dom";
+import { Login } from "../../scripts/GameApi";
 
 function LoginRegisterPage() {
   const fieldNames = {
@@ -53,6 +54,25 @@ function LoginRegisterPage() {
     if (isLogin) {
       // authorize and login to web
       //return to "/";
+
+      const handleLogin = async () => {
+        const user = await Login(
+          formData[fieldNames.name],
+          formData[fieldNames.password]
+        );
+        if (user) {
+          navigate("/");
+          alert("sucessfully logged in");
+        } else {
+          setErrorMessages((prevErrors) => ({
+            ...prevErrors,
+            [fieldNames.name]: "username and password is not matching",
+            [fieldNames.password]: "username password is not matching",
+          }));
+        }
+      };
+
+      handleLogin();
     }
     const userObject = {
       user_name: formData.name,
@@ -89,6 +109,23 @@ function LoginRegisterPage() {
     }));
 
     checkErrors(name, value);
+  };
+
+  const handleLogin = async () => {
+    const user = await Login(
+      formData[fieldNames.name],
+      formData[fieldNames.password]
+    );
+    if (user) {
+      navigate("/");
+      alert("sucessfully logged in");
+    } else {
+      setErrorMessages((prevErrors) => ({
+        ...prevErrors,
+        [fieldNames.name]: "user/ password is not matching",
+        [fieldNames.password]: "user/ password is not matching",
+      }));
+    }
   };
 
   // check errors by field/inputName and value
