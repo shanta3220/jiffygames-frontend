@@ -53,11 +53,22 @@ export async function getLeaderboard(gameId) {
 export async function getUser(userId) {
   try {
     const { data } = await axios.get(getFullPath(`users/${userId}`));
-    console.log(data);
     return data;
   } catch (error) {
     console.error(error);
   }
 }
 
-export async function updateUser(userObject) {}
+export async function updateUser(userId, userObject) {
+  try {
+    console.log(userObject);
+    const { data } = await axios.put(
+      getFullPath(`users/${userId}`),
+      userObject
+    );
+
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
+}

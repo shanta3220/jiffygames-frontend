@@ -27,7 +27,7 @@ function EditUserPage() {
     email: "email",
     password: "password",
     confirmPassword: "confirmPassword",
-    aboutMe: "aboutMe",
+    aboutMe: "about_me",
   };
 
   const [formData, setFormData] = useState({
@@ -81,16 +81,17 @@ function EditUserPage() {
       return;
     }
 
-    const updateUser = async () => {
+    const editUser = async () => {
       try {
         const userObject = {
-          username: formData.name,
+          username: formData.username,
           email: formData.email,
           password: formData.password,
-          avatar: imageFile,
-          about_me: formData.about_me,
+          avatar: imageFile ?? "",
+          about_me: formData.about_me ?? "",
         };
-        const updatedUser = await updateUser(userObject);
+        console.log(userObject);
+        const updatedUser = await updateUser(userId, userObject);
         if (updatedUser) {
           alert("User info has been successfully updated!");
           navigate("/");
@@ -101,7 +102,7 @@ function EditUserPage() {
       }
     };
 
-    updateUser();
+    editUser();
   };
 
   const checkErrors = (inputName, value) => {
