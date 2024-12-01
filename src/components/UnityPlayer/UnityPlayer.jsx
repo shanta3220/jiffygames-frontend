@@ -116,14 +116,14 @@ export default function UnityPlayer({
   useEffect(() => {
     const makeEventsPassive = () => {
       const unityCanvas = canvasRef.current;
-      // if (unityCanvas) {
-      //   unityCanvas.addEventListener("touchstart", (e) => e.preventDefault(), {
-      //     passive: false,
-      //   });
-      //   unityCanvas.addEventListener("touchmove", (e) => e.preventDefault(), {
-      //     passive: false,
-      //   });
-      // }
+      if (unityCanvas) {
+        unityCanvas.addEventListener("touchstart", (e) => e.preventDefault(), {
+          passive: false,
+        });
+        unityCanvas.addEventListener("touchmove", (e) => e.preventDefault(), {
+          passive: false,
+        });
+      }
     };
 
     // Run after Unity is loaded to modify event listeners
@@ -139,14 +139,14 @@ export default function UnityPlayer({
       const removeAllListeners = async () => {
         if (isLoaded && unload) {
           const unityCanvas = canvasRef.current;
-          // if (unityCanvas) {
-          //   unityCanvas.removeEventListener("touchstart", (e) =>
-          //     e.preventDefault()
-          //   );
-          //   unityCanvas.removeEventListener("touchmove", (e) =>
-          //     e.preventDefault()
-          //   );
-          // }
+          if (unityCanvas) {
+            unityCanvas.removeEventListener("touchstart", (e) =>
+              e.preventDefault()
+            );
+            unityCanvas.removeEventListener("touchmove", (e) =>
+              e.preventDefault()
+            );
+          }
           await unload(); // Ensure unloading happens in the cleanup
         }
       };
