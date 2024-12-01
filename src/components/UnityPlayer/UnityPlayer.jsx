@@ -8,7 +8,11 @@ import shareIcon from "../../assets/icons/icon_share.png";
 import returnIcon from "../../assets/icons/icon_return.png";
 import loadingGif from "../../assets/images/loading.gif";
 
-export default function UnityPlayer({ gameInfo }) {
+export default function UnityPlayer({
+  gameInfo,
+  onUnityReady,
+  handleUnityFocus,
+}) {
   const gameProjectName = gameInfo.project_name;
   const { gameId } = useParams();
 
@@ -24,18 +28,18 @@ export default function UnityPlayer({ gameInfo }) {
   const absoluteFilePath = `${gameInfo?.build_path}/Build/${gameProjectName}`;
 
   // Prevent unity memory logs spam message
-  useEffect(() => {
-    const originalConsoleLog = console.log;
-    const originalConsoleWarn = console.warn;
+  // useEffect(() => {
+  //   const originalConsoleLog = console.log;
+  //   const originalConsoleWarn = console.warn;
 
-    const suppressAllLogs = () => {};
-    console.log = suppressAllLogs;
-    console.warn = suppressAllLogs;
-    return () => {
-      console.log = originalConsoleLog;
-      console.warn = originalConsoleWarn;
-    };
-  }, []);
+  //   const suppressAllLogs = () => {};
+  //   console.log = suppressAllLogs;
+  //   console.warn = suppressAllLogs;
+  //   return () => {
+  //     console.log = originalConsoleLog;
+  //     console.warn = originalConsoleWarn;
+  //   };
+  // }, []);
 
   const {
     unityProvider,
@@ -62,8 +66,17 @@ export default function UnityPlayer({ gameInfo }) {
   }, [gameId]);
 
   useEffect(() => {
-    setUnityKey(gameId);
-  }, [unityKey]);
+    if (isLoaded) {
+      onUnityReady(sendMessage);
+    }
+  }, [isLoaded, sendMessage, onUnityReady]);
+
+  useEffect(() => {
+    window.addEventListener("focus", handleUnityFocus);
+    return () => {
+      window.removeEventListener("focus", handleUnityFocus);
+    };
+  }, [handleUnityFocus]);
 
   const handleGameOver = useCallback((userName, score) => {
     setIsGameOver(true);
@@ -103,13 +116,12 @@ export default function UnityPlayer({ gameInfo }) {
 
   async function handleClickReturn() {
     try {
-      if (unload) await unload(); // Ensure Unity is unloaded before navigating away
+      if (unload) await unload();
     } finally {
       navigate("/");
     }
   }
 
-  // functions to unload, register/unregister events
   useEffect(() => {
     const makeEventsPassive = () => {
       const unityCanvas = canvasRef.current;
@@ -180,7 +192,7 @@ export default function UnityPlayer({ gameInfo }) {
 
   return (
     <div className="game">
-      <div className="game__container">
+      <div className="game__container ">
         {isLoaded === false && (
           <div className="game__loading-overlay">
             <img src={loadingGif} alt="" />
@@ -191,13 +203,16 @@ export default function UnityPlayer({ gameInfo }) {
         )}
         {
           <Fragment>
-            <Unity
-              className="game__unity-player"
-              style={{ visibility: isLoaded ? "visible" : "none" }}
-              unityProvider={unityProvider}
-              disabledCanvasEvents={["dragstart", "scroll"]}
-              ref={canvasRef}
-            />
+            <div onClick={handleUnityFocus}>
+              <Unity
+                key={unityKey}
+                className="game__unity-player"
+                style={{ visibility: isLoaded ? "visible" : "none" }}
+                unityProvider={unityProvider}
+                disabledCanvasEvents={["dragstart", "scroll"]}
+                ref={canvasRef}
+              />
+            </div>
           </Fragment>
         }
         <div

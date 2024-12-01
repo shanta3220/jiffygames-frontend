@@ -3,7 +3,12 @@ import UserAvatar from "../UserAvatar/UserAvatar";
 import "./GameComments.scss";
 import { useRef, useState, useEffect } from "react";
 
-function Comments({ comments, handlePostNewComment, handleDeleteComment }) {
+function Comments({
+  comments,
+  handlePostNewComment,
+  handleDeleteComment,
+  handleCommentFocus,
+}) {
   const [comment, setComment] = useState("");
   const [commentError, setCommentError] = useState("");
   const errorUpdateAfterDelay = useRef(null);
@@ -62,6 +67,7 @@ function Comments({ comments, handlePostNewComment, handleDeleteComment }) {
                 required
                 value={comment}
                 onChange={handleCommentChange}
+                onClick={handleCommentFocus}
               ></textarea>
               {commentError && (
                 <p className="comment-form__error-message">{commentError}</p>

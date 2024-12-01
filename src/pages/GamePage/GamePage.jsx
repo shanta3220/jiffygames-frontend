@@ -11,6 +11,26 @@ export default function GamePage() {
   const { gameId } = useParams();
   const [gameInfo, setGameInfo] = useState(null);
   const [games, setGames] = useState(null);
+  const [sendMessage, setSendMessage] = useState(null);
+
+  const handleUnityReady = (sendMessageFunction) => {
+    // Store the sendMessage function from UnityPlayer
+    setSendMessage(() => sendMessageFunction);
+  };
+
+  const handleUnityBlur = () => {
+    if (sendMessage) {
+      sendMessage("Datacontroller", "CaptureKeyboardInputs", 0);
+    }
+  };
+
+  const handleUnityFocus = () => {
+    if (sendMessage) {
+      console.log("called here");
+      sendMessage("Datacontroller", "CaptureKeyboardInputs", 1);
+    }
+    console.log("called here 1");
+  };
 
   useEffect(() => {
     const fetchGames = async () => {
@@ -57,7 +77,13 @@ export default function GamePage() {
   return (
     <main className="main-game">
       <section className="game-holder">
-        <UnityPlayer gameInfo={gameInfo} tabIndex={1} key={gameId} />
+        <UnityPlayer
+          gameInfo={gameInfo}
+          tabIndex={1}
+          key={gameId}
+          onUnityReady={handleUnityReady}
+          handleUnityFocus={handleUnityFocus}
+        />
       </section>
       <section className="main-game__details">
         <GameDetails gameInfo={gameInfo} />
@@ -67,6 +93,7 @@ export default function GamePage() {
           comments={gameInfo.comments}
           handlePostNewComment={handlePostNewComment}
           handleDeleteComment={handleDeleteComment}
+          handleCommentFocus={handleUnityBlur}
         />
       </section>
       {games && (
