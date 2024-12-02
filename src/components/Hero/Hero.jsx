@@ -122,7 +122,7 @@ function Hero({ game }) {
             {leaderboardScores.map((entry, index) => {
               if (index <= 10) {
                 return (
-                  <li key={entry.id}>
+                  <li key={index}>
                     <p>{++index}</p>
                     <p>{entry.username}</p>
                     <p>{entry.score}</p>
