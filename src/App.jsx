@@ -9,6 +9,7 @@ import LoginRegisterPage from "./pages/LoginRegisterPage/LoginRegisterPage";
 import EditUserPage from "./pages/EditUserPage/EditUserPage";
 import UserProfilePage from "./pages/UserProfilePage/UserProfilePage";
 import { useState } from "react";
+import LeaderboardsPage from "./pages/LeaderboardsPage/LeaderboardsPage";
 
 function App() {
   const [avatar, setAvatar] = useState("");
@@ -41,13 +42,6 @@ function App() {
 
 export default App;
 
-function LeaderboardsPage() {
-  return (
-    <div>
-      <p>This is LeaderboardsPage</p>
-    </div>
-  );
-}
 function UserProfilePages() {
   return (
     <div>
