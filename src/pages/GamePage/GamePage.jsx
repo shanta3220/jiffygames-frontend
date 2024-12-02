@@ -48,13 +48,13 @@ export default function GamePage() {
 
   const handleUnityBlur = () => {
     if (sendMessage) {
-      sendMessage("Datacontroller", "CaptureKeyboardInputs", 0);
+      sendMessage("DataController", "CaptureKeyboardInputs", 0);
     }
   };
 
   const handleUnityFocus = () => {
     if (sendMessage) {
-      sendMessage("Datacontroller", "CaptureKeyboardInputs", 1);
+      sendMessage("DataController", "CaptureKeyboardInputs", 1);
     }
   };
 

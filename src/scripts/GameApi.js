@@ -134,3 +134,49 @@ export function getMyUserId() {
 export function Logout() {
   localStorage.removeItem("userId");
 }
+
+export async function FindGamesByUser(userId) {
+  try {
+    const user = await getUser(userId);
+    if (user) {
+      const leaderboards = await getLeaderboards();
+      console.log(leaderboards);
+
+      let leaderboardArray = [];
+      if (Array.isArray(leaderboards)) {
+        leaderboardArray = leaderboards;
+      } else if (typeof leaderboards === "object") {
+        leaderboardArray = Object.values(leaderboards);
+      }
+
+      // Find the leaderboard where the user has a score
+      const [game_id, score] = leaderboardArray.find((leaderboard) =>
+        leaderboard.scores.some((score) => score.user_id == userId)
+      );
+
+      console.log(game_id, score);
+      if (leaderboardWithUserScore) {
+        // Assuming each leaderboard has a single score entry for the user
+        const userScore = leaderboardWithUserScore.scores.find(
+          (score) => score.user_id == userId
+        );
+        const gameId = leaderboardWithUserScore.game_id;
+        const score = userScore ? userScore.score : null;
+
+        console.log({ userId, gameId, score });
+        return { userId, gameId, score }; // Return the gameId and score
+      } else {
+        console.warn("No scores found for the user in any leaderboard.");
+        return null;
+      }
+    } else {
+      console.warn("No user found with the provided ID");
+      return null;
+    }
+  } catch (error) {
+    console.error("Error finding games by user:", error);
+    return null;
+  }
+}
+
+FindGamesByUser(2);
