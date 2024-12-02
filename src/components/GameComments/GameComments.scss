@@ -46,6 +46,7 @@
       padding-left: $padding-margin-between-components-mobile;
       font-family: $font-family;
       resize: none;
+
       @include tablet {
         height: 3.75rem;
       }
@@ -73,6 +74,10 @@
   }
 }
 
+.comments__container {
+  background-color: #66121159;
+}
+
 .comment {
   display: flex;
   width: 100%;
@@ -80,7 +85,9 @@
   padding: 0;
   padding-top: $gap;
   border-bottom: 1px solid $primary-bright;
-
+  &:nth-child(even) {
+    background-color: #330a08;
+  }
   @include tablet {
     padding-top: 1.75rem;
     padding-bottom: 1rem;
