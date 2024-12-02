@@ -12,7 +12,11 @@ function GameList({ games }) {
             key={game.id}
             className="all-game__item"
             onClick={() => {
-              navigate(`/games/${game.id}`);
+              if (!window.location.pathname.includes("/leaderboards")) {
+                navigate(`/games/${game.id}`);
+              } else {
+                navigate(`/leaderboards/${game.id}`);
+              }
             }}
           >
             <div className="all-game__item-contents">

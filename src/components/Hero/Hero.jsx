@@ -1,13 +1,14 @@
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import background from "../../assets/images/hero-background.png";
 import leaderboardImage from "../../assets/images/leaderboard.png";
+import { getLeaderboard } from "../../scripts/GameApi";
 
-function Hero({ videoPath }) {
+function Hero({ game }) {
   const backgroundRef = useRef(null);
   const leaderBoardRef = useRef(null);
   const videoPlayerRef = useRef(null);
   const leaderBoardListRef = useRef(null);
-
+  const [leaderboardScores, setLeaderboardScores] = useState([]);
   const videoRef = useRef(null);
 
   useEffect(() => {
@@ -17,8 +18,23 @@ function Hero({ videoPath }) {
         console.error("Autoplay failed:", err);
       });
     }
-  }, [videoPath]);
+  }, [game]);
 
+  useEffect(() => {
+    const fetchScores = async () => {
+      if (game?.id) {
+        try {
+          const fetchScores = await getLeaderboard(game.id);
+          if (fetchScores?.scores) {
+            setLeaderboardScores(fetchScores.scores);
+          }
+        } catch (error) {
+          console.error(error);
+        }
+      }
+    };
+    fetchScores();
+  }, [game]);
   useEffect(() => {
     const updateLeaderboardSize = () => {
       if (leaderBoardRef.current && leaderBoardListRef.current) {
@@ -98,10 +114,24 @@ function Hero({ videoPath }) {
             className="hero__video"
             ref={videoRef}
             crossOrigin="anonymous"
-            src={videoPath}
+            src={game?.video_path}
           />
         </div>
-        <div className="hero__leaderboard-list" ref={leaderBoardListRef}></div>
+        <div className="hero__leaderboard-list" ref={leaderBoardListRef}>
+          <ul>
+            {leaderboardScores.map((entry, index) => {
+              if (index <= 10) {
+                return (
+                  <li key={entry.id}>
+                    <p>{++index}</p>
+                    <p>{entry.username}</p>
+                    <p>{entry.score}</p>
+                  </li>
+                );
+              }
+            })}
+          </ul>
+        </div>
       </div>
     </section>
   );

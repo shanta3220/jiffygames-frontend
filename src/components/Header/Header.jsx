@@ -1,10 +1,24 @@
 import "./Header.scss";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import logoIcon from "/logo.png";
 import UserAvatar from "../UserAvatar/UserAvatar";
+import { getMyUserId, Logout } from "../../scripts/GameApi";
+import { useEffect, useState } from "react";
 
-function Header() {
-  const isLoggedIn = true;
+function Header({ avatar }) {
+  const navigate = useNavigate();
+  const userId = getMyUserId();
+
+  const [trackAvatarChange, setAvatarChange] = useState("");
+
+  const handleLogout = () => {
+    Logout();
+    navigate("/");
+  };
+
+  useEffect(() => {
+    setAvatarChange(avatar.name);
+  }, [avatar]);
 
   return (
     <div className="header">
@@ -30,7 +44,7 @@ function Header() {
         </NavLink>
       </div>
       <div className="header__links">
-        {!isLoggedIn && (
+        {!userId && (
           <NavLink
             to={"/register"}
             className={({ isActive }) =>
@@ -44,12 +58,12 @@ function Header() {
             LOGIN/SIGN UP
           </NavLink>
         )}
-        {isLoggedIn && (
+        {userId && (
           <>
-            <Link to={"/"} className="header__link">
+            <span onClick={handleLogout} className="header__link">
               LOGOUT
-            </Link>
-            <UserAvatar />
+            </span>
+            <UserAvatar userId={userId} avatar={avatar} />
           </>
         )}
       </div>

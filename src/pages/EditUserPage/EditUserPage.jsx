@@ -1,20 +1,20 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState, useRef, useEffect } from "react";
-import { getUser, updateUser } from "../../scripts/GameApi";
+import { getMyUserId, getUser, updateUser } from "../../scripts/GameApi";
 import defaultImage from "../../assets/images/user-profile.png";
 import EditUserInput from "../../components/EditUserInput/EditUserInput";
 import "./EditUserPage.scss";
+import UserAvatar from "../../components/UserAvatar/UserAvatar";
 
-function EditUserPage() {
-  const isLoggedIn = true;
+function EditUserPage({ setAvatar }) {
   const navigate = useNavigate("");
-  const userId = 1;
+  const userId = getMyUserId();
 
   useEffect(() => {
-    if (!isLoggedIn) {
+    if (!userId) {
       navigate("/login");
     }
-  }, [isLoggedIn]);
+  }, [userId]);
 
   const imageInputRef = useRef(null);
   const [imageFile, setImageFile] = useState(null);
@@ -26,7 +26,7 @@ function EditUserPage() {
     email: "email",
     password: "password",
     confirmPassword: "confirmPassword",
-    aboutMe: "aboutMe",
+    aboutMe: "about_me",
   };
 
   const [formData, setFormData] = useState({
@@ -51,12 +51,14 @@ function EditUserPage() {
       try {
         const data = await getUser(userId);
         if (data) {
+          setAvatarPreviewImage(data.avatar_path);
+
           setFormData({
-            [fieldNames.name]: data.user_name ?? "",
+            [fieldNames.name]: data.username ?? "",
             [fieldNames.email]: data.email ?? "",
-            [fieldNames.password]: data.password,
-            [fieldNames.confirmPassword]: data.password,
-            [fieldNames.avatar]: data.avatar ?? "",
+            [fieldNames.password]: data.password ?? "",
+            [fieldNames.confirmPassword]: data.password ?? "",
+            [fieldNames.avatar]: data.avatar_path ?? "",
             [fieldNames.aboutMe]: data.about_me ?? "",
           });
         }
@@ -79,30 +81,28 @@ function EditUserPage() {
     if (hasAnyErrors) {
       return;
     }
-
-    const updateUser = async () => {
+    const editUser = async () => {
       try {
-        const userObject = {
-          user_name: formData.name,
-          email: formData.email,
-          password: formData.password,
-          avatar: imageFile,
-          about_me: formData.about_me,
-        };
-        const updatedUser = await updateUser(userObject);
+        const userData = new FormData();
+        userData.append("username", formData.username);
+        userData.append("email", formData.email);
+        userData.append("password", formData.password);
+        userData.append("avatar_path", imageFile ?? "");
+        userData.append("about_me", formData.about_me ?? "");
+        const updatedUser = await updateUser(userId, userData);
         if (updatedUser) {
+          setAvatar(avatarPreviewImage);
           alert("User info has been successfully updated!");
           navigate("/");
         }
       } catch (error) {
         console.error("updateUser:", error);
-        navigate("/");
+        alert("Failed to update user information. Please try again.");
       }
     };
 
-    updateUser();
+    editUser();
   };
-
   const checkErrors = (inputName, value) => {
     let errorText = "";
     switch (inputName) {
@@ -182,7 +182,10 @@ function EditUserPage() {
       <h1 className="main-edit-user__title">User Profile</h1>
       <form onSubmit={handleSubmit} className="form">
         <section className="form__section-left">
-          <img src={avatarPreviewImage} alt="User Avatar." />
+          <div>
+            <UserAvatar avatar={avatarPreviewImage} />
+          </div>
+          {/* <img src={avatarPreviewImage} alt="User Avatar." /> */}
           <button className="button" type="button" onClick={handleImageClick}>
             Change Icon
           </button>

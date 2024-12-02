@@ -3,7 +3,13 @@ import UserAvatar from "../UserAvatar/UserAvatar";
 import "./GameComments.scss";
 import { useRef, useState, useEffect } from "react";
 
-function Comments({ comments, handlePostNewComment, handleDeleteComment }) {
+function Comments({
+  comments,
+  handlePostNewComment,
+  handleDeleteComment,
+  handleCommentFocus,
+  userId,
+}) {
   const [comment, setComment] = useState("");
   const [commentError, setCommentError] = useState("");
   const errorUpdateAfterDelay = useRef(null);
@@ -50,7 +56,7 @@ function Comments({ comments, handlePostNewComment, handleDeleteComment }) {
 
       <section className="comments__and-form">
         <div className="comment-form-container">
-          <UserAvatar />
+          <UserAvatar userId={userId} />
           <form className="comment-form" onSubmit={handleSubmit}>
             <label className="comment-form__label">
               <textarea
@@ -62,6 +68,7 @@ function Comments({ comments, handlePostNewComment, handleDeleteComment }) {
                 required
                 value={comment}
                 onChange={handleCommentChange}
+                onClick={handleCommentFocus}
               ></textarea>
               {commentError && (
                 <p className="comment-form__error-message">{commentError}</p>
@@ -79,6 +86,7 @@ function Comments({ comments, handlePostNewComment, handleDeleteComment }) {
               comment={comment}
               key={comment.id}
               handleDeleteComment={handleDeleteComment}
+              userId={userId}
             />
           ))}
         </div>

@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 
-function FeaturedGamesList({ setVideoPath, games }) {
+function FeaturedGamesList({ setGame, games }) {
   const navigate = useNavigate("");
 
   return (
@@ -15,7 +15,7 @@ function FeaturedGamesList({ setVideoPath, games }) {
                 alt={`${game.game_name} image`}
                 className="featured-games__item-image"
                 onClick={() => {
-                  setVideoPath(`/trailers/${game.project_name}.mp4`);
+                  setGame(game);
                 }}
               />
               <p className="featured-games__item-title">{game.game_name}</p>

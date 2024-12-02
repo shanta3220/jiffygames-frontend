@@ -99,6 +99,37 @@
     margin-top: 2.7%;
     //background-color: rgba(0, 255, 255, 0.199);
     border-radius: 2%;
+    background-color: $secondary-dark;
+    ul {
+      padding-top: 10px;
+      padding-bottom: 10px;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      align-items: center;
+      justify-content: space-between;
+    }
+    li {
+      width: 90%;
+      height: 100%;
+      margin: auto;
+      display: flex;
+      font-size: 17px;
+      justify-items: center;
+      gap: 8px;
+
+      justify-content: space-between;
+      color: $secondary-bright;
+      text-align: center;
+      p {
+        @include subHeader;
+        & {
+          font-weight: 600;
+        }
+      }
+    }
   }
 }
 
