@@ -56,7 +56,7 @@ function Comments({
 
       <section className="comments__and-form">
         <div className="comment-form-container">
-          <UserAvatar />
+          <UserAvatar userId={userId} />
           <form className="comment-form" onSubmit={handleSubmit}>
             <label className="comment-form__label">
               <textarea

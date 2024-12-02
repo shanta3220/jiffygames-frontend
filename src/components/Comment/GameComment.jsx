@@ -5,7 +5,10 @@ import UserAvatar from "../UserAvatar/UserAvatar";
 function Comment({ comment, handleDeleteComment, userId }) {
   return (
     <div className="comment">
-      <UserAvatar linkPath={`/users/${comment.user_id}`} />
+      <UserAvatar
+        linkPath={`/users/${comment.user_id}`}
+        userId={comment.user_id}
+      />
       <div className="comment__texts">
         <div className="comment__pair-info">
           <p className="comment__username">{comment.username}</p>

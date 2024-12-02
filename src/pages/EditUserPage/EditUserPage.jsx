@@ -7,15 +7,14 @@ import "./EditUserPage.scss";
 import UserAvatar from "../../components/UserAvatar/UserAvatar";
 
 function EditUserPage() {
-  const isLoggedIn = true;
   const navigate = useNavigate("");
   const userId = getMyUserId();
 
   useEffect(() => {
-    if (!isLoggedIn) {
+    if (!userId) {
       navigate("/login");
     }
-  }, [isLoggedIn]);
+  }, [userId]);
 
   const imageInputRef = useRef(null);
   const [imageFile, setImageFile] = useState(null);
@@ -52,12 +51,14 @@ function EditUserPage() {
       try {
         const data = await getUser(userId);
         if (data) {
+          setAvatarPreviewImage(data.avatar_path);
+
           setFormData({
             [fieldNames.name]: data.username ?? "",
             [fieldNames.email]: data.email ?? "",
             [fieldNames.password]: data.password ?? "",
             [fieldNames.confirmPassword]: data.password ?? "",
-            [fieldNames.avatar]: data.avatar ?? "",
+            [fieldNames.avatar]: data.avatar_path ?? "",
             [fieldNames.aboutMe]: data.about_me ?? "",
           });
         }
@@ -80,31 +81,32 @@ function EditUserPage() {
     if (hasAnyErrors) {
       return;
     }
-
     const editUser = async () => {
       try {
-        const userObject = {
-          username: formData.username,
-          email: formData.email,
-          password: formData.password,
-          avatar: imageFile ?? "",
-          about_me: formData.about_me ?? "",
-        };
-        console.log(userObject);
-        const updatedUser = await updateUser(userId, userObject);
+        const userData = new FormData();
+        userData.append("username", formData.username);
+        userData.append("email", formData.email);
+        userData.append("password", formData.password);
+        userData.append("avatar_path", imageFile ?? "");
+        userData.append("about_me", formData.about_me ?? "");
+
+        for (let pair of userData.entries()) {
+          console.log(pair[0] + ": " + pair[1]);
+        }
+
+        const updatedUser = await updateUser(userId, userData);
         if (updatedUser) {
           alert("User info has been successfully updated!");
           navigate("/");
         }
       } catch (error) {
         console.error("updateUser:", error);
-        navigate("/");
+        alert("Failed to update user information. Please try again.");
       }
     };
 
     editUser();
   };
-
   const checkErrors = (inputName, value) => {
     let errorText = "";
     switch (inputName) {
@@ -234,7 +236,7 @@ function EditUserPage() {
             value={formData[fieldNames.password]}
             errorMessage={errorMessages[fieldNames.password]}
           />
-          {/*   {formData[fieldNames.password] !==
+          {formData[fieldNames.password] !==
             formData[fieldNames.confirmPassword] && (
             <EditUserInput
               inputType="password"
@@ -244,7 +246,7 @@ function EditUserPage() {
               value={formData[fieldNames.confirmPassword]}
               errorMessage={errorMessages[fieldNames.confirmPassword]}
             />
-          )} */}
+          )}
           <button type="submit" className="button">
             Submit
           </button>

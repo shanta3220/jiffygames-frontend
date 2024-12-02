@@ -64,9 +64,13 @@ export async function updateUser(userId, userObject) {
   try {
     const { data } = await axios.put(
       getFullPath(`users/${userId}`),
-      userObject
+      userObject,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }
     );
-
     return data;
   } catch (error) {
     console.error(error);

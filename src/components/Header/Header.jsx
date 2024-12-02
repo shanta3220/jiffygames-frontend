@@ -56,7 +56,7 @@ function Header() {
             <span onClick={handleLogout} className="header__link">
               LOGOUT
             </span>
-            <UserAvatar />
+            <UserAvatar userId={userId} />
           </>
         )}
       </div>

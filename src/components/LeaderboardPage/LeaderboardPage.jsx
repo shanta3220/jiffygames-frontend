@@ -48,7 +48,7 @@ function LeaderboardPage() {
             <li className="leaderboard-list__item leaderboard-list__item--hover">
               <p className="leaderboard-list__item-text">{i + 1}</p>
               <UserAvatar
-                avatar={entry.avatar_path}
+                userId={entry.user_id}
                 linkPath={`/users/${entry.user_id}`}
               />
               <p className="leaderboard-list__item-text">{entry.username}</p>
