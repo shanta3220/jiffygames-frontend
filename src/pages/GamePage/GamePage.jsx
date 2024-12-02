@@ -30,7 +30,6 @@ export default function GamePage() {
 
         if (!userId) {
           navigate("/register");
-          alert("You need to login with an account");
         } else {
           setUserId(userId);
         }
@@ -38,6 +37,7 @@ export default function GamePage() {
         console.error(error);
       }
     };
+
     fetchLoggedUser();
   }, [navigate]);
 
