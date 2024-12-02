@@ -77,7 +77,17 @@ export async function updateUser(userId, userObject) {
   }
 }
 
-export async function PostComment(commentObject) {
+export async function postUser(userObject) {
+  try {
+    console.log(getFullPath("users"), userObject);
+    const { data } = await axios.post(getFullPath("users"), userObject);
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export async function postComment(commentObject) {
   try {
     const { data } = await axios.post(getFullPath("comments"), commentObject);
     return data;
@@ -86,7 +96,7 @@ export async function PostComment(commentObject) {
   }
 }
 
-export async function DeleteComment(commentId) {
+export async function deleteComment(commentId) {
   try {
     await axios.delete(getFullPath(`comments/${commentId}`));
     return null;
@@ -95,7 +105,7 @@ export async function DeleteComment(commentId) {
   }
 }
 
-export async function Login(username, password) {
+export async function login(username, password) {
   try {
     const users = await getUsers();
     if (users && users.length > 0) {
@@ -135,48 +145,12 @@ export function Logout() {
   localStorage.removeItem("userId");
 }
 
-export async function FindGamesByUser(userId) {
+export async function findGames(userId) {
   try {
-    const user = await getUser(userId);
-    if (user) {
-      const leaderboards = await getLeaderboards();
-      console.log(leaderboards);
-
-      let leaderboardArray = [];
-      if (Array.isArray(leaderboards)) {
-        leaderboardArray = leaderboards;
-      } else if (typeof leaderboards === "object") {
-        leaderboardArray = Object.values(leaderboards);
-      }
-
-      // Find the leaderboard where the user has a score
-      const [game_id, score] = leaderboardArray.find((leaderboard) =>
-        leaderboard.scores.some((score) => score.user_id == userId)
-      );
-
-      console.log(game_id, score);
-      if (leaderboardWithUserScore) {
-        // Assuming each leaderboard has a single score entry for the user
-        const userScore = leaderboardWithUserScore.scores.find(
-          (score) => score.user_id == userId
-        );
-        const gameId = leaderboardWithUserScore.game_id;
-        const score = userScore ? userScore.score : null;
-
-        console.log({ userId, gameId, score });
-        return { userId, gameId, score }; // Return the gameId and score
-      } else {
-        console.warn("No scores found for the user in any leaderboard.");
-        return null;
-      }
-    } else {
-      console.warn("No user found with the provided ID");
-      return null;
-    }
+    const { data } = await axios.get(getFullPath(`users/${userId}/games`));
+    console.log(data);
+    return data;
   } catch (error) {
-    console.error("Error finding games by user:", error);
-    return null;
+    console.error(error);
   }
 }
-
-FindGamesByUser(2);

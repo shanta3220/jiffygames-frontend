@@ -17,9 +17,9 @@ function Header({ avatar }) {
   };
 
   useEffect(() => {
-    console.log(avatar);
     setAvatarChange(avatar.name);
   }, [avatar]);
+
   return (
     <div className="header">
       <div className="header__logo">

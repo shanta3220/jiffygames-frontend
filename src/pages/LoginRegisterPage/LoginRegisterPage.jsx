@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Form from "../../components/Form/Form";
 import { useNavigate } from "react-router-dom";
-import { Login } from "../../scripts/GameApi";
+import { login, postUser } from "../../scripts/GameApi";
 
 function LoginRegisterPage() {
   const fieldNames = {
@@ -52,11 +52,8 @@ function LoginRegisterPage() {
       return;
     }
     if (isLogin) {
-      // authorize and login to web
-      //return to "/";
-
       const handleLogin = async () => {
-        const user = await Login(
+        const user = await login(
           formData[fieldNames.name],
           formData[fieldNames.password]
         );
@@ -75,21 +72,17 @@ function LoginRegisterPage() {
       handleLogin();
     }
     const userObject = {
-      user_name: formData.name,
+      username: formData.username,
       email: formData.email,
       password: formData.password,
     };
 
-    //TODO: Register the user
-    return;
-
     const addUserToApi = async () => {
       try {
-        const API_URL = import.meta.env.VITE_API_URL;
-
-        const { data } = await axios.post(`${API_URL}/api/users/`, userObject);
+        const data = await postUser(userObject);
+        console.log(data);
         if (data) {
-          alert(`Succesfully added ${data.user_name}`);
+          alert(`Succesfully added ${data.username}`);
           navigate("/");
         }
       } catch (e) {
@@ -112,7 +105,7 @@ function LoginRegisterPage() {
   };
 
   const handleLogin = async () => {
-    const user = await Login(
+    const user = await login(
       formData[fieldNames.name],
       formData[fieldNames.password]
     );

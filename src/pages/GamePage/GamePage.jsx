@@ -4,8 +4,8 @@ import {
   getGameInfo,
   getGameList,
   getMyUserId,
-  PostComment,
-  DeleteComment,
+  postComment,
+  deleteComment,
 } from "../../scripts/GameApi";
 import "./GamePage.scss";
 import { useEffect, useState } from "react";
@@ -99,7 +99,7 @@ export default function GamePage() {
         game_id: gameId,
       };
       // Await the response from PostComment
-      const data = await PostComment(commentObject);
+      const data = await postComment(commentObject);
       setChangeCommentId(data.id);
     } catch (error) {
       console.error("Error posting a new comment:", error);
@@ -108,7 +108,7 @@ export default function GamePage() {
 
   const handleDeleteComment = async (commentId) => {
     try {
-      await DeleteComment(commentId);
+      await deleteComment(commentId);
     } finally {
       setChangeCommentId(commentId);
     }
