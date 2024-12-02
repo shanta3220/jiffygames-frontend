@@ -1,0 +1,50 @@
+@use "./typography";
+
+$font-family: "Fredoka";
+
+$primary-dark: #1c1c1c;
+$primary-medium: #661211;
+
+$primary-light: #ff5e42;
+
+$primary-bright: #ff914d;
+
+$primary-invalid: #d22d2d;
+
+$secondary-dark: #0a1e2b;
+$secondary-medium: #330a08;
+$secondary-light: #f5a623;
+$secondary-bright: #0ceeff;
+
+// // Primary Color Set
+// $primary-medium: #263e5c;
+// $secondary-medium: #32556b;
+// $primary-dark: #0c2a38;
+// $primary-light: #5a9bd4;
+// $primary-bright: #dfebf1;
+// $primary-invalid: #d22d2d;
+
+// // Secondary Color Set
+// $secondary-dark: #2f3f5c;
+// $secondary-light: #8eb4d7;
+// $secondary-bright: #8ad2e8;
+
+$tablet-breakpoint: 768px;
+$desktop-breakpoint: 1280px;
+
+$padding-margin-top-bottom: 1.25rem;
+$padding-headlines-top-mobile: 1.25rem;
+$padding-headlines-bottom-mobile: 0.875rem;
+$padding-margin-between-components-mobile: 1rem;
+$padding-margin-between-mobile: 4.5vw;
+$padding-margin-between-mobile-half: 0.5rem;
+
+$padding-headlines-top-tablet: 2.25rem;
+$padding-headlines-bottom-tablet: 1.5rem;
+$padding-margin-between-components-tablet: 1.25rem;
+$padding-margin-between-tablet: 4.5vw;
+$padding-margin-between-tablet-half: 1.125rem;
+$padding-margin-between-desktop: 10vw;
+
+$gap: 1rem;
+$border-radius: 1rem;

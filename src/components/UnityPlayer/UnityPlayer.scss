@@ -1,0 +1,118 @@
+@use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/variables" as *;
+
+.game {
+  width: 100%;
+  height: 100%;
+
+  &__container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+  }
+
+  &__loading-overlay {
+    &__text {
+      @include bodyCopy;
+    }
+    & {
+      position: absolute;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 1.25rem;
+      text-align: center;
+      flex-direction: column;
+    }
+    img {
+      height: 35%;
+      margin-bottom: 1.25rem;
+    }
+  }
+
+  &__unity-player {
+    width: 100%;
+    height: 100%;
+  }
+
+  .button {
+    margin-top: 20px;
+    min-width: 300px !important;
+  }
+
+  &__title-text {
+    @include mainHeader;
+  }
+
+  &__title-and-interaction {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: $primary-medium;
+    padding: $padding-margin-between-components-mobile;
+
+    @include tablet {
+      padding: $padding-margin-between-components-tablet;
+    }
+  }
+
+  &__title-and-return {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: $gap;
+  }
+}
+
+.game-interact {
+  width: 100%;
+  display: flex;
+  justify-content: end;
+  flex: 1;
+  gap: 3rem;
+  align-items: center;
+
+  &__social {
+    border-radius: 2rem;
+    width: 80px;
+    height: 30px;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  &__icon {
+    height: 26px;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  &__icon--fullscreen {
+    @extend .game-interact__icon;
+
+    height: 32px;
+  }
+
+  &__like {
+    display: flex;
+    align-items: center;
+    height: 36px;
+    gap: 6px;
+  }
+  &__like-text {
+    @include bodyCopy;
+
+    & {
+      height: 36px;
+      line-height: 2rem;
+      vertical-align: middle;
+    }
+  }
+}

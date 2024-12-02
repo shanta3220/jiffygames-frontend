@@ -1,0 +1,55 @@
+@use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/variables" as *;
+
+.main-game-list {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+
+  @include tablet {
+    padding: 0 $padding-margin-between-tablet;
+  }
+
+  @include desktop {
+    padding: 0 $padding-margin-between-desktop;
+  }
+
+  section {
+    background-color: $secondary-medium;
+    border-radius: $border-radius;
+  }
+
+  h1 {
+    @include headlinesPaddingTopBottom();
+    & {
+      margin-top: -0.5rem;
+      @include mainHeader;
+    }
+  }
+
+  .all-game__item {
+    background-color: $primary-medium;
+
+    padding: $padding-margin-between-components-mobile;
+    @include tablet {
+      padding: $padding-margin-between-components-tablet;
+    }
+
+    & {
+      border-radius: 0.625rem;
+      width: 100%;
+    }
+
+    @include tablet {
+      width: 45%;
+    }
+
+    @include desktop {
+      width: 30%;
+    }
+
+    P {
+      @include sectionHeader;
+    }
+  }
+}
