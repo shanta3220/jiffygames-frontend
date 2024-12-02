@@ -1,6 +1,12 @@
 import UnityPlayer from "../../components/UnityPlayer/UnityPlayer";
 import { useParams, useNavigate } from "react-router-dom";
-import { getGameInfo, getGameList, getMyUserId } from "../../scripts/GameApi";
+import {
+  getGameInfo,
+  getGameList,
+  getMyUserId,
+  PostComment,
+  DeleteComment,
+} from "../../scripts/GameApi";
 import "./GamePage.scss";
 import { useEffect, useState } from "react";
 import GameDetails from "../../components/GameDetails/GameDetails";
@@ -14,6 +20,8 @@ export default function GamePage() {
   const [games, setGames] = useState(null);
   const [sendMessage, setSendMessage] = useState(null);
   const navigate = useNavigate();
+
+  const [changeCommentId, setChangeCommentId] = useState([]);
 
   useEffect(() => {
     const fetchLoggedUser = async () => {
@@ -67,14 +75,13 @@ export default function GamePage() {
     const fetchGameInfo = async () => {
       try {
         const gameInfo = await getGameInfo(gameId);
-
         setGameInfo(gameInfo);
       } catch (error) {
         console.error(error);
       }
     };
     fetchGameInfo();
-  }, [gameId]);
+  }, [gameId, changeCommentId]);
 
   if (gameInfo == null) {
     return (
@@ -84,12 +91,27 @@ export default function GamePage() {
     );
   }
 
-  const handlePostNewComment = (comment) => {
-    alert("clicked post new comment");
+  const handlePostNewComment = async (comment) => {
+    try {
+      const commentObject = {
+        message: comment,
+        user_id: userId,
+        game_id: gameId,
+      };
+      // Await the response from PostComment
+      const data = await PostComment(commentObject);
+      setChangeCommentId(data.id);
+    } catch (error) {
+      console.error("Error posting a new comment:", error);
+    }
   };
 
-  const handleDeleteComment = (comment) => {
-    alert("clicked post new comment");
+  const handleDeleteComment = async (commentId) => {
+    try {
+      await DeleteComment(commentId);
+    } finally {
+      setChangeCommentId(commentId);
+    }
   };
 
   return (

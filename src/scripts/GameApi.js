@@ -73,6 +73,24 @@ export async function updateUser(userId, userObject) {
   }
 }
 
+export async function PostComment(commentObject) {
+  try {
+    const { data } = await axios.post(getFullPath("comments"), commentObject);
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export async function DeleteComment(commentId) {
+  try {
+    await axios.delete(getFullPath(`comments/${commentId}`));
+    return null;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
 export async function Login(username, password) {
   try {
     const users = await getUsers();

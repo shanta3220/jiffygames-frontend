@@ -85,7 +85,6 @@ function Comments({
             <Comment
               comment={comment}
               key={comment.id}
-              id={comment.id}
               handleDeleteComment={handleDeleteComment}
               userId={userId}
             />
