@@ -5,14 +5,14 @@ import FeaturedGameList from "../../components/FeaturedGameList/FeaturedGameList
 import { getGameList } from "../../scripts/GameApi";
 
 function HomePage() {
-  const [videoPath, setVideoPath] = useState("/trailers/RikoTheAdventurer.mp4");
+  const [game, setGame] = useState();
   const [games, setGames] = useState(null);
 
   useEffect(() => {
     const fetchGameList = async () => {
       try {
         const games = await getGameList();
-
+        setGame(games[0]);
         setGames(games);
       } catch (error) {
         console.error(error);
@@ -22,8 +22,8 @@ function HomePage() {
   }, []);
   return (
     <main className="home-main">
-      <Hero videoPath={videoPath} />
-      {games && <FeaturedGameList setVideoPath={setVideoPath} games={games} />}
+      <Hero game={game} />
+      {games && <FeaturedGameList setGame={setGame} games={games} />}
     </main>
   );
 }
