@@ -120,7 +120,7 @@ export default function GamePage() {
         <UnityPlayer
           gameInfo={gameInfo}
           tabIndex={1}
-          key={gameId}
+          key={gameInfo.id}
           onUnityReady={handleUnityReady}
           handleUnityFocus={handleUnityFocus}
         />
