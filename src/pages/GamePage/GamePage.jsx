@@ -110,7 +110,7 @@ export default function GamePage() {
     try {
       await deleteComment(commentId);
     } finally {
-      setChangeCommentId(commentId);
+      setChangeCommentId(null);
     }
   };
 
