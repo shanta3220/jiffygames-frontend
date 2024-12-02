@@ -6,7 +6,7 @@ import EditUserInput from "../../components/EditUserInput/EditUserInput";
 import "./EditUserPage.scss";
 import UserAvatar from "../../components/UserAvatar/UserAvatar";
 
-function EditUserPage() {
+function EditUserPage({ setAvatar }) {
   const navigate = useNavigate("");
   const userId = getMyUserId();
 
@@ -89,13 +89,9 @@ function EditUserPage() {
         userData.append("password", formData.password);
         userData.append("avatar_path", imageFile ?? "");
         userData.append("about_me", formData.about_me ?? "");
-
-        for (let pair of userData.entries()) {
-          console.log(pair[0] + ": " + pair[1]);
-        }
-
         const updatedUser = await updateUser(userId, userData);
         if (updatedUser) {
+          setAvatar(avatarPreviewImage);
           alert("User info has been successfully updated!");
           navigate("/");
         }

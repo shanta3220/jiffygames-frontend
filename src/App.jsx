@@ -8,11 +8,14 @@ import LeaderboardPage from "./components/LeaderboardPage/LeaderboardPage";
 import LoginRegisterPage from "./pages/LoginRegisterPage/LoginRegisterPage";
 import EditUserPage from "./pages/EditUserPage/EditUserPage";
 import UserProfilePage from "./pages/UserProfilePage/UserProfilePage";
+import { useState } from "react";
 
 function App() {
+  const [avatar, setAvatar] = useState("");
+
   return (
     <BrowserRouter>
-      <Header />
+      <Header avatar={avatar} />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/games/" element={<GamesPage />} />
@@ -27,7 +30,10 @@ function App() {
         <Route path="/login" element={<LoginRegisterPage />} />
         <Route path="/users/" element={<UserProfilePages />} />
         <Route path="/users/:userId" element={<UserProfilePage />} />
-        <Route path="/user-profile" element={<EditUserPage />} />
+        <Route
+          path="/user-profile"
+          element={<EditUserPage setAvatar={setAvatar} />}
+        />
       </Routes>
     </BrowserRouter>
   );

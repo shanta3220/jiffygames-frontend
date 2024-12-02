@@ -3,16 +3,23 @@ import { NavLink, useNavigate } from "react-router-dom";
 import logoIcon from "/logo.png";
 import UserAvatar from "../UserAvatar/UserAvatar";
 import { getMyUserId, Logout } from "../../scripts/GameApi";
+import { useEffect, useState } from "react";
 
-function Header() {
+function Header({ avatar }) {
   const navigate = useNavigate();
   const userId = getMyUserId();
+
+  const [trackAvatarChange, setAvatarChange] = useState("");
 
   const handleLogout = () => {
     Logout();
     navigate("/");
   };
 
+  useEffect(() => {
+    console.log(avatar);
+    setAvatarChange(avatar.name);
+  }, [avatar]);
   return (
     <div className="header">
       <div className="header__logo">
@@ -56,7 +63,7 @@ function Header() {
             <span onClick={handleLogout} className="header__link">
               LOGOUT
             </span>
-            <UserAvatar userId={userId} />
+            <UserAvatar userId={userId} avatar={avatar} />
           </>
         )}
       </div>
