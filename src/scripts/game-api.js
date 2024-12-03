@@ -96,7 +96,7 @@ export async function postUser(userObject) {
   }
 }
 
-export async function findGames(userId) {
+export async function getUserGames(userId) {
   try {
     const { data } = await axios.get(getFullPath(`users/${userId}/games`));
     return data;

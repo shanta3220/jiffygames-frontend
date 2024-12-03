@@ -42,10 +42,7 @@ function Hero({ game }) {
           leaderBoardRef.current.getBoundingClientRect();
 
         // Set width and height for leaderboard dynamically
-        leaderBoardListRef.current.style.setProperty(
-          "width",
-          `${width * 0.87}px`
-        );
+        leaderBoardListRef.current.style.setProperty("width", `${width}px`);
         leaderBoardListRef.current.style.setProperty(
           "height",
           `${height * 0.77}px`
