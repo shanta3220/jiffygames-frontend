@@ -134,19 +134,36 @@
     }
   }
 
-  &__delete-container {
+  &__delete-like-container {
     display: flex;
-    justify-content: end;
+    justify-content: right;
+    align-items: center;
     position: relative;
-    padding-bottom: 2.25rem;
+    padding: 0;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    div {
+      display: flex;
+      gap: 0.5rem;
+      margin-right: -1.125rem;
+      padding-right: $gap;
+    }
   }
 
   &__delete {
     img {
-      position: absolute;
-      top: 8px;
-      right: 0px;
-      height: 28px;
+      height: 1.375rem;
+      margin-left: 1.125rem;
+      &:hover {
+        cursor: pointer;
+        transform: scale(1.05);
+      }
+    }
+  }
+
+  &__like {
+    img {
+      height: 1.375rem;
 
       &:hover {
         cursor: pointer;

@@ -107,22 +107,22 @@ export default function GamePage() {
     }
   };
 
-  const handlelikeComment = async (comment) => {
-    try {
-      const data = await likeComment(commentId);
-      if (data) {
-        setChangeCommentId(`${data.id}-${data.like_count}.like`);
-      }
-    } catch (error) {
-      console.error("Error posting a new comment:", error);
-    }
-  };
-
   const handleDeleteComment = async (commentId) => {
     try {
       await deleteComment(commentId);
     } finally {
       setChangeCommentId(`${commentId}.delete`);
+    }
+  };
+
+  const handleLikeComment = async (commentId) => {
+    try {
+      const likes = await likeComment(commentId);
+      if (likes) {
+        setChangeCommentId(`${commentId}-${likes}.like`);
+      }
+    } catch (error) {
+      console.error("Error posting a new comment:", error);
     }
   };
 
@@ -145,7 +145,7 @@ export default function GamePage() {
           comments={gameInfo.comments}
           handlePostNewComment={handlePostNewComment}
           handleDeleteComment={handleDeleteComment}
-          handleLikeComment={handlelikeComment}
+          handleLikeComment={handleLikeComment}
           handleCommentFocus={handleUnityBlur}
           userId={userId}
         />

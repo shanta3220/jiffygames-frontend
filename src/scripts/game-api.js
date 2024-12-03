@@ -16,7 +16,7 @@ export async function getGameList() {
 
 export async function likeGame(gameId) {
   try {
-    const { data } = await axios.delete(getFullPath(`games/${gameId}/like`));
+    const { data } = await axios.get(getFullPath(`games/${gameId}/like`));
     return data.like_count;
   } catch (error) {
     console.error(error);
@@ -165,9 +165,7 @@ export async function deleteComment(commentId) {
 
 export async function likeComment(commentId) {
   try {
-    const { data } = await axios.delete(
-      getFullPath(`comments/${commentId}/like`)
-    );
+    const { data } = await axios.get(getFullPath(`comments/${commentId}/like`));
     return data.like_count;
   } catch (error) {
     console.error(error);
