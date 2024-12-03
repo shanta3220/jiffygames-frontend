@@ -13,6 +13,7 @@ import {
   postUserScore,
   likeGame,
 } from "../../scripts/game-api";
+import SocialShareModal from "../SocialShareModal/SocialShareModal";
 
 export default function UnityPlayer({
   gameInfo,
@@ -29,6 +30,14 @@ export default function UnityPlayer({
   const [devicePixelRatio, setDevicePixelRatio] = useState(
     window.devicePixelRatio
   );
+  const [open, setOpen] = useState(false);
+  const [currentUrl, setCurrentUrl] = useState("");
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setCurrentUrl(window.location.href || "");
+    }
+  }, []);
 
   //Prevent unity memory logs spam message
   useEffect(() => {
@@ -233,7 +242,7 @@ export default function UnityPlayer({
                 src={shareIcon}
                 alt=""
                 className="game-interact__icon"
-                onClick={handleClickReturn}
+                onClick={() => setOpen(true)}
               />
               <div className="game-interact__like">
                 <img
@@ -256,6 +265,7 @@ export default function UnityPlayer({
           </div>
         </div>
       </div>
+      <SocialShareModal open={open} setOpen={setOpen} currentUrl={currentUrl} />
     </div>
   );
 }
