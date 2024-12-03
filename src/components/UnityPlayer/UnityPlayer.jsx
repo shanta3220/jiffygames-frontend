@@ -7,6 +7,11 @@ import likeIcon from "../../assets/icons/icon_like.png";
 import shareIcon from "../../assets/icons/icon_share.png";
 import returnIcon from "../../assets/icons/icon_return.png";
 import loadingGif from "../../assets/images/loading.gif";
+import {
+  getLeaderboard,
+  getUserScore,
+  postUserScore,
+} from "../../scripts/GameApi";
 
 export default function UnityPlayer({
   gameInfo,
@@ -28,18 +33,18 @@ export default function UnityPlayer({
   const absoluteFilePath = `${gameInfo?.build_path}/Build/${gameProjectName}`;
 
   //Prevent unity memory logs spam message
-  useEffect(() => {
-    const originalConsoleLog = console.log;
-    const originalConsoleWarn = console.warn;
+  // useEffect(() => {
+  //   const originalConsoleLog = console.log;
+  //   const originalConsoleWarn = console.warn;
 
-    const suppressAllLogs = () => {};
-    console.log = suppressAllLogs;
-    console.warn = suppressAllLogs;
-    return () => {
-      console.log = originalConsoleLog;
-      console.warn = originalConsoleWarn;
-    };
-  }, []);
+  //   const suppressAllLogs = () => {};
+  //   console.log = suppressAllLogs;
+  //   console.warn = suppressAllLogs;
+  //   return () => {
+  //     console.log = originalConsoleLog;
+  //     console.warn = originalConsoleWarn;
+  //   };
+  // }, []);
 
   const {
     unityProvider,
@@ -61,6 +66,7 @@ export default function UnityPlayer({
   });
   const [unityKey, setUnityKey] = useState(gameId);
 
+  getLeaderboard;
   useEffect(() => {
     setUnityKey(gameId);
   }, [gameId]);
@@ -78,28 +84,29 @@ export default function UnityPlayer({
     };
   }, [handleUnityFocus]);
 
-  const handleGameOver = useCallback((userName, score) => {
+  const handleGameOver = useCallback((newScore) => {
     setIsGameOver(true);
-    setUserName(userName);
-    setScore(score);
-    console.log("Game Over");
+    if (score != newScore && newScore != 0) {
+      setScore(newScore);
+      postUserScore(gameId, newScore);
+    }
   }, []);
 
-  const handleSetScore = useCallback((userName, score) => {
-    setUserName(userName);
-    setScore(score);
-    console.log("SetScore");
+  const handleSetScore = useCallback((newScore) => {
+    console.log(newScore);
+    if (score != newScore && newScore != 0) {
+      setScore(newScore);
+      postUserScore(gameId, newScore);
+    }
   }, []);
 
-  const handleQuit = useCallback((userName, score) => {
+  const handleQuit = useCallback((newScore) => {
     setIsQuit(true);
-    setUserName(userName);
-    setScore(score);
+    if (score != newScore && newScore != 0) {
+      setScore(newScore);
+      postUserScore(gameId, newScore);
+    }
   }, []);
-
-  function handleScore() {
-    sendMessage("GameManager", "SetScore", 100);
-  }
 
   function handleClickEnterFullscreen() {
     requestFullscreen(true);
@@ -126,14 +133,26 @@ export default function UnityPlayer({
       }
     };
 
-    // Run after Unity is loaded to modify event listeners
+    // Run after Unity is loaded to modify event listeners, set the current user score
     if (isLoaded) {
       makeEventsPassive();
     }
 
+    const initializeScore = async () => {
+      if (sendMessage && isLoaded) {
+        const intialScore = await getUserScore(gameId);
+        console.log("called", intialScore);
+        sendMessage("DataController", "SendScoreToGame", intialScore);
+      }
+    };
+
+    const initScore = () => {
+      initializeScore();
+    };
+    initScore();
     addEventListener("GameOver", handleGameOver);
     addEventListener("SetScore", handleSetScore);
-    addEventListener("Quit", handleQuit);
+    addEventListener("QuitGame", handleQuit);
 
     return () => {
       const removeAllListeners = async () => {
@@ -154,7 +173,7 @@ export default function UnityPlayer({
       // Removing Unity event listeners as well
       removeEventListener("GameOver", handleGameOver);
       removeEventListener("SetScore", handleSetScore);
-      removeEventListener("Quit", handleQuit);
+      removeEventListener("QuitGame", handleQuit);
     };
   }, [
     isLoaded,
@@ -164,6 +183,8 @@ export default function UnityPlayer({
     handleGameOver,
     handleSetScore,
     handleQuit,
+    sendMessage,
+    gameId,
   ]);
 
   useEffect(() => {

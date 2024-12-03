@@ -148,9 +148,48 @@ export function Logout() {
 export async function findGames(userId) {
   try {
     const { data } = await axios.get(getFullPath(`users/${userId}/games`));
-    console.log(data);
     return data;
   } catch (error) {
     console.error(error);
+  }
+}
+
+export async function getUserScore(gameId) {
+  const userId = getMyUserId();
+  try {
+    const { data } = await axios.get(
+      getFullPath(`leaderboards/?user_id=${userId}&game_id=${gameId}`)
+    );
+
+    return data.score || 0;
+  } catch (error) {
+    if (error.response?.status === 404) {
+      return 0;
+    }
+
+    console.error("Error fetching score:", error);
+    throw error;
+  }
+}
+
+export async function postUserScore(gameId, score) {
+  const userId = getMyUserId();
+  try {
+    const userObject = {
+      user_id: userId,
+      score: score,
+    };
+    const { data } = await axios.post(
+      getFullPath(`leaderboards/${gameId}`),
+      userObject
+    );
+    return data;
+  } catch (error) {
+    if (error.response?.status === 404) {
+      return 0;
+    }
+
+    console.error("Error posting score:", error);
+    throw error;
   }
 }
