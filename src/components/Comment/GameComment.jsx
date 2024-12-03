@@ -1,8 +1,9 @@
 import { getTimeInterval } from "../../scripts/global";
 import deleteIcon from "../../assets/icons/icon_delete.png";
+import likeIcon from "../../assets/icons/icon_like.png";
 import UserAvatar from "../UserAvatar/UserAvatar";
 
-function Comment({ comment, handleDeleteComment, userId }) {
+function Comment({ comment, handleDeleteComment, handleLikeComment, userId }) {
   return (
     <div className="comment">
       <UserAvatar
@@ -15,7 +16,16 @@ function Comment({ comment, handleDeleteComment, userId }) {
           <p className="comment__date">{getTimeInterval(comment.created_at)}</p>
         </div>
         <p className="body-copy">{comment.message}</p>
-        <div className="comment__delete-container">
+        <div className="comment__delete-like-container">
+          <div
+            className="comment__like"
+            onClick={() => {
+              handleLikeComment(comment.id);
+            }}
+          >
+            <img src={likeIcon} alt="Like Icon" />
+            <p>{comment.like_count}</p>
+          </div>
           <div
             style={
               comment.user_id == userId
@@ -27,10 +37,7 @@ function Comment({ comment, handleDeleteComment, userId }) {
               handleDeleteComment(comment.id);
             }}
           >
-            <img
-              src={deleteIcon}
-              alt="Likes icon to illustrate the likes received by people"
-            />
+            <img src={deleteIcon} alt="Delete Icon" />
           </div>
         </div>
       </div>

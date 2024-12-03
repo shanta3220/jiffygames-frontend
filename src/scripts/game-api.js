@@ -14,6 +14,15 @@ export async function getGameList() {
   }
 }
 
+export async function likeGame(gameId) {
+  try {
+    const { data } = await axios.get(getFullPath(`games/${gameId}/like`));
+    return data.like_count;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
 export async function getGameInfo(gameId) {
   try {
     const { data } = await axios.get(getFullPath(`games/${gameId}`));
@@ -87,6 +96,55 @@ export async function postUser(userObject) {
   }
 }
 
+export async function findGames(userId) {
+  try {
+    const { data } = await axios.get(getFullPath(`users/${userId}/games`));
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export async function getUserScore(gameId) {
+  const userId = getMyUserId();
+  try {
+    const { data } = await axios.get(
+      getFullPath(`leaderboards/?user_id=${userId}&game_id=${gameId}`)
+    );
+
+    return data.score || 0;
+  } catch (error) {
+    if (error.response?.status === 404) {
+      return 0;
+    }
+
+    console.error("Error fetching score:", error);
+    throw error;
+  }
+}
+
+export async function postUserScore(gameId, score) {
+  const userId = getMyUserId();
+  try {
+    const userObject = {
+      user_id: userId,
+      score: score,
+    };
+    const { data } = await axios.post(
+      getFullPath(`leaderboards/${gameId}`),
+      userObject
+    );
+    return data;
+  } catch (error) {
+    if (error.response?.status === 404) {
+      return 0;
+    }
+
+    console.error("Error posting score:", error);
+    throw error;
+  }
+}
+
 export async function postComment(commentObject) {
   try {
     const { data } = await axios.post(getFullPath("comments"), commentObject);
@@ -100,6 +158,15 @@ export async function deleteComment(commentId) {
   try {
     await axios.delete(getFullPath(`comments/${commentId}`));
     return null;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export async function likeComment(commentId) {
+  try {
+    const { data } = await axios.get(getFullPath(`comments/${commentId}/like`));
+    return data.like_count;
   } catch (error) {
     console.error(error);
   }
@@ -143,14 +210,4 @@ export function getMyUserId() {
 
 export function Logout() {
   localStorage.removeItem("userId");
-}
-
-export async function findGames(userId) {
-  try {
-    const { data } = await axios.get(getFullPath(`users/${userId}/games`));
-    console.log(data);
-    return data;
-  } catch (error) {
-    console.error(error);
-  }
 }

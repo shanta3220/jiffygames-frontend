@@ -1,7 +1,7 @@
 import { useParams, Link } from "react-router-dom";
 import "./LeaderboardPage.scss";
 import { useEffect, useState } from "react";
-import { getLeaderboard } from "../../scripts/GameApi";
+import { getLeaderboard } from "../../scripts/game-api";
 import UserAvatar from "../../components/UserAvatar/UserAvatar";
 import { useNavigate } from "react-router-dom";
 

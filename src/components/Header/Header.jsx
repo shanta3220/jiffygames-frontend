@@ -2,7 +2,7 @@ import "./Header.scss";
 import { NavLink, useNavigate } from "react-router-dom";
 import logoIcon from "/logo.png";
 import UserAvatar from "../UserAvatar/UserAvatar";
-import { getMyUserId, Logout } from "../../scripts/GameApi";
+import { getMyUserId, Logout } from "../../scripts/game-api";
 import { useEffect, useState } from "react";
 
 function Header({ avatar }) {

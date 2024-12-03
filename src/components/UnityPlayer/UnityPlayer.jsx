@@ -7,6 +7,13 @@ import likeIcon from "../../assets/icons/icon_like.png";
 import shareIcon from "../../assets/icons/icon_share.png";
 import returnIcon from "../../assets/icons/icon_return.png";
 import loadingGif from "../../assets/images/loading.gif";
+import {
+  getLeaderboard,
+  getUserScore,
+  postUserScore,
+  likeGame,
+} from "../../scripts/game-api";
+import SocialShareModal from "../SocialShareModal/SocialShareModal";
 
 export default function UnityPlayer({
   gameInfo,
@@ -18,14 +25,19 @@ export default function UnityPlayer({
 
   const navigate = useNavigate();
   const canvasRef = useRef(null);
-  const [isGameOver, setIsGameOver] = useState(false);
-  const [isQuit, setIsQuit] = useState(false);
-  const [userName, setUserName] = useState();
   const [score, setScore] = useState();
+  const [likes, setLikes] = useState(gameInfo.like_count);
   const [devicePixelRatio, setDevicePixelRatio] = useState(
     window.devicePixelRatio
   );
-  const absoluteFilePath = `${gameInfo?.build_path}/Build/${gameProjectName}`;
+  const [open, setOpen] = useState(false);
+  const [currentUrl, setCurrentUrl] = useState("");
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setCurrentUrl(window.location.href || "");
+    }
+  }, []);
 
   //Prevent unity memory logs spam message
   useEffect(() => {
@@ -41,6 +53,7 @@ export default function UnityPlayer({
     };
   }, []);
 
+  const absoluteFilePath = `${gameInfo?.build_path}/Build/${gameProjectName}`;
   const {
     unityProvider,
     sendMessage,
@@ -61,6 +74,7 @@ export default function UnityPlayer({
   });
   const [unityKey, setUnityKey] = useState(gameId);
 
+  getLeaderboard;
   useEffect(() => {
     setUnityKey(gameId);
   }, [gameId]);
@@ -78,28 +92,13 @@ export default function UnityPlayer({
     };
   }, [handleUnityFocus]);
 
-  const handleGameOver = useCallback((userName, score) => {
-    setIsGameOver(true);
-    setUserName(userName);
-    setScore(score);
-    console.log("Game Over");
+  const handleSetScore = useCallback((newScore) => {
+    console.log(newScore);
+    if (score != newScore && newScore != 0) {
+      setScore(newScore);
+      postUserScore(gameId, newScore);
+    }
   }, []);
-
-  const handleSetScore = useCallback((userName, score) => {
-    setUserName(userName);
-    setScore(score);
-    console.log("SetScore");
-  }, []);
-
-  const handleQuit = useCallback((userName, score) => {
-    setIsQuit(true);
-    setUserName(userName);
-    setScore(score);
-  }, []);
-
-  function handleScore() {
-    sendMessage("GameManager", "SetScore", 100);
-  }
 
   function handleClickEnterFullscreen() {
     requestFullscreen(true);
@@ -112,6 +111,17 @@ export default function UnityPlayer({
       navigate("/");
     }
   }
+
+  const handlelikeGame = async () => {
+    try {
+      const data = await likeGame(gameId);
+      if (data) {
+        setLikes(data);
+      }
+    } catch (error) {
+      console.error("Error posting a new comment:", error);
+    }
+  };
 
   useEffect(() => {
     const makeEventsPassive = () => {
@@ -126,14 +136,23 @@ export default function UnityPlayer({
       }
     };
 
-    // Run after Unity is loaded to modify event listeners
+    // Run after Unity is loaded to modify event listeners, set the current user score
     if (isLoaded) {
       makeEventsPassive();
     }
 
-    addEventListener("GameOver", handleGameOver);
+    const initializeScore = async () => {
+      if (sendMessage && isLoaded) {
+        const intialScore = await getUserScore(gameId);
+        sendMessage("DataController", "SendScoreToGame", intialScore);
+      }
+    };
+
+    const initScore = () => {
+      initializeScore();
+    };
+    initScore();
     addEventListener("SetScore", handleSetScore);
-    addEventListener("Quit", handleQuit);
 
     return () => {
       const removeAllListeners = async () => {
@@ -151,19 +170,16 @@ export default function UnityPlayer({
         }
       };
       removeAllListeners();
-      // Removing Unity event listeners as well
-      removeEventListener("GameOver", handleGameOver);
       removeEventListener("SetScore", handleSetScore);
-      removeEventListener("Quit", handleQuit);
     };
   }, [
     isLoaded,
     unload,
     addEventListener,
     removeEventListener,
-    handleGameOver,
     handleSetScore,
-    handleQuit,
+    sendMessage,
+    gameId,
   ]);
 
   useEffect(() => {
@@ -226,15 +242,16 @@ export default function UnityPlayer({
                 src={shareIcon}
                 alt=""
                 className="game-interact__icon"
-                onClick={handleClickReturn}
+                onClick={() => setOpen(true)}
               />
               <div className="game-interact__like">
                 <img
                   src={likeIcon}
                   alt="Like Icon"
                   className="game-interact__icon"
+                  onClick={handlelikeGame}
                 />
-                <p className="game-interact__like-text">{gameInfo.like}</p>
+                <p className="game-interact__like-text">{likes}</p>
               </div>
             </div>
             <div>
@@ -248,6 +265,7 @@ export default function UnityPlayer({
           </div>
         </div>
       </div>
+      <SocialShareModal open={open} setOpen={setOpen} currentUrl={currentUrl} />
     </div>
   );
 }

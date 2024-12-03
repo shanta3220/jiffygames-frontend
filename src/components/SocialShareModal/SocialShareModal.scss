@@ -1,0 +1,60 @@
+@use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/variables" as *;
+
+.share-modal__overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+}
+
+.share-modal {
+  outline: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: $secondary-medium;
+  box-shadow: 24px;
+  padding: 1.875rem;
+  border-radius: 8px;
+  border: 0.25rem double $primary-bright;
+
+  &:focus {
+    outline: none;
+  }
+
+  &__title {
+    @include sectionHeader;
+    & {
+      margin-bottom: 2rem;
+    }
+  }
+
+  &__list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 1.25rem;
+  }
+
+  &__list-item {
+    display: flex;
+    align-items: center;
+
+    &:hover {
+      scale: (1.05);
+    }
+  }
+
+  &__list-item-text {
+    @include bodyCopy;
+    & {
+      text-align: center;
+      font-size: 1rem;
+    }
+  }
+}
