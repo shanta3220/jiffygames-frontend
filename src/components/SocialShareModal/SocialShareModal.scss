@@ -17,10 +17,9 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 300px;
   background-color: $secondary-medium;
   box-shadow: 24px;
-  padding: 20px;
+  padding: 1.875rem;
   border-radius: 8px;
   border: 0.25rem double $primary-bright;
 
@@ -34,21 +33,28 @@
       margin-bottom: 2rem;
     }
   }
+
+  &__list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 1.25rem;
+  }
+
   &__list-item {
     display: flex;
     align-items: center;
-    padding: 8px 0;
-  }
 
-  &__list-item-icon {
-    margin-right: 12px;
+    &:hover {
+      scale: (1.05);
+    }
   }
 
   &__list-item-text {
     @include bodyCopy;
     & {
-      line-height: 1rem;
-      margin-top: 1rem;
+      text-align: center;
+      font-size: 1rem;
     }
   }
 }

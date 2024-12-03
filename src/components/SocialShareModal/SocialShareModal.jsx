@@ -43,19 +43,19 @@ const SocialShareModal = ({ open, setOpen, currentUrl }) => {
       >
         <div className="share-modal__content">
           <h2 className="share-modal__title">Share options</h2>
-          <ul>
+          <ul className="share-modal__list">
             {socialIcons.map((social, index) => {
               const ShareButtonComponent = social.component;
               return (
                 <li className="share-modal__list-item" key={index}>
-                  <div className="share-modal__list-item-icon">
-                    <ShareButtonComponent url={currentUrl}>
+                  <ShareButtonComponent url={currentUrl}>
+                    <div className="share-modal__list-item-icon">
                       {social.icon}
-                    </ShareButtonComponent>
-                  </div>
-                  <div className="share-modal__list-item-text">
-                    <span>{social.label}</span>
-                  </div>
+                    </div>
+                    <div className="share-modal__list-item-text">
+                      <span>{social.label}</span>
+                    </div>
+                  </ShareButtonComponent>
                 </li>
               );
             })}
