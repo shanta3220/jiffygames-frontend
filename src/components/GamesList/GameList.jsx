@@ -7,28 +7,31 @@ function GameList({ games }) {
   return (
     <section className="all-game">
       <ul className="all-game__list">
-        {games.map((game) => (
-          <li
-            key={game.id}
-            className="all-game__item"
-            onClick={() => {
-              if (!window.location.pathname.includes("/leaderboards")) {
-                navigate(`/games/${game.id}`);
-              } else {
-                navigate(`/leaderboards/${game.id}`);
-              }
-            }}
-          >
-            <div className="all-game__item-contents">
-              <img
-                src={`/images/${game.project_name}.png`}
-                alt={`${game.game_name} image`}
-                className="all-game__item-image"
-              />
-              <p className="all-game__item-title">{game.game_name}</p>
-            </div>
-          </li>
-        ))}
+        {games.map((game) => {
+          const gameId = game.id ?? game.game_id;
+          return (
+            <li
+              key={gameId}
+              className="all-game__item"
+              onClick={() => {
+                if (!window.location.pathname.includes("/leaderboards")) {
+                  navigate(`/games/${gameId}`);
+                } else {
+                  navigate(`/leaderboards/${gameId}`);
+                }
+              }}
+            >
+              <div className="all-game__item-contents">
+                <img
+                  src={game.image_path}
+                  alt={`${game.game_name} image`}
+                  className="all-game__item-image"
+                />
+                <p className="all-game__item-title">{game.game_name}</p>
+              </div>
+            </li>
+          );
+        })}
       </ul>
     </section>
   );

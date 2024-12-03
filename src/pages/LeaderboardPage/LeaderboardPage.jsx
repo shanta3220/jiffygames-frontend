@@ -14,7 +14,6 @@ function LeaderboardPage() {
     const fetchLeaderboard = async () => {
       try {
         const leaderboard = await getLeaderboard(leaderboardId);
-        console.log(leaderboard);
         setLeaderboard(leaderboard);
       } catch (error) {
         console.error(error);

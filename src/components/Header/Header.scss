@@ -32,6 +32,9 @@
   &__logo-icon {
     width: 26px;
     height: 26px;
+    &:hover {
+      cursor: pointer;
+    }
   }
 
   &__logo-title {
@@ -40,6 +43,9 @@
       font-size: 28px;
       font-weight: 700;
       color: $primary-light;
+      &:hover {
+        cursor: pointer;
+      }
     }
   }
 
@@ -83,11 +89,11 @@
 
     &:hover {
       color: $secondary-light;
+      cursor: pointer;
     }
   }
 
   .user-avatar {
     margin: auto;
-    height: 2.75rem;
   }
 }
