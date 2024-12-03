@@ -4,6 +4,7 @@ import { getUser } from "../../scripts/game-api";
 import UserProfileInput from "../../components/UserProfileInput/UserProfileInput";
 import "./UserProfilePage.scss";
 import UserAvatar from "../../components/UserAvatar/UserAvatar";
+import GameListByUser from "../../components/GameListByUser/GameListByUser";
 
 function UserProfilePage() {
   const { userId } = useParams();
@@ -48,6 +49,7 @@ function UserProfilePage() {
             avatar={formData[fieldNames.avatar]}
             linkPath={`/users/${userId}`}
           />
+          <GameListByUser userId={userId} />
         </section>
         <section className="form__section-right">
           <UserProfileInput
