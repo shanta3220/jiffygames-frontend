@@ -6,7 +6,8 @@ import {
   getMyUserId,
   postComment,
   deleteComment,
-} from "../../scripts/GameApi";
+  likeComment,
+} from "../../scripts/game-api";
 import "./GamePage.scss";
 import { useEffect, useState } from "react";
 import GameDetails from "../../components/GameDetails/GameDetails";
@@ -100,7 +101,18 @@ export default function GamePage() {
       };
       // Await the response from PostComment
       const data = await postComment(commentObject);
-      setChangeCommentId(data.id);
+      setChangeCommentId(`${data.id}.post`);
+    } catch (error) {
+      console.error("Error posting a new comment:", error);
+    }
+  };
+
+  const handlelikeComment = async (comment) => {
+    try {
+      const data = await likeComment(commentId);
+      if (data) {
+        setChangeCommentId(`${data.id}-${data.like_count}.like`);
+      }
     } catch (error) {
       console.error("Error posting a new comment:", error);
     }
@@ -110,7 +122,7 @@ export default function GamePage() {
     try {
       await deleteComment(commentId);
     } finally {
-      setChangeCommentId(null);
+      setChangeCommentId(`${commentId}.delete`);
     }
   };
 
@@ -133,6 +145,7 @@ export default function GamePage() {
           comments={gameInfo.comments}
           handlePostNewComment={handlePostNewComment}
           handleDeleteComment={handleDeleteComment}
+          handleLikeComment={handlelikeComment}
           handleCommentFocus={handleUnityBlur}
           userId={userId}
         />

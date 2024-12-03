@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { getUser } from "../../scripts/GameApi";
+import { getUser } from "../../scripts/game-api";
 import UserProfileInput from "../../components/UserProfileInput/UserProfileInput";
 import "./UserProfilePage.scss";
 import UserAvatar from "../../components/UserAvatar/UserAvatar";

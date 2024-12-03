@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Form from "../../components/Form/Form";
 import { useNavigate } from "react-router-dom";
-import { login, postUser } from "../../scripts/GameApi";
+import { login, postUser } from "../../scripts/game-api";
 
 function LoginRegisterPage() {
   const fieldNames = {

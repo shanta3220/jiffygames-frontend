@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import GameList from "../../components/GamesList/GameList";
-import { getGameList } from "../../scripts/GameApi";
+import { getGameList } from "../../scripts/game-api";
 //import "./LeaderboardsPage.scss";
 
 function LeaderboardsPage() {

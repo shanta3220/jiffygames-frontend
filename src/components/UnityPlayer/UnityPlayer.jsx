@@ -11,7 +11,7 @@ import {
   getLeaderboard,
   getUserScore,
   postUserScore,
-} from "../../scripts/GameApi";
+} from "../../scripts/game-api";
 
 export default function UnityPlayer({
   gameInfo,
@@ -33,18 +33,18 @@ export default function UnityPlayer({
   const absoluteFilePath = `${gameInfo?.build_path}/Build/${gameProjectName}`;
 
   //Prevent unity memory logs spam message
-  // useEffect(() => {
-  //   const originalConsoleLog = console.log;
-  //   const originalConsoleWarn = console.warn;
+  useEffect(() => {
+    const originalConsoleLog = console.log;
+    const originalConsoleWarn = console.warn;
 
-  //   const suppressAllLogs = () => {};
-  //   console.log = suppressAllLogs;
-  //   console.warn = suppressAllLogs;
-  //   return () => {
-  //     console.log = originalConsoleLog;
-  //     console.warn = originalConsoleWarn;
-  //   };
-  // }, []);
+    const suppressAllLogs = () => {};
+    console.log = suppressAllLogs;
+    console.warn = suppressAllLogs;
+    return () => {
+      console.log = originalConsoleLog;
+      console.warn = originalConsoleWarn;
+    };
+  }, []);
 
   const {
     unityProvider,
@@ -141,7 +141,6 @@ export default function UnityPlayer({
     const initializeScore = async () => {
       if (sendMessage && isLoaded) {
         const intialScore = await getUserScore(gameId);
-        console.log("called", intialScore);
         sendMessage("DataController", "SendScoreToGame", intialScore);
       }
     };

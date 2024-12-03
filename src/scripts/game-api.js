@@ -14,6 +14,15 @@ export async function getGameList() {
   }
 }
 
+export async function likeGame(gameId) {
+  try {
+    const { data } = await axios.delete(getFullPath(`games/${gameId}/like`));
+    return data.like_count;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
 export async function getGameInfo(gameId) {
   try {
     const { data } = await axios.get(getFullPath(`games/${gameId}`));
@@ -87,64 +96,6 @@ export async function postUser(userObject) {
   }
 }
 
-export async function postComment(commentObject) {
-  try {
-    const { data } = await axios.post(getFullPath("comments"), commentObject);
-    return data;
-  } catch (error) {
-    console.error(error);
-  }
-}
-
-export async function deleteComment(commentId) {
-  try {
-    await axios.delete(getFullPath(`comments/${commentId}`));
-    return null;
-  } catch (error) {
-    console.error(error);
-  }
-}
-
-export async function login(username, password) {
-  try {
-    const users = await getUsers();
-    if (users && users.length > 0) {
-      let user = users.filter((user) => {
-        return (
-          user.username.trim().toLowerCase() === username.trim().toLowerCase()
-        );
-      });
-      if (user) {
-        user = await getUser(user[0].id);
-        const match =
-          user.username.trim().toLowerCase() ===
-            username.trim().toLowerCase() && user.password === password;
-        if (match) {
-          localStorage.setItem("userId", user.id);
-          return user;
-        } else {
-          localStorage.removeItem("userId");
-          return null;
-        }
-      }
-    } else {
-      console.warn("No users found");
-    }
-  } catch (error) {
-    console.error("Error during login:", error);
-  }
-
-  return null;
-}
-
-export function getMyUserId() {
-  return localStorage.getItem("userId");
-}
-
-export function Logout() {
-  localStorage.removeItem("userId");
-}
-
 export async function findGames(userId) {
   try {
     const { data } = await axios.get(getFullPath(`users/${userId}/games`));
@@ -192,4 +143,73 @@ export async function postUserScore(gameId, score) {
     console.error("Error posting score:", error);
     throw error;
   }
+}
+
+export async function postComment(commentObject) {
+  try {
+    const { data } = await axios.post(getFullPath("comments"), commentObject);
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export async function deleteComment(commentId) {
+  try {
+    await axios.delete(getFullPath(`comments/${commentId}`));
+    return null;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export async function likeComment(commentId) {
+  try {
+    const { data } = await axios.delete(
+      getFullPath(`comments/${commentId}/like`)
+    );
+    return data.like_count;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export async function login(username, password) {
+  try {
+    const users = await getUsers();
+    if (users && users.length > 0) {
+      let user = users.filter((user) => {
+        return (
+          user.username.trim().toLowerCase() === username.trim().toLowerCase()
+        );
+      });
+      if (user) {
+        user = await getUser(user[0].id);
+        const match =
+          user.username.trim().toLowerCase() ===
+            username.trim().toLowerCase() && user.password === password;
+        if (match) {
+          localStorage.setItem("userId", user.id);
+          return user;
+        } else {
+          localStorage.removeItem("userId");
+          return null;
+        }
+      }
+    } else {
+      console.warn("No users found");
+    }
+  } catch (error) {
+    console.error("Error during login:", error);
+  }
+
+  return null;
+}
+
+export function getMyUserId() {
+  return localStorage.getItem("userId");
+}
+
+export function Logout() {
+  localStorage.removeItem("userId");
 }
