@@ -10,7 +10,7 @@ import EditUserPage from "./pages/EditUserPage/EditUserPage";
 import UserProfilePage from "./pages/UserProfilePage/UserProfilePage";
 import { useState } from "react";
 import LeaderboardsPage from "./pages/LeaderboardsPage/LeaderboardsPage";
-
+import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
 function App() {
   const [avatar, setAvatar] = useState("");
 
@@ -21,7 +21,6 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/games/" element={<GamesPage />} />
         <Route path="/games/:gameId" element={<GamePage />} />
-
         <Route path="/leaderboards" element={<LeaderboardsPage />} />
         <Route
           path="/leaderboards/:leaderboardId"
@@ -34,7 +33,8 @@ function App() {
         <Route
           path="/user-profile"
           element={<EditUserPage setAvatar={setAvatar} />}
-        />
+        />{" "}
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </BrowserRouter>
   );
