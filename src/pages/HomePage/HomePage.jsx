@@ -2,7 +2,7 @@ import { useRef, useEffect, useState } from "react";
 import "./HomePage.scss";
 import Hero from "../../components/Hero/Hero";
 import FeaturedGameList from "../../components/FeaturedGameList/FeaturedGameList";
-import { getGameList } from "../../scripts/GameApi";
+import { getGameList } from "../../scripts/game-api";
 
 function HomePage() {
   const [game, setGame] = useState();

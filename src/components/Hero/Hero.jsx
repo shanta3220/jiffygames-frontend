@@ -1,7 +1,7 @@
 import { useRef, useEffect, useState } from "react";
 import background from "../../assets/images/hero-background.png";
 import leaderboardImage from "../../assets/images/leaderboard.png";
-import { getLeaderboard } from "../../scripts/GameApi";
+import { getLeaderboard } from "../../scripts/game-api";
 
 function Hero({ game }) {
   const backgroundRef = useRef(null);

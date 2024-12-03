@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState, useRef, useEffect } from "react";
-import { getMyUserId, getUser, updateUser } from "../../scripts/GameApi";
+import { getMyUserId, getUser, updateUser } from "../../scripts/game-api";
 import defaultImage from "../../assets/images/user-profile.png";
 import EditUserInput from "../../components/EditUserInput/EditUserInput";
 import "./EditUserPage.scss";

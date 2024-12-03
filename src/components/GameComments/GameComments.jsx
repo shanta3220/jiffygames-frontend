@@ -8,6 +8,7 @@ function Comments({
   handlePostNewComment,
   handleDeleteComment,
   handleCommentFocus,
+  handleLikeComment,
   userId,
 }) {
   const [comment, setComment] = useState("");
@@ -86,6 +87,7 @@ function Comments({
               comment={comment}
               key={comment.id}
               handleDeleteComment={handleDeleteComment}
+              handleLikeComment={handleLikeComment}
               userId={userId}
             />
           ))}

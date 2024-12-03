@@ -2,7 +2,7 @@ import "./UserAvatar.scss";
 import profileIcon from "../../assets/images/user-avatar-example.jpg";
 import defaultIcon from "../../assets/images/user-profile.png";
 import { Link } from "react-router-dom";
-import { getUser } from "../../scripts/GameApi";
+import { getUser } from "../../scripts/game-api";
 import { useState, useEffect } from "react";
 
 function UserAvatar({ linkPath, avatar, userId }) {
