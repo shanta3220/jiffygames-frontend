@@ -11,7 +11,7 @@ function FeaturedGamesList({ setGame, games }) {
           <li key={game.id} className="featured-games__item">
             <div className="featured-games__item-contents">
               <img
-                src={`/images/${game.project_name}.png`}
+                src={`${game.image_path}`}
                 alt={`${game.game_name} image`}
                 className="featured-games__item-image"
                 onClick={() => {
