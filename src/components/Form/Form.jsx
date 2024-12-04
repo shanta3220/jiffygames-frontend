@@ -15,7 +15,7 @@ function Form({
     return (
       <section className="form-holder">
         <h1 className="form-title">Login</h1>
-        <form onSubmit={handleSubmit} className="form">
+        <form onSubmit={handleSubmit} className="form" autoComplete="off">
           <Input
             inputType="text"
             label="Enter your username"
@@ -42,7 +42,7 @@ function Form({
     return (
       <section className="form-holder">
         <h1 className="form-title">Sign Up</h1>
-        <form onSubmit={handleSubmit} className="form">
+        <form onSubmit={handleSubmit} className="form" autoComplete="off">
           <Input
             inputType="text"
             label="Enter your username"

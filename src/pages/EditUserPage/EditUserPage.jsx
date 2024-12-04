@@ -180,7 +180,7 @@ function EditUserPage({ setAvatar }) {
   return (
     <main className="main-edit-user">
       <h1 className="main-edit-user__title">User Profile</h1>
-      <form onSubmit={handleSubmit} className="form">
+      <form onSubmit={handleSubmit} className="form" autoComplete="off">
         <section className="form__section-left">
           <div>
             <UserAvatar avatar={avatarPreviewImage} />
