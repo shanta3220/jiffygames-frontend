@@ -33,7 +33,7 @@ Many players enjoy casual games but dislike installing multiple apps or managing
 
 3. Games:
    Play games directly in the browser.
-   View game descriptions, full-screen mode, and game-specific leaderboards.
+   View game descriptions, full-screen mode, and game-specific, leaderboards, social share the game links.
 
 4. Leaderboards:
    See top scores for each game.
@@ -68,70 +68,66 @@ Custom APIs: Developed to manage leaderboards, games, and user profiles.
 **Home Page**: Displays games with cards and featured slides.<br>
 **Leaderboards Page**: Lists all games' leaderboards.<br>
 **Individual Leaderboard Page**: Shows a detailed table of users and scores for a game.<br>
-**User Profile Page**: Displays personal details and editable settings for the profile owner.<br>
+**User Profile Pages**: Display personal details and editable settings for the profile owner.<br>
 **Game Page**: Includes the game itself, description, fullscreen mode, and comments.
+**Sign Up Page**: Displays a form to fill username, email, confirm email and confirm password to register the user
+**Login Page**: Displays a form to login the user.
 
 ### Data
 
 Data Relationships:
-**Users**: UserID, Username, Role, FullName, Avatar, AboutMe, Scores<br>
-**Games**: GameID, Title, Description, Instruction, Category, Thumbnail, HighScores, FeaturedVideo, CreatedAt, UpdatedAt<br>
-**Leaderboards**: LeaderboardID, GameID, UserID, Scores, Rank<br>
-**Comments**: CommentID, GameID, UserID, Content, Timestamp, CreatedAt, UpdatedAt<br>
+**Users**: UserID, Username, FullName, Avatar, AboutMe, Scores<br>
+**Games**: GameID, Title, Description, Instruction, Category, Thumbnail, FeaturedVideo, CreatedAt, UpdatedAt<br>
+**Leaderboard-Scores**: LeaderboardID, GameID, UserID, Scores<br>
+**Comments**: CommentID, GameID, UserID, Message, CreatedAt, UpdatedAt<br>
 
 ### Endpoints
 
 **Game Management**
 
-- `GET /api/games`  
+- `GET /games`  
   Retrieve all games.
-- `GET /api/games/:gameId`  
+- `GET /games/:id`  
   Retrieve details for a specific game.
-- `POST /api/games/:gameId/comments`  
-  Post a comment to a game's page (`commentObject`).
-- `PUT /api/games/:gameId/comments/:commentId`  
-  Update a specific comment on a game (`commentObject`).
-- `DELETE /api/games/:gameId/comments/:commentId`  
-  Delete a specific comment on a game.
+- `GET /games/:id/like`  
+  Like a specific game.
 
-**Leaderboards**
+**Leaderboard-Scores**
 
-- `GET /api/leaderboards`  
+- `GET /leaderboards`  
   Retrieve all leaderboards.
-- `POST /api/leaderboards/`  
-  Create a new leaderboard (`leaderboardObject`).
-- `POST /api/leaderboards/:leaderboardId`  
-  Add a user's score to a leaderboard (`UserScoreObject`).
-- `GET /api/leaderboards/:leaderboardId`  
+- `GET /leaderboards/user_id=:userId&game_id=:gameId`  
+  Retrieve specific user score from a game.
+- `GET /leaderboards/:id`  
   Retrieve leaderboard details for a specific game.
-- `GET /api/leaderboards/:leaderboardId/comments`  
-  Retrieve comments for a specific leaderboard.
-- `POST /api/leaderboards/:leaderboardId/comment`  
-  Post a comment to a game's leaderboard.
+- `POST /leaderboards/:id`  
+  Add a user's score to a leaderboard (`UserScoreObject`).
 
 **User Management**
 
-- `GET /api/users/:userId`  
-  Retrieve user profile data.
-- `GET /api/users/:userId/achievements`  
-  Retrieve a user's achievements.
-- `POST /api/users/`  
-  User signup (`UserObject`).
-- `PUT /api/users/:userId`  
+- `GET /users`  
+  Retrieve all the users data.
+- `POST /users/`  
+  User signup (`UserObject`)
+- `GET /users/:id`  
+  Retrieve a specific user profile data.
+- `PUT /users/:id`
   Update user profile data (`UserObject`).
-- `GET /api/users/:userId/comments`  
-  Retrieve all comments made by a specific user.
-- `DELETE /api/users/:userId/comments/:commentId`  
-  Delete a specific comment made by a user.
+- `GET /users/:id/games`  
+  Retrieve games played by the user.
 
-**Social Feature**
+**Comments Feature**
 
-- `POST /api/users/:userId/friends/:friendId`  
-  Add a friend to a user's friend list.
-- `GET /api/users/:userId/friends`  
-  Retrieve the list of a user's friends.
-- `GET /api/users/:userId/friends/:friendId`  
-  Retrieve the profile data of a specific friend.
+- `GET /comments`  
+  Retrieve all comments.
+- `GET /comments/:id`  
+  Retrieve a specific comment.
+- `POST /comments`  
+  Create a new comment (`CommentObject`).
+- `DELETE /comments/:id`  
+  Delete a specific comment.
+- `GET /comments/:id/like`  
+  Like a specific comment.
 
 ## Roadmap
 
