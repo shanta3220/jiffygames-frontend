@@ -29,12 +29,16 @@
   }
 
   &__background {
-    width: 80%;
+    width: 105%;
     height: auto;
     object-fit: contain;
     object-position: right center;
     position: relative;
     z-index: 1;
+
+    @include tablet {
+      width: 80%;
+    }
 
     @include desktop {
       border-top-left-radius: 5%;
@@ -43,10 +47,14 @@
   }
 
   &__leaderboard-container {
-    width: 24.1%;
-    height: auto;
+    display: none;
 
-    z-index: 1;
+    @include tablet {
+      width: 24.1%;
+      height: auto;
+      display: block;
+      z-index: 1;
+    }
 
     @include desktop {
       border-top-right-radius: 5%;
@@ -95,11 +103,17 @@
   }
 
   &__leaderboard-list {
-    margin-top: 2.7%;
-    border-radius: 2%;
-    position: relative;
-    left: 0;
-    background-color: $secondary-dark;
+    display: none;
+
+    @include tablet {
+      display: block;
+      margin-top: 2.7%;
+      border-radius: 2%;
+      position: relative;
+      left: 0;
+      background-color: $secondary-dark;
+    }
+
     ul {
       position: absolute;
       right: 10%;
@@ -126,8 +140,11 @@
       color: $secondary-bright;
       text-align: center;
       p {
-        @include subHeader;
+        @include desktop {
+          @include subHeader;
+        }
         & {
+          font-size: 0.875rem;
           font-weight: 600;
         }
       }
