@@ -236,7 +236,7 @@ export default function UnityPlayer({
             <p className="game__title-text">{gameInfo.game_name}</p>
           </div>
           <div className="game-interact">
-            <p className="game-interact__like-text">{`Score: ${
+            <p className="game-interact__score-text">{`Score: ${
               score ? score : 0
             }`}</p>
             <div className="game-interact__social">

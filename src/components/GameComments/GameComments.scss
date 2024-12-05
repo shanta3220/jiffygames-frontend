@@ -85,6 +85,8 @@
   padding: 0;
   padding-top: $gap;
   border-bottom: 1px solid $primary-bright;
+  padding-left: $padding-margin-between-components-mobile;
+  padding-right: $padding-margin-between-components-mobile;
 
   .user-avatar__image-container {
     max-width: 50px;
@@ -97,12 +99,11 @@
   @include tablet {
     padding-top: 1.75rem;
     padding-bottom: 1rem;
+    padding-left: $padding-margin-between-components-tablet;
+    padding-right: $padding-margin-between-components-tablet;
   }
 
   @include desktop {
-    padding-left: $padding-margin-between-components-tablet;
-    padding-right: $padding-margin-between-components-tablet;
-
     &:last-child {
       border-bottom: none;
     }
