@@ -98,21 +98,19 @@
     width: 2.25rem;
   }
 
-  .leaderboard-list__item-label--avatar {
-    @extend .leaderboard-list__item-label;
-    width: 4.375rem;
-    padding-right: 2.5rem;
-  }
-
   .leaderboard-list__item-label {
     @extend .leaderboard-list__item-text;
     @include subHeader;
     & {
-      padding-top: 20px;
+      padding-top: 1.25rem;
     }
 
     &--rank {
       @extend .leaderboard-list__item-label;
+      margin-right: 0.5rem;
+      @include tablet {
+        margin-right: 0;
+      }
     }
     &--user {
       & {
@@ -131,6 +129,17 @@
       }
 
       @extend .leaderboard-list__item-label;
+    }
+  }
+
+  .leaderboard-list__item-label--avatar {
+    @extend .leaderboard-list__item-label;
+    width: 4.375rem;
+    padding-right: 2.5rem;
+
+    margin-right: -0.5rem;
+    @include tablet {
+      margin-right: 0;
     }
   }
 
