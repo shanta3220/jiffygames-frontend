@@ -20,8 +20,14 @@
     }
   }
   .user-avatar__image-container {
-    max-width: 60px;
-    max-height: 60px;
+    width: 2.5rem;
+    height: 2.5rem;
+    max-width: 3.75rem;
+    max-height: 3.75rem;
+    @include tablet {
+      width: 3.75rem;
+      height: 3.75rem;
+    }
   }
 }
 
@@ -89,8 +95,12 @@
   padding-right: $padding-margin-between-components-mobile;
 
   .user-avatar__image-container {
-    max-width: 50px;
-    max-height: 50px;
+    width: 2.5rem;
+    height: 2.5rem;
+    @include tablet {
+      width: 3.125rem;
+      height: 3.125rem;
+    }
   }
 
   &:nth-child(even) {
@@ -114,10 +124,16 @@
   }
 
   &__texts {
-    width: 100%;
+    width: 90%;
 
+    padding-right: 2rem;
     .body-copy {
       text-align: justify;
+    }
+
+    @include tablet {
+      width: 100%;
+      padding-right: 0;
     }
   }
 
