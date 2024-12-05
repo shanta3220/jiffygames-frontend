@@ -140,12 +140,12 @@
       color: $secondary-bright;
       text-align: center;
       p {
-        @include desktop {
-          @include subHeader;
-        }
         & {
           font-size: 0.875rem;
           font-weight: 600;
+        }
+        @include desktop {
+          @include subHeader;
         }
       }
     }
