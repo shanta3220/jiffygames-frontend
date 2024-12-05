@@ -9,12 +9,23 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 0.5rem $padding-margin-between-mobile;
+
   @include tablet {
-    padding: 1rem $padding-margin-between-tablet;
+    padding: 1.5rem $padding-margin-between-tablet;
   }
 
   @include desktop {
     padding: 1rem $padding-margin-between-desktop;
+  }
+  h1 {
+    @include mainHeader;
+    & {
+      margin-bottom: -0.25rem;
+      @include tablet {
+        margin-bottom: 0.5rem;
+      }
+    }
   }
 }
 
@@ -22,7 +33,7 @@
   & {
     background-color: $secondary-medium;
     border-radius: $border-radius;
-    width: 70%;
+    width: 97%;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -30,6 +41,10 @@
     justify-items: center;
     gap: $gap;
     padding: 1rem $padding-margin-between-components-mobile;
+
+    @include tablet {
+      width: 70%;
+    }
   }
 
   h1 {
