@@ -5,10 +5,17 @@
   width: 100%;
   height: 100%;
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
-  flex-wrap: wrap;
+  padding: 1rem $padding-margin-between-mobile;
+
   gap: 1rem;
+
   @include tablet {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
     padding: 1rem $padding-margin-between-tablet;
   }
 
@@ -17,7 +24,7 @@
   }
 
   .game-holder {
-    width: 56%;
+    width: 100%;
     height: 50%;
     background-color: $secondary-medium;
     border-radius: $border-radius;
@@ -26,37 +33,65 @@
     gap: 1rem;
     padding: $padding-margin-between-components-mobile;
 
-    @include tablet {
+    @include desktop {
+      width: 56%;
+      height: auto;
+      display: flex;
+      justify-content: space-evenly;
       padding: $padding-margin-between-components-tablet;
     }
   }
 
   &__details {
-    width: 40%;
+    width: 100%;
     display: flex;
     flex-direction: column;
     gap: 1rem;
+
+    @include tablet {
+      width: 47%;
+    }
+    @include desktop {
+      width: 40%;
+    }
   }
 
   &__comments {
-    width: 56%;
+    width: 100%;
     background-color: $secondary-medium;
     border-radius: $border-radius;
     padding: $padding-margin-between-components-mobile;
 
     @include tablet {
+      order: 2;
       padding: $padding-margin-between-components-tablet;
+    }
+
+    @include desktop {
+      width: 56%;
+      order: 0;
+    }
+  }
+
+  .all-game__item {
+    @include desktop {
+      width: 44%;
     }
   }
 }
 
 .main-games {
-  width: 40%;
+  width: 100%;
   background-color: $secondary-medium;
   border-radius: $border-radius;
   padding: $padding-margin-between-components-mobile;
 
   @include tablet {
+    width: 50%;
+  }
+
+  @include desktop {
+    width: 40%;
     padding: $padding-margin-between-components-tablet;
   }
 
