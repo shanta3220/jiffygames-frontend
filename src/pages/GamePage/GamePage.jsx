@@ -151,7 +151,7 @@ export default function GamePage() {
         />
       </section>
       {games && (
-        <section className="main-games">
+        <section className="main-games game-page-games">
           <GameList games={games} />
         </section>
       )}

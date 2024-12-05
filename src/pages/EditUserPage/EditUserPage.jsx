@@ -185,7 +185,6 @@ function EditUserPage({ setAvatar }) {
           <div>
             <UserAvatar avatar={avatarPreviewImage} />
           </div>
-          {/* <img src={avatarPreviewImage} alt="User Avatar." /> */}
           <button className="button" type="button" onClick={handleImageClick}>
             Change Icon
           </button>

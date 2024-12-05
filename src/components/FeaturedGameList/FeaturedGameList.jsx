@@ -5,7 +5,14 @@ function FeaturedGamesList({ setGame, games }) {
 
   return (
     <section className="featured-games">
-      <button className="button">VIEW ALL</button>
+      <button
+        className="button"
+        onClick={() => {
+          navigate(`/games`);
+        }}
+      >
+        VIEW ALL
+      </button>
       <ul className="featured-games__list">
         {games.map((game) => (
           <li key={game.id} className="featured-games__item">

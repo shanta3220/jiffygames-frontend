@@ -20,10 +20,16 @@
   }
 
   h1 {
+    margin-left: 0.5rem;
+    padding: 0 $padding-margin-between-mobile;
+
     @include headlinesPaddingTopBottom();
     & {
       margin-top: -0.5rem;
       @include mainHeader;
+      @include tablet {
+        padding-left: 2rem;
+      }
     }
   }
 
