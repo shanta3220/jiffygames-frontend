@@ -139,13 +139,15 @@
       justify-content: space-between;
       color: $secondary-bright;
       text-align: center;
+      max-width: 100%;
       p {
         & {
           font-size: 0.875rem;
           font-weight: 600;
         }
         @include desktop {
-          @include subHeader;
+          font-size: 1.1rem;
+          overflow: hidden;
         }
       }
     }
