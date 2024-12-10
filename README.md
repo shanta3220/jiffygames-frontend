@@ -5,7 +5,7 @@ Many players enjoy casual games but dislike installing multiple apps or managing
 ### Website
 [Checkout the website](https://jiffygames.netlify.app)
 ### Backend
-[Check Backend Project](https://github.com/shanta3220/nusrat-jahan-shanta-capstone-backend)
+[Backend project](https://github.com/shanta3220/nusrat-jahan-shanta-capstone-backend)
 
 ### User Profile
 
