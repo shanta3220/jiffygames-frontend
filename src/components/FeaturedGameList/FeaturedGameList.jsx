@@ -25,17 +25,19 @@ function FeaturedGamesList({ setGame, games }) {
                   setGame(game);
                 }}
               />
-              <p className="featured-games__item-title">{game.game_name}</p>
+              <div className="featured-games__item-title-button">
+                <p className="featured-games__item-title">{game.game_name}</p>
 
-              <div className="featured-games__preview-button-container">
-                <button
-                  className="button"
-                  onClick={() => {
-                    navigate(`/games/${game.id}`);
-                  }}
-                >
-                  Play
-                </button>
+                <div className="featured-games__preview-button-container">
+                  <button
+                    className="button"
+                    onClick={() => {
+                      navigate(`/games/${game.id}`);
+                    }}
+                  >
+                    Play
+                  </button>
+                </div>
               </div>
             </div>
           </li>
