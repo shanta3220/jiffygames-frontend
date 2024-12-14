@@ -108,7 +108,7 @@
     }
   }
 
-  @include text-style(0.875rem, 1.25rem, 600);
+  @include text-style(1rem, 1.25rem, 600);
   @include tablet {
     padding: 0 2rem;
     width: auto;

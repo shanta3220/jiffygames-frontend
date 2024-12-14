@@ -54,10 +54,10 @@
       width: 30%;
     }
 
-    P {
-      @include sectionHeader;
+    p {
+      @include subHeader;
       & {
-        text-transform: uppercase;
+        font-weight: 700;
         margin-top: 0.75rem;
       }
     }
