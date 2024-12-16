@@ -60,7 +60,7 @@
 }
 
 @mixin subHeader {
-  @include text-style(0.875rem, 1.125rem, 700);
+  @include text-style(1rem, 1.125rem, 700);
 
   @include tablet {
     @include text-style(1.1875rem, 1.4rem, 700);
@@ -108,7 +108,7 @@
     }
   }
 
-  @include text-style(0.875rem, 1.25rem, 600);
+  @include text-style(1rem, 1.25rem, 600);
   @include tablet {
     padding: 0 2rem;
     width: auto;
