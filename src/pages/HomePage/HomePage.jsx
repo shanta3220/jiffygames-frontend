@@ -1,4 +1,4 @@
-import { useRef, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import "./HomePage.scss";
 import Hero from "../../components/Hero/Hero";
 import FeaturedGameList from "../../components/FeaturedGameList/FeaturedGameList";

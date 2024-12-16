@@ -18,7 +18,8 @@
   @include desktop {
     padding: 1rem $padding-margin-between-desktop;
   }
-  h1 {
+
+  &__title {
     @include mainHeader;
     & {
       margin-bottom: -0.25rem;
@@ -44,15 +45,6 @@
 
     @include tablet {
       width: 70%;
-    }
-  }
-
-  h1 {
-    @include mainHeader;
-    & {
-      padding-top: $padding-headlines-top-mobile;
-      padding-bottom: $padding-headlines-bottom-mobile;
-      padding-left: $padding-margin-between-components-mobile;
     }
   }
 

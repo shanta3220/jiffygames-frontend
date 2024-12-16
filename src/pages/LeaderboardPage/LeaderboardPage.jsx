@@ -1,4 +1,4 @@
-import { useParams, Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import "./LeaderboardPage.scss";
 import { useEffect, useState } from "react";
 import { getLeaderboard } from "../../scripts/game-api";
@@ -28,7 +28,7 @@ function LeaderboardPage() {
 
   return (
     <main className="main-leaderboard">
-      <h1>{leaderboard.game_name}</h1>
+      <h1 className="main-leaderboard__title">{leaderboard.game_name}</h1>
       <ul className="leaderboard-list">
         <div className="leaderboard-list__item">
           <p className="leaderboard-list__item-label--rank">RANK</p>

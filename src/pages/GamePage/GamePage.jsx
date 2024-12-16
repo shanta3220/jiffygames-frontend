@@ -47,15 +47,18 @@ export default function GamePage() {
     setSendMessage(() => sendMessageFunction);
   };
 
-  const handleUnityBlur = () => {
-    if (sendMessage) {
-      sendMessage("DataController", "CaptureKeyboardInputs", 0);
-    }
-  };
-
+  // Capture Game's keyboard inputs when the unity player is focused
   const handleUnityFocus = () => {
     if (sendMessage) {
       sendMessage("DataController", "CaptureKeyboardInputs", 1);
+    }
+  };
+
+  // Prevent Game capturing keyboard inputs
+  // when other ui elements are focused, for instance, comment form
+  const handleUnityBlur = () => {
+    if (sendMessage) {
+      sendMessage("DataController", "CaptureKeyboardInputs", 0);
     }
   };
 
@@ -99,7 +102,7 @@ export default function GamePage() {
         user_id: userId,
         game_id: gameId,
       };
-      // Await the response from PostComment
+
       const data = await postComment(commentObject);
       setChangeCommentId(`${data.id}.post`);
     } catch (error) {
