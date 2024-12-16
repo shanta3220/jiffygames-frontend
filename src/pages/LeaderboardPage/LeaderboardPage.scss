@@ -88,21 +88,34 @@
   &__item-text {
     width: 1.875rem;
     text-align: center;
-    padding-top: 1.25rem;
+    padding-top: 0.875rem;
+    @include tablet {
+      padding-top: 1.25rem;
+    }
   }
 
   .user-avatar {
     margin-right: 1.25rem;
-    margin-top: 1.45rem;
+    margin-top: 0.85rem;
     height: 2.25rem;
     width: 2.25rem;
+
+    @include tablet {
+      margin-top: 1.45rem;
+    }
   }
 
   .leaderboard-list__item-label {
     @extend .leaderboard-list__item-text;
-    @include subHeader;
     & {
+      font-size: 0.875rem;
+      font-weight: 700;
+    }
+
+    @include tablet {
+      margin-top: 0.2rem;
       padding-top: 1.25rem;
+      @include subHeader;
     }
 
     &--rank {
