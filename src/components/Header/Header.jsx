@@ -2,12 +2,12 @@ import "./Header.scss";
 import { NavLink, useNavigate } from "react-router-dom";
 import logoIcon from "/logo.png";
 import UserAvatar from "../UserAvatar/UserAvatar";
-import { getMyUserId, Logout } from "../../scripts/game-api";
+import { getMyUserId, isGuestUser, Logout } from "../../scripts/game-api";
 import { useEffect, useState } from "react";
 
 function Header({ avatar }) {
   const navigate = useNavigate();
-  const userId = getMyUserId();
+  const userId = !isGuestUser() ? getMyUserId() : null;
 
   const [trackAvatarChange, setAvatarChange] = useState("");
 
