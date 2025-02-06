@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Form from "../../components/Form/Form";
 import { useNavigate } from "react-router-dom";
-import { login, postUser } from "../../scripts/game-api";
+import { login, postUser, guestUserName } from "../../scripts/game-api";
 
 function LoginRegisterPage() {
   const fieldNames = {
@@ -80,13 +80,11 @@ function LoginRegisterPage() {
     const addUserToApi = async () => {
       try {
         const data = await postUser(userObject);
-        console.log(data);
-        if (data) {
-          alert(`Succesfully added ${data.username}`);
-          navigate("/");
-        }
+
+        alert(`Succesfully added ${data.username}`);
+        navigate("/");
       } catch (e) {
-        console.error("Failed to update/add the user:", e);
+        alert(`username or email already exists`);
       }
     };
 
@@ -127,7 +125,11 @@ function LoginRegisterPage() {
     switch (inputName) {
       case fieldNames.name:
         errorText =
-          value.trim() === "" ? "Name cannot be empty or have whitespace" : "";
+          value.trim() === ""
+            ? "Name cannot be empty or have whitespace"
+            : value.toLowerCase() === guestUserName.toLowerCase()
+            ? `Username cannot be ${guestUserName}`
+            : "";
         break;
       case fieldNames.password:
         errorText =
@@ -158,7 +160,7 @@ function LoginRegisterPage() {
         errorText =
           value.trim() === ""
             ? "Confirm email cannot be empty or have whitespace"
-            : value !== formData[fieldNames.confirmEmail]
+            : value !== formData[fieldNames.email]
             ? "Confirm email does not match with email"
             : "";
         break;
