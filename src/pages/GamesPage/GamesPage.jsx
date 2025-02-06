@@ -23,8 +23,7 @@ function GamesPage() {
   return (
     <main className="main-game-list">
       <h1>{title}</h1>
-      {!games && <p>Loading...</p>}
-      {games && <GameList games={games} />}
+      {<GameList games={games} />}
     </main>
   );
 }
