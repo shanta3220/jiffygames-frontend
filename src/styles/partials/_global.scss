@@ -151,3 +151,13 @@
     height: 26px;
   }
 }
+
+.body-copy {
+  text-align: center;
+  padding: 1rem $padding-margin-between-components-mobile;
+  @include bodyCopy;
+
+  @include tablet {
+    padding: 2rem $padding-margin-between-components-tablet;
+  }
+}

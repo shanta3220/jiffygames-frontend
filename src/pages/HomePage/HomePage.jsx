@@ -3,9 +3,10 @@ import "./HomePage.scss";
 import Hero from "../../components/Hero/Hero";
 import FeaturedGameList from "../../components/FeaturedGameList/FeaturedGameList";
 import { getGameList } from "../../scripts/game-api";
+import LoadingTextAfterDelay from "../../components/LoadingTextAfterDelay/LoadingTextAfterDelay";
 
 function HomePage() {
-  const [game, setGame] = useState();
+  const [game, setGame] = useState(null);
   const [games, setGames] = useState(null);
 
   useEffect(() => {
@@ -20,10 +21,17 @@ function HomePage() {
     };
     fetchGameList();
   }, []);
+  if (!games || !game) {
+    return (
+      <main className="home-main">
+        {<LoadingTextAfterDelay games={games} />}
+      </main>
+    );
+  }
   return (
     <main className="home-main">
       <Hero game={game} />
-      {games && <FeaturedGameList setGame={setGame} games={games} />}
+      <FeaturedGameList setGame={setGame} games={games} />
     </main>
   );
 }
