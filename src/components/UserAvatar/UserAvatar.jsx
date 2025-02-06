@@ -1,8 +1,7 @@
 import "./UserAvatar.scss";
-import profileIcon from "../../assets/images/user-avatar-example.jpg";
 import defaultIcon from "../../assets/images/user-profile.png";
 import { Link } from "react-router-dom";
-import { getUser } from "../../scripts/game-api";
+import { getUser, isGuestUser } from "../../scripts/game-api";
 import { useState, useEffect } from "react";
 
 function UserAvatar({ linkPath, avatar, userId }) {
@@ -23,15 +22,19 @@ function UserAvatar({ linkPath, avatar, userId }) {
 
       fetchUser();
     } else {
-      setAvatarPath(defaultIcon);
+      setAvatarPath(avatar);
     }
   }, [userId, avatar]);
-  return (
+  return !isGuestUser(userId) ? (
     <Link to={linkPath ?? "/user-profile"} className="user-avatar">
       <div className="user-avatar__image-container">
         <img src={avatarPath} alt="userProfileIcon" />
       </div>
     </Link>
+  ) : (
+    <div className="user-avatar__image-container user-avatar__image-container--guest">
+      <img src={avatarPath} alt="userProfileIcon" />
+    </div>
   );
 }
 
