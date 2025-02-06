@@ -219,6 +219,6 @@ export function Logout() {
   localStorage.removeItem("userId");
 }
 
-export function isGuestUser() {
-  return getMyUserId() === guestUserName;
+export function isGuestUser(username = getMyUserId()) {
+  return username === guestUserName;
 }

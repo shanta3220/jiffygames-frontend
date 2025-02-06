@@ -70,6 +70,7 @@ function LoginRegisterPage() {
       };
 
       handleLogin();
+      return;
     }
     const userObject = {
       username: formData.username,
