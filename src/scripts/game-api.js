@@ -1,9 +1,12 @@
 import axios from "axios";
+
 const baseUrl = import.meta.env.VITE_API_URL;
 
 const getFullPath = (path) => {
   return `${baseUrl}/${path}`;
 };
+
+export const guestUserName = "Guest";
 
 export async function getGameList() {
   try {
@@ -88,11 +91,12 @@ export async function updateUser(userId, userObject) {
 
 export async function postUser(userObject) {
   try {
-    console.log(getFullPath("users"), userObject);
     const { data } = await axios.post(getFullPath("users"), userObject);
     return data;
   } catch (error) {
-    console.error(error);
+    if (error.response?.status !== 400) {
+      console.error(error);
+    }
   }
 }
 
@@ -124,6 +128,9 @@ export async function getUserScore(gameId) {
 }
 
 export async function postUserScore(gameId, score) {
+  if (isGuestUser()) {
+    return;
+  }
   const userId = getMyUserId();
   try {
     const userObject = {
@@ -205,9 +212,13 @@ export async function login(username, password) {
 }
 
 export function getMyUserId() {
-  return localStorage.getItem("userId");
+  return localStorage.getItem("userId") ?? guestUserName;
 }
 
 export function Logout() {
   localStorage.removeItem("userId");
+}
+
+export function isGuestUser() {
+  return getMyUserId() === guestUserName;
 }

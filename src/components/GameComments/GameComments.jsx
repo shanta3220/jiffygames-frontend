@@ -1,3 +1,4 @@
+import { isGuestUser } from "../../scripts/game-api";
 import Comment from "../Comment/GameComment";
 import UserAvatar from "../UserAvatar/UserAvatar";
 import "./GameComments.scss";
@@ -17,6 +18,9 @@ function Comments({
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (isGuestUser()) {
+      return;
+    }
     const errorCommentMessage = getErrorMessage(comment);
     if (errorCommentMessage) {
       setCommentError(errorCommentMessage);
@@ -64,12 +68,17 @@ function Comments({
                 id="comment"
                 className="comment-form__comment"
                 name="comment"
-                placeholder="Add a new comment"
+                placeholder={
+                  !isGuestUser()
+                    ? "Add a new comment"
+                    : "Login To Comment/ Save Score"
+                }
                 autoComplete="off"
                 required
                 value={comment}
                 onChange={handleCommentChange}
                 onClick={handleCommentFocus}
+                disabled={isGuestUser()}
               ></textarea>
               {commentError && (
                 <p className="comment-form__error-message">{commentError}</p>

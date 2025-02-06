@@ -6,7 +6,7 @@ import { getUser } from "../../scripts/game-api";
 import { useState, useEffect } from "react";
 
 function UserAvatar({ linkPath, avatar, userId }) {
-  const [avatarPath, setAvatarPath] = useState();
+  const [avatarPath, setAvatarPath] = useState(defaultIcon);
   useEffect(() => {
     if (!avatar && userId) {
       const fetchUser = async () => {
@@ -23,7 +23,7 @@ function UserAvatar({ linkPath, avatar, userId }) {
 
       fetchUser();
     } else {
-      setAvatarPath(avatar);
+      setAvatarPath(defaultIcon);
     }
   }, [userId, avatar]);
   return (
