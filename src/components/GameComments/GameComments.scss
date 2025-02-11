@@ -130,6 +130,7 @@
     padding-right: 2rem;
     .body-copy {
       text-align: justify;
+      padding: 0;
     }
 
     @include tablet {
