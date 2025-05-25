@@ -14,11 +14,10 @@ import GameDetails from "../../components/GameDetails/GameDetails";
 import Comments from "../../components/GameComments/GameComments";
 import GameList from "../../components/GamesList/GameList";
 
-export default function GamePage() {
+export default function GamePage({ games }) {
   const { gameId } = useParams();
   const [userId, setUserId] = useState(null);
   const [gameInfo, setGameInfo] = useState(null);
-  const [games, setGames] = useState(null);
   const [sendMessage, setSendMessage] = useState(null);
   const navigate = useNavigate();
 
@@ -58,19 +57,6 @@ export default function GamePage() {
       sendMessage("DataController", "CaptureKeyboardInputs", 1);
     }
   };
-
-  useEffect(() => {
-    const fetchGames = async () => {
-      try {
-        const games = await getGameList();
-
-        setGames(games);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    fetchGames();
-  }, []);
 
   useEffect(() => {
     const fetchGameInfo = async () => {

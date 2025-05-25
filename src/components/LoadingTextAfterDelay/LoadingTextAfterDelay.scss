@@ -1,0 +1,23 @@
+@use "../../styles/partials/mixins" as *;
+
+.loading {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2rem;
+  align-items: center;
+  margin: 2.5rem 1.25rem;
+
+  .body-copy {
+    padding: 0;
+    padding: 8px;
+  }
+
+  iframe {
+    width: 100%;
+    margin-bottom: 2rem;
+    @include tablet {
+      width: 35rem;
+    }
+  }
+}
