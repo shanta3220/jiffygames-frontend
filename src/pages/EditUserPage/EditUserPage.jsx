@@ -6,6 +6,8 @@ import EditUserInput from "../../components/EditUserInput/EditUserInput";
 import "./EditUserPage.scss";
 import UserAvatar from "../../components/UserAvatar/UserAvatar";
 
+const PASSWORD_PLACEHOLDER = "********";
+
 function EditUserPage({ setAvatar }) {
   const navigate = useNavigate("");
   const userId = getMyUserId();
@@ -56,8 +58,8 @@ function EditUserPage({ setAvatar }) {
           setFormData({
             [fieldNames.name]: data.username ?? "",
             [fieldNames.email]: data.email ?? "",
-            [fieldNames.password]: data.password ?? "",
-            [fieldNames.confirmPassword]: data.password ?? "",
+            [fieldNames.password]: PASSWORD_PLACEHOLDER,
+            [fieldNames.confirmPassword]: PASSWORD_PLACEHOLDER,
             [fieldNames.avatar]: data.avatar_path ?? "",
             [fieldNames.aboutMe]: data.about_me ?? "",
           });
@@ -86,9 +88,20 @@ function EditUserPage({ setAvatar }) {
         const userData = new FormData();
         userData.append("username", formData.username);
         userData.append("email", formData.email);
-        userData.append("password", formData.password);
-        userData.append("avatar_path", imageFile ?? "");
+
+        if (
+          formData.password !== PASSWORD_PLACEHOLDER &&
+          formData.password.trim()
+        ) {
+          userData.append("password", formData.password);
+        }
+
+        if (imageFile) {
+          userData.append("avatar_path", imageFile);
+        }
+
         userData.append("about_me", formData.about_me ?? "");
+
         const updatedUser = await updateUser(userId, userData);
         if (updatedUser) {
           setAvatar(avatarPreviewImage);
@@ -103,6 +116,7 @@ function EditUserPage({ setAvatar }) {
 
     editUser();
   };
+
   const checkErrors = (inputName, value) => {
     let errorText = "";
     switch (inputName) {
@@ -110,19 +124,15 @@ function EditUserPage({ setAvatar }) {
         errorText =
           value.trim() === "" ? "Name cannot be empty or have whitespace" : "";
         break;
-      case fieldNames.password:
-        errorText =
-          value.trim() === ""
-            ? "Password cannot be empty or have whitespace"
-            : "";
-        break;
       case fieldNames.confirmPassword:
-        errorText =
-          value.trim() === ""
-            ? "Confirm Password cannot be empty or have whitespace"
-            : value !== formData[fieldNames.password]
-            ? "Confirm Password does not match with password"
-            : "";
+        if (formData[fieldNames.password]?.trim()) {
+          errorText =
+            value !== formData[fieldNames.password]
+              ? "Confirm Password does not match"
+              : "";
+        } else {
+          errorText = "";
+        }
         break;
       case fieldNames.email:
         errorText =
