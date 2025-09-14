@@ -8,6 +8,7 @@ const getFullPath = (path) => {
 
 export const guestUserName = "Guest";
 
+// Games
 export async function getGameList() {
   try {
     const { data } = await axios.get(getFullPath("games"));
@@ -36,6 +37,7 @@ export async function getGameInfo(gameId) {
   }
 }
 
+// Leaderboards, User Scores
 export async function getLeaderboards() {
   try {
     const { data } = await axios.get(getFullPath("leaderboards"));
@@ -54,6 +56,78 @@ export async function getLeaderboard(gameId) {
   }
 }
 
+export async function getUserScore(gameId) {
+  const userId = getMyUserId();
+  try {
+    const { data } = await axios.get(
+      getFullPath(`leaderboards/?user_id=${userId}&game_id=${gameId}`)
+    );
+
+    return data.score || 0;
+  } catch (error) {
+    if (error.response?.status === 404) {
+      return 0;
+    }
+
+    console.error("Error fetching score:", error);
+    throw error;
+  }
+}
+
+export async function postUserScore(gameId, score) {
+  if (isGuestUser()) {
+    return;
+  }
+  const userId = getMyUserId();
+  try {
+    const userObject = {
+      user_id: userId,
+      score: score,
+    };
+    const { data } = await axios.post(
+      getFullPath(`leaderboards/${gameId}`),
+      userObject
+    );
+    return data;
+  } catch (error) {
+    if (error.response?.status === 404) {
+      return 0;
+    }
+
+    console.error("Error posting score:", error);
+    throw error;
+  }
+}
+
+// Comments
+export async function postComment(commentObject) {
+  try {
+    const { data } = await axios.post(getFullPath("comments"), commentObject);
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export async function deleteComment(commentId) {
+  try {
+    await axios.delete(getFullPath(`comments/${commentId}`));
+    return null;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export async function likeComment(commentId) {
+  try {
+    const { data } = await axios.get(getFullPath(`comments/${commentId}/like`));
+    return data.like_count;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+// Users
 export async function getUsers() {
   try {
     const { data } = await axios.get(getFullPath("users"));
@@ -109,106 +183,41 @@ export async function getUserGames(userId) {
   }
 }
 
-export async function getUserScore(gameId) {
-  const userId = getMyUserId();
-  try {
-    const { data } = await axios.get(
-      getFullPath(`leaderboards/?user_id=${userId}&game_id=${gameId}`)
-    );
-
-    return data.score || 0;
-  } catch (error) {
-    if (error.response?.status === 404) {
-      return 0;
+// Axios auth wiring
+axios.interceptors.request.use((config) => {
+  const token = localStorage.getItem("token");
+  if (token) config.headers.Authorization = `Bearer ${token}`;
+  return config;
+});
+axios.interceptors.response.use(
+  (r) => r,
+  (err) => {
+    if (err.response?.status === 401) {
+      localStorage.removeItem("token");
+      localStorage.removeItem("userId");
     }
-
-    console.error("Error fetching score:", error);
-    throw error;
+    return Promise.reject(err);
   }
-}
+);
 
-export async function postUserScore(gameId, score) {
-  if (isGuestUser()) {
-    return;
-  }
-  const userId = getMyUserId();
-  try {
-    const userObject = {
-      user_id: userId,
-      score: score,
-    };
-    const { data } = await axios.post(
-      getFullPath(`leaderboards/${gameId}`),
-      userObject
-    );
-    return data;
-  } catch (error) {
-    if (error.response?.status === 404) {
-      return 0;
-    }
-
-    console.error("Error posting score:", error);
-    throw error;
-  }
-}
-
-export async function postComment(commentObject) {
-  try {
-    const { data } = await axios.post(getFullPath("comments"), commentObject);
-    return data;
-  } catch (error) {
-    console.error(error);
-  }
-}
-
-export async function deleteComment(commentId) {
-  try {
-    await axios.delete(getFullPath(`comments/${commentId}`));
-    return null;
-  } catch (error) {
-    console.error(error);
-  }
-}
-
-export async function likeComment(commentId) {
-  try {
-    const { data } = await axios.get(getFullPath(`comments/${commentId}/like`));
-    return data.like_count;
-  } catch (error) {
-    console.error(error);
-  }
-}
-
+// Users and Authentication
 export async function login(username, password) {
   try {
-    const users = await getUsers();
-    if (users && users.length > 0) {
-      let user = users.filter((user) => {
-        return (
-          user.username.trim().toLowerCase() === username.trim().toLowerCase()
-        );
-      });
-      if (user) {
-        user = await getUser(user[0].id);
-        const match =
-          user.username.trim().toLowerCase() ===
-            username.trim().toLowerCase() && user.password === password;
-        if (match) {
-          localStorage.setItem("userId", user.id);
-          return user;
-        } else {
-          localStorage.removeItem("userId");
-          return null;
-        }
-      }
-    } else {
-      console.warn("No users found");
+    const { data } = await axios.post(`${baseUrl}/auth/login`, {
+      username,
+      password,
+    });
+    if (data?.token) {
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("userId", data.user.id);
+      return data.user;
     }
+    return null;
   } catch (error) {
+    if (error.response?.status === 401) return null;
     console.error("Error during login:", error);
+    return null;
   }
-
-  return null;
 }
 
 export function getMyUserId() {
@@ -217,8 +226,13 @@ export function getMyUserId() {
 
 export function Logout() {
   localStorage.removeItem("userId");
+  localStorage.removeItem("token");
 }
 
 export function isGuestUser(username = getMyUserId()) {
   return username === guestUserName;
+}
+
+export function isLoggedIn() {
+  return !!localStorage.getItem("token");
 }
